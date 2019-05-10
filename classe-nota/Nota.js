@@ -19,11 +19,17 @@ var vetObjNote = [],
     vetObjLine,
     //vetor para guardar as linhas de uniao entre as notas...
     id = 0;
+//id das notas...
 
 function createNote(_name) {
     //adicionando um evento ao todos os elementos linhas additional...
-    $('.svg').one('click', function (e) {
-        //event.target é o elemento clicado...
+    //if para garantir que nao vai ter duas notas esperando click...
+    $('#conteiner').one('click', (e) => {
+        let button = document.getElementsByTagName('button');
+        for (let i = 0; i < button.length; i++) {
+            //inabilitando os botoes...
+            button[i].setAttribute('disabled', 'true');
+        }
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
             let x = e.clientX;
@@ -49,6 +55,12 @@ function createNote(_name) {
             vetObjNote.push('nota' + id);
             //armazenado id do obj...
             id++;
+
+            for (let i = 0; i < button.length; i++) {
+                button[i].removeAttribute('disabled', 'true');
+                //retirando a propriedade disabled...
+                //ativando os botoes...
+            }
         } else createNote(_name);
         //se o click nao for em cima da linha, ja chamar a funcao novamente...
     });
@@ -94,7 +106,7 @@ function join() {
                                 x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0]));
                             y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
                             if (x2 < x1) {
-                                //se a segunda nota for clikada primeiro...
+                                //se a segunda nota for clicada primeiro...
                                 let aux = x2;
                                 x2 = x1;
                                 x1 = aux;
@@ -166,14 +178,15 @@ function createLineJoin(_obj) {
 }
 /* window.onresize = () => {
     //sempre que houver mudanças no tamanho da tela...
-    for (let i = 0; i < vetObjNote.length; i++) {
-        let a = document.getElementById(vetObjNote[i]);
-        a.removeAttributeNS(null, 'transform', this.localName);
-        //removendo o atributo antigo...
-        a.setAttributeNS(null, 'transform',
-            //inserindo um novo atributo com a posicao atual
-            'translate(' + ((returnPositionX_px(a.getAttributeNS(null, 'x', this.localName))) - 5) +
-            ' ' + a.getAttributeNS(null, 'y', this.localName) + ')'
+    let tag_class = document.getElementsByClassName('div');
+    for (let i = 0; i < tag_class.length; i++) {
+        let elemento = tag_class[i];
+        elemento.removeAttribute('heigth', this.localName);
+        console.log(elemento.id);
+        elemento.setAttribute(
+            null,
+            'height',
+            '50vh'
         );
     }
 } */

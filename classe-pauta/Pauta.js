@@ -34,10 +34,10 @@ function createDiv() {
     //cria um elemento "div"...
     div.setAttribute('id', 'div' + i);
     div.setAttribute('class', 'corpo');
-    div.setAttribute("width", "100vh");
-    div.setAttribute("height", "50vw");
+    div.setAttribute("width", "100vw");
+    div.setAttribute("height", "50vh");
 
-    document.body.appendChild(div);
+    document.getElementById('conteiner').appendChild(div);
     //anexa a "div" criada com o novo conteúdo 
 
     createSVG(i, "div" + i);
