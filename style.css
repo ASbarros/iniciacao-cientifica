@@ -1,0 +1,99 @@
+/**    tags     */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body,
+html {
+    width: 99vw;
+    background-color: #c2bfbf;
+}
+
+header {
+    width: 100%;
+    min-height: 10%;
+    background-color: #c2bfbf;
+    text-align: center;
+}
+
+line {
+    stroke: rgb(23, 23, 29);
+    stroke-width: 0.2%;
+    stroke-linecap: round;
+}
+
+a {
+    text-decoration: none;
+}
+
+div {
+    background-color: rgb(34, 33, 33);
+    display: flex;
+    justify-content: space-around;
+}
+
+svg {
+    background-color: aliceblue;
+}
+
+button {
+    border-radius: 3px;
+    padding: 3px;
+    margin: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    background-color: #918f8f;
+}
+
+/**    ids     */
+
+
+/**    classes   */
+.corpo {
+    width: 96%;
+    height: 23.5em;
+    margin-left: 2%;
+}
+
+.principal {
+    width: 98%;
+    height: 23.5em;
+    margin-left: 1%;
+}
+
+.suplementar {
+    stroke-width: 0.4%;
+    opacity: 0.05;
+}
+
+.time {
+    stroke: rgb(58, 12, 226);
+    stroke-width: 0.4%;
+}
+
+.compasso {
+    stroke-width: 0.3%;
+}
+
+.lastLine {
+    stroke-width: 0.5%;
+    stroke-linecap: butt;
+}
+
+.circle {
+    stroke: #000;
+    stroke-width: 1px;
+    fill: none;
+}
+
+.linejoincolcheia {
+    stroke-width: 0.99%;
+    stroke-linecap: butt;
+}
+
+.linejoinsemicolcheia {
+    stroke-width: 0.48%;
+}

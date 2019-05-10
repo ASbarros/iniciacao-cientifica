@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>principal</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="shortcut icon" href="img/fivecon.png" sizes="32x32" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body onload="createDiv()">
+    <header>
+        <h1>Pauta</h1>
+        <p></p>
+        <button onclick="join()"> Juntar notas </button>
+        <button onclick="createDiv()"> Mais pauta </button>
+        <button onclick="time()"> Iniciar </button>
+        <button onclick="createNote('colcheia')">Colcheia</button>
+        <button onclick="createNote('semicolcheia')">Semicolcheia</button>
+        <button onclick="createNote('fusa')">Fusa</button>
+        <button onclick="createNote('semifusa')">Semifusa</button>
+        <button onclick="createNote('semibreve')">Semibreve</button>
+        <button onclick="createNote('minima')">Mínima</button>
+        <button onclick="createNote('seminima')">Seminima</button>
+        <button onclick="createNote('sustenido')">Sustenido</button>
+    </header>
+    <script src="bibliotecas/jquery/jquery-3.3.1.min.js"></script>
+    <script src="classe-linha/Linha.js"></script>
+    <script src="classe-pauta/Pauta.js"></script>
+    <script src="classe-compasso/Compasso.js"></script>
+    <script src="classe-auxiliar/Auxiliar.js"></script>
+    <script src="classe-nota/Nota.js"></script>
+    <script src="classe-tempo/Tempo.js"></script>
+    <script src="classe-imagem/imagens.js"></script>
+</body>
+
+</html>
