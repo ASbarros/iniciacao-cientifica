@@ -24,12 +24,12 @@ var vetObjNote = [],
 function createNote(_name) {
     //adicionando um evento ao todos os elementos linhas additional...
     //if para garantir que nao vai ter duas notas esperando click...
+    let button = document.getElementsByTagName('button');
+    for (let i = 0; i < button.length; i++) {
+        //inabilitando os botoes...
+        button[i].setAttribute('disabled', 'true');
+    }
     $('.svg').one('click', (e) => {
-        let button = document.getElementsByTagName('button');
-        for (let i = 0; i < button.length; i++) {
-            //inabilitando os botoes...
-            button[i].setAttribute('disabled', 'true');
-        }
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
             let x = e.clientX;
