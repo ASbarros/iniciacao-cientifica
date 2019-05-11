@@ -37,7 +37,7 @@ function createDiv() {
     div.setAttribute("width", "100vw");
     div.setAttribute("height", "50vh");
 
-    document.getElementById('conteiner').appendChild(div);
+    document.body.appendChild(div);
     //anexa a "div" criada com o novo conteúdo 
 
     createSVG(i, "div" + i);
