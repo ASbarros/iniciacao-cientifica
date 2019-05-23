@@ -13,6 +13,7 @@ function createCompassFormula(idDiv, name, x, y) {
     //apendando o elemento no corpo do svg...
 }
 
+
 var vetObjNote = [],
     //vetor para atualizar a posicao das notas,
     //guarda os ids das notas...
@@ -29,7 +30,7 @@ function createNote(_name) {
         //inabilitando os botoes...
         button[i].setAttribute('disabled', 'true');
     }
-    $('.svg').one('click', (e) => {
+    $(document.body).one('click', (e) => {
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
             let x = e.clientX;

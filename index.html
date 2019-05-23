@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title>principal</title>
+    <title>Principal</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="shortcut icon" href="img/fivecon.png" sizes="32x32" type="image/png">
@@ -14,9 +14,12 @@
     <header>
         <h1>Pauta</h1>
         <p></p>
+        <!-- botoes de controle -->
         <button onclick="join()"> Juntar notas </button>
         <button onclick="createDiv()"> Mais pauta </button>
         <button onclick="time()"> Iniciar </button>
+        <p></p>
+        <!-- criaçao das notas -->
         <button onclick="createNote('colcheia')">Colcheia</button>
         <button onclick="createNote('semicolcheia')">Semicolcheia</button>
         <button onclick="createNote('fusa')">Fusa</button>
@@ -25,16 +28,24 @@
         <button onclick="createNote('minima')">Mínima</button>
         <button onclick="createNote('seminima')">Seminima</button>
         <button onclick="createNote('sustenido')">Sustenido</button>
+        <p></p>
+        <!-- criacao das pausas -->
+        <button onclick="createNote('pausa_de_semibreve')">Pausa de Semibreve</button>
+        <button onclick="createNote('pausa_de_minima')">Pausa de Mínima</button>
+        <button onclick="createNote('pausa_de_seminima')">Pausa de Seminima</button>
+        <button onclick="createNote('pausa_de_colcheia')">Pausa de Colcheia</button>
+        <button onclick="createNote('pausa_de_semicolcheia')">Pausa de Semicolcheia</button>
     </header>
-    
+    <!-- bibliotecas -->
     <script src="bibliotecas/jquery/jquery-3.3.1.min.js"></script>
+    <!-- chamadas dos documentos -->
     <script src="classe-linha/Linha.js"></script>
     <script src="classe-pauta/Pauta.js"></script>
     <script src="classe-compasso/Compasso.js"></script>
     <script src="classe-auxiliar/Auxiliar.js"></script>
     <script src="classe-nota/Nota.js"></script>
     <script src="classe-tempo/Tempo.js"></script>
-    <script src="classe-imagem/imagens.js"></script>
+    <script src="classe-imagem/Imagens.js"></script>
 </body>
 
 </html>
