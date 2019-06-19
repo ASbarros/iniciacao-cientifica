@@ -14,7 +14,7 @@ function createCompassFormula(idDiv, name, x, y) {
 }
 
 
-var vetObjNote = [],
+let vetObjNote = [],
     //vetor para atualizar a posicao das notas,
     //guarda os ids das notas...
     vetObjLine,
@@ -167,27 +167,38 @@ function changeNote(_note) {
 }
 
 function createLineJoin(_obj) {
+    let objLine;
     if (_obj.name == 'colcheia') {
-        createLine(_obj.x1 + 2.55, _obj.y1, _obj.x2 + 2.5, _obj.y2,
-            'join' + _obj.name, 'idSVG' + _obj.mom, 'linejoincolcheia');
+        objLine = {
+            x1: _obj.x1 + 2.55,
+            x2: _obj.x2 + 2.55,
+            y1: _obj.y1,
+            y2: _obj.y2,
+            idDiv: 'idSVG' + _obj.mom,
+            idName: 'join' + _obj.name,
+            classe: 'linejoincolcheia'
+        }
+        createLine(objLine);
     } else if (_obj.name == 'semicolcheia') {
-        createLine(_obj.x1 + 2.6, _obj.y1 - 1, _obj.x2 + 2.5, _obj.y2 - 1,
-            'join' + _obj.name, 'idSVG' + _obj.mom, 'linejoinsemicolcheia');
-        createLine(_obj.x1 + 2.6, _obj.y1 + 1, _obj.x2 + 2.5, _obj.y2 + 1,
-            'join' + _obj.name, 'idSVG' + _obj.mom, 'linejoinsemicolcheia');
+        objLine = {
+            x1: _obj.x1 + 2.6,
+            x2: _obj.x2 + 2.5,
+            y1: _obj.y1 - 1,
+            y2: _obj.y2 - 1,
+            idDiv: 'idSVG' + _obj.mom,
+            idName: 'join' + _obj.name,
+            classe: 'linejoinsemicolcheia'
+        }
+        createLine(objLine);
+        objLine = {
+            x1: _obj.x1 + 2.6,
+            x2: _obj.x2 + 2.5,
+            y1: _obj.y1 + 1,
+            y2: _obj.y2 + 1,
+            idDiv: 'idSVG' + _obj.mom,
+            idName: 'join' + _obj.name,
+            classe: 'linejoinsemicolcheia'
+        }
+        createLine(objLine);
     }
 }
-/* window.onresize = () => {
-    //sempre que houver mudanças no tamanho da tela...
-    let tag_class = document.getElementsByClassName('div');
-    for (let i = 0; i < tag_class.length; i++) {
-        let elemento = tag_class[i];
-        elemento.removeAttribute('heigth', this.localName);
-        console.log(elemento.id);
-        elemento.setAttribute(
-            null,
-            'height',
-            '50vh'
-        );
-    }
-} */

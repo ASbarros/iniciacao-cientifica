@@ -12,10 +12,12 @@ html {
 }
 
 header {
-    width: 100%;
-    min-height: 10%;
+    width: 100vw;
+    height: 10%;
     background-color: #c2bfbf;
     text-align: center;
+    display: flex;
+    justify-content: space-around;
 }
 
 line {
@@ -44,12 +46,19 @@ button {
     margin: 5px;
     cursor: pointer;
     justify-content: center;
-    align-items: center;
     background-color: #918f8f;
 }
 
-/**    ids     */
+img {
+    width: 25px;
+    height: 25px;
+}
 
+/**    ids     */
+#titulo {
+    width: 100%;
+    background-color: #c2bfbf;
+}
 
 /**    classes   */
 .corpo {
@@ -96,4 +105,33 @@ button {
 
 .linejoinsemicolcheia {
     stroke-width: 0.48%;
+}
+
+.botoesControle {
+    width: 18vw;
+    height: 100px;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #c2bfbf;
+}
+
+.botoesNotas {
+    width: 15vw;
+    height: 100px;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    background-color: #c2bfbf;
+}
+
+.botoesPausas {
+    width: 15vw;
+    height: 100px;
+    justify-content: right;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: #c2bfbf;
 }

@@ -9,7 +9,6 @@ let a = 0.3;
 var idSVG = 0;
 
 function time() {
-    //createAudio(0);
     var idTime = 0;
     //id da linha...
     createCircle('grande' + idSVG, 1.5);
@@ -25,38 +24,49 @@ function time() {
 
     setTimeout(() => {
         //linha passando...
-        var Tscroll = 350;
-        //variavel para incrementar o scroll...
-        var inter = setInterval(() => {
-            try {
-                idTime++;
-                createLine(x, 40, x, 60, "time" + idTime, "idSVG" + idSVG, "time");
-                x = x + 0.18;
-                var id = 'time' + (idTime - 1) + '-idSVG' + idSVG;
-                //id da linha ...
-                remove_id(id);
-                if (x >= 98.3) {
-                    //voltando ao inicio da pauta...
-                    window.scrollTo(0, Tscroll);
-                    Tscroll = Tscroll + 350;
-                    x = 5;
-                    remove_id("time" + idTime + "-idSVG" + idSVG);
-                    //removendo a linha...
-                    remove_id('circle-grande' + idSVG);
-                    //removendo o timer, composto por dois circulos...
-                    remove_id('circle-' + idSVG);
-                    idSVG++;
-                    //incremento...
-                    createCircle('grande' + idSVG, 1.5);
-                    //criando o proximo timer...
-                    createCircle(idSVG, 0.3);
+        var Tscroll = 350,
+            //variavel para incrementar o scroll...
+            objLine,
+            inter = setInterval(() => {
+                try {
+                    idTime++;
+                    objLine = {
+                        x1: x,
+                        x2: x,
+                        y1: 40,
+                        y2: 60,
+                        idName: 'time' + idTime,
+                        idDiv: "idSVG" + idSVG,
+                        classe: 'time'
+                    }
+                    createLine(objLine);
+                    //createLine(x, 40, x, 60, "time" + idTime, "idSVG" + idSVG, "time");
+                    x = x + 0.18;
+                    var id = 'time' + (idTime - 1) + '-idSVG' + idSVG;
+                    //id da linha ...
+                    remove_id(id);
+                    if (x >= 98.3) {
+                        //voltando ao inicio da pauta...
+                        window.scrollTo(0, Tscroll);
+                        Tscroll = Tscroll + 350;
+                        x = 5;
+                        remove_id("time" + idTime + "-idSVG" + idSVG);
+                        //removendo a linha...
+                        remove_id('circle-grande' + idSVG);
+                        //removendo o timer, composto por dois circulos...
+                        remove_id('circle-' + idSVG);
+                        idSVG++;
+                        //incremento...
+                        createCircle('grande' + idSVG, 1.5);
+                        //criando o proximo timer...
+                        createCircle(idSVG, 0.3);
+                    }
+                } catch (e) {
+                    clearInterval(inter);
+                    clearInterval(timer);
+                    idSVG = 0;
                 }
-            } catch (e) {
-                clearInterval(inter);
-                clearInterval(timer);
-                idSVG = 0;
-            }
-        }, tempo);
+            }, tempo);
         //deley...
     }, 300);
 }

@@ -12,17 +12,33 @@ function createPauta(_idDiv) {
     let primeiraLinha = 40,
         //onde sera a primeira linha...
         x2 = 98.2,
-        x1 = 0.7;
+        x1 = 0.7,
+        objLine;
     for (let i = 5, y1 = primeiraLinha, y2 = y1; linha < i; i--, y1 = y1 + espacamento, y2 = y1) {
         //criando as linhas, cada uma com seu identificador...
-        createLine(x1, y1, x2, y2, "line" + i, _idDiv, "linha");
+        objLine = {
+            x1: x1,
+            x2: x2,
+            y1: y1,
+            y2: y2,
+            idName: 'line' + i,
+            idDiv: _idDiv,
+            classe: 'linha'
+        }
+        createLine(objLine);
     }
     createCompassFormula(_idDiv, 'claveSol', 0, 0);
     createCompassFormula(_idDiv, 'quatro', 50, 105);
     createCompassFormula(_idDiv, 'quatro', 45, 150);
     compasso(4, _idDiv);
     for (let i = 29, y1 = 15, y2 = y1; linha < i; i--, y1 = y1 + (espacamento / 2), y2 = y1) {
-        createLine(7, y1, x2, y2, "additional" + i, "idSVG" + NumDiv, "suplementar");
+        objLine.x1 = 7;
+        objLine.y1 = y1;
+        objLine.y2 = y2;
+        objLine.idName = 'additional' + i;
+        objLine.idDiv = 'idSVG' + NumDiv;
+        objLine.classe = 'suplementar';
+        createLine(objLine);
         //criando as linhas adicionais ...
     }
 }

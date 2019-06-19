@@ -9,32 +9,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
-  
+
 <body onload="createDiv()">
-    <header>
+    <div id="titulo">
         <h1>Pauta</h1>
-        <p></p>
+    </div>
+    <header>
         <!-- botoes de controle -->
-        <button onclick="join()"> Juntar notas </button>
-        <button onclick="createDiv()"> Mais pauta </button>
-        <button onclick="time()"> Iniciar </button>
-        <p></p>
+        <div class="botoesControle">
+            <button onclick="join()"> Juntar notas </button>
+            <button onclick="createDiv()"> Mais pauta </button>
+            <button onclick="time()"> <img src="img/play.png" alt=""> </button>
+        </div>
         <!-- criaçao das notas -->
-        <button onclick="createNote('colcheia')">Colcheia</button>
-        <button onclick="createNote('semicolcheia')">Semicolcheia</button>
-        <button onclick="createNote('fusa')">Fusa</button>
-        <button onclick="createNote('semifusa')">Semifusa</button>
-        <button onclick="createNote('semibreve')">Semibreve</button>
-        <button onclick="createNote('minima')">Mínima</button>
-        <button onclick="createNote('seminima')">Seminima</button>
-        <button onclick="createNote('sustenido')">Sustenido</button>
-        <p></p>
+        <div class="botoesNotas">
+            <button onclick="createNote('colcheia')"><img src="img/colcheia.png" alt=""></button>
+            <button onclick="createNote('semicolcheia')"><img src="img/semicolcheia.png" alt=""></button>
+            <button onclick="createNote('fusa')"><img src="img/fusa.png" alt=""></button>
+            <button onclick="createNote('semifusa')"><img src="img/semifusa.png" alt=""></button>
+            <button onclick="createNote('semibreve')"><img src="img/semibreve.png" alt=""></button>
+            <button onclick="createNote('minima')"><img src="img/minima.png" alt=""></button>
+            <button onclick="createNote('seminima')"><img src="img/seminima.png" alt=""></button>
+            <button onclick="createNote('sustenido')"><img src="img/sustenido.png" alt=""></button>
+        </div>
         <!-- criacao das pausas -->
-        <button onclick="createNote('pausa_de_semibreve')">Pausa de Semibreve</button>
-        <button onclick="createNote('pausa_de_minima')">Pausa de Mínima</button>
-        <button onclick="createNote('pausa_de_seminima')">Pausa de Seminima</button>
-        <button onclick="createNote('pausa_de_colcheia')">Pausa de Colcheia</button>
-        <button onclick="createNote('pausa_de_semicolcheia')">Pausa de Semicolcheia</button>
+        <div class="botoesPausas">
+            <button onclick="createNote('pausa_de_semibreve')">Pausa de Semibreve</button>
+            <button onclick="createNote('pausa_de_minima')">Pausa de Mínima</button>
+            <button onclick="createNote('pausa_de_seminima')">Pausa de Seminima</button>
+            <button onclick="createNote('pausa_de_colcheia')"><img src="img/pausaColcheia.png" alt=""></button>
+            <button onclick="createNote('pausa_de_semicolcheia')">Pausa de Semicolcheia</button>
+        </div>
     </header>
     <!-- bibliotecas -->
     <script src="bibliotecas/jquery/jquery-3.3.1.min.js"></script>

@@ -4,19 +4,32 @@
  */
 
 //funcao para criar o compasso(as linhas verticais)...
-function compasso(NumCompasso, idDiv) {
+function compasso(_NumCompasso, _idDiv) {
     //variavel responsavel por comtrolar o espacamento dos compassos...
-    var EspaCompasso = 100 / NumCompasso;
+    let EspaCompasso = 100 / _NumCompasso;
     //para garantir o mesmo espacamento...
-    var TamCompasso = EspaCompasso;
+    let TamCompasso = EspaCompasso;
 
-    let y1 = 40;
-    let y2 = 60;
-
-    let id = 0;
+    let y1 = 40,
+        y2 = 60,
+        objLine,
+        id = 0;
     id++;
-    for (let i = 1; i < NumCompasso; i++, EspaCompasso += TamCompasso, id++) {
-        createLine(EspaCompasso, y1, EspaCompasso, y2, "compasso" + id, idDiv, "compasso");
+    for (let i = 1; i < _NumCompasso; i++, EspaCompasso += TamCompasso, id++) {
+        objLine = {
+            x1: EspaCompasso,
+            x2: EspaCompasso,
+            y1: y1,
+            y2: y2,
+            idName: 'compasso' + id,
+            idDiv: _idDiv,
+            classe: 'compasso'
+        }
+        createLine(objLine);
     }
-    createLine(98.2, y1, 98.2, y2, "compasso" + id, idDiv, "compasso");
+    objLine.x1 = 98.2;
+    objLine.x2 = 98.2;
+    objLine.idDiv = 'compasso' + id;
+    objLine.idDiv = _idDiv;
+    createLine(objLine);
 }

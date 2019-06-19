@@ -188,8 +188,7 @@ function getImagem(_nomeImagem) {
         this.x = 450;
         this.y = 274;
     } else if (_nomeImagem == 'pausa_de_minima') {
-        this.imagem = 'M454.6,375.1 441,375.1 415.5,375.1 401.9,375.1 401.9,376.8 415.5,376.8' +
-            '415.5,385.4 441,385.4      441,376.8 454.6,376.8    ';
+        this.imagem = 'M454.6,375.1 441,375.1 415.5,375.1 401.9,375.1 401.9,376.8 415.5,376.8 415.5,385.4 441,385.4      441,376.8 454.6,376.8    ';
         this.x = 450;
         this.y = 287;
     } else if (_nomeImagem == 'pausa_de_colcheia') {
