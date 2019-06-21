@@ -178,7 +178,7 @@ function createLineJoin(_obj) {
             idName: 'join' + _obj.name,
             classe: 'linejoincolcheia'
         }
-        createLine(objLine);
+        new createLine(objLine);
     } else if (_obj.name == 'semicolcheia') {
         objLine = {
             x1: _obj.x1 + 2.6,
@@ -189,7 +189,7 @@ function createLineJoin(_obj) {
             idName: 'join' + _obj.name,
             classe: 'linejoinsemicolcheia'
         }
-        createLine(objLine);
+        new createLine(objLine);
         objLine = {
             x1: _obj.x1 + 2.6,
             x2: _obj.x2 + 2.5,
@@ -199,6 +199,6 @@ function createLineJoin(_obj) {
             idName: 'join' + _obj.name,
             classe: 'linejoinsemicolcheia'
         }
-        createLine(objLine);
+        new createLine(objLine);
     }
 }

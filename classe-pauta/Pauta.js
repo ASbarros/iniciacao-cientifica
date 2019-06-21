@@ -42,7 +42,7 @@ function createPauta(_idDiv) {
     objcompass.x = 45;
     objcompass.y = 150;
     new createCompassFormula(objcompass);
-    new compasso(4, _idDiv);
+    new createCompass(4, _idDiv);
     for (let i = 29, y1 = 15, y2 = y1; linha < i; i--, y1 = y1 + (espacamento / 2), y2 = y1) {
         objLine.x1 = 7;
         objLine.y1 = y1;
@@ -58,7 +58,7 @@ let i = 0;
 
 function createDiv() {
     //funcao para criar mais pautas...
-    var div = document.createElement('div');
+    const div = document.createElement('div');
     //cria um elemento "div"...
     div.setAttribute('id', 'div' + i);
     div.setAttribute('class', 'corpo');
@@ -68,9 +68,9 @@ function createDiv() {
     document.body.appendChild(div);
     //anexa a "div" criada com o novo conteúdo 
 
-    createSVG(i, "div" + i);
-    createPauta("idSVG" + i);
-    lastLine(i);
+    new createSVG(i, "div" + i);
+    new createPauta("idSVG" + i);
+    new lastLine(i);
     i++;
 }
 
@@ -79,5 +79,5 @@ function lastLine(_id) {
         remove_id('lastLine' + index + '-idSVG' + (_id - 1));
         //remove a linha anterior...
     }
-    createLastLine("idSVG" + _id);
+    new createLastLine("idSVG" + _id);
 }

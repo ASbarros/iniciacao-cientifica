@@ -3,13 +3,13 @@
  * @author anderson dos santos de barros
  */
 
-let x = 5;
 const tempo = 10;
-let a = 0.3;
-let idSVG = 0;
+let x = 5,
+    a = 0.3,
+    idSVG = 0;
 
 function time() {
-    var idTime = 0;
+    let idTime = 0;
     //id da linha...
     new createCircle('grande' + idSVG, 1.5);
     //criando o timer, composto por dois circulos...
