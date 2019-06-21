@@ -25,11 +25,11 @@ function compasso(_NumCompasso, _idDiv) {
             idDiv: _idDiv,
             classe: 'compasso'
         }
-        createLine(objLine);
+        new createLine(objLine);
     }
     objLine.x1 = 98.2;
     objLine.x2 = 98.2;
     objLine.idDiv = 'compasso' + id;
     objLine.idDiv = _idDiv;
-    createLine(objLine);
+    new createLine(objLine);
 }

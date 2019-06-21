@@ -3,19 +3,19 @@
  * @author anderson dos santos de barros
  */
 
-var x = 5;
+let x = 5;
 const tempo = 10;
 let a = 0.3;
-var idSVG = 0;
+let idSVG = 0;
 
 function time() {
     var idTime = 0;
     //id da linha...
-    createCircle('grande' + idSVG, 1.5);
+    new createCircle('grande' + idSVG, 1.5);
     //criando o timer, composto por dois circulos...
-    createCircle(idSVG, 0.3);
+    new createCircle(idSVG, 0.3);
 
-    var timer = setInterval(() => {
+    let timer = setInterval(() => {
         //timer...
         document.getElementById('circle-' + idSVG).setAttributeNS(null, 'r', a + '%');
         a += 0.1;
@@ -24,7 +24,7 @@ function time() {
 
     setTimeout(() => {
         //linha passando...
-        var Tscroll = 350,
+        let Tscroll = 350,
             //variavel para incrementar o scroll...
             objLine,
             inter = setInterval(() => {
@@ -39,10 +39,10 @@ function time() {
                         idDiv: "idSVG" + idSVG,
                         classe: 'time'
                     }
-                    createLine(objLine);
+                    new createLine(objLine);
                     //createLine(x, 40, x, 60, "time" + idTime, "idSVG" + idSVG, "time");
                     x = x + 0.18;
-                    var id = 'time' + (idTime - 1) + '-idSVG' + idSVG;
+                    let id = 'time' + (idTime - 1) + '-idSVG' + idSVG;
                     //id da linha ...
                     remove_id(id);
                     if (x >= 98.3) {
@@ -57,9 +57,9 @@ function time() {
                         remove_id('circle-' + idSVG);
                         idSVG++;
                         //incremento...
-                        createCircle('grande' + idSVG, 1.5);
+                        new createCircle('grande' + idSVG, 1.5);
                         //criando o proximo timer...
-                        createCircle(idSVG, 0.3);
+                        new createCircle(idSVG, 0.3);
                     }
                 } catch (e) {
                     clearInterval(inter);
@@ -72,7 +72,7 @@ function time() {
 }
 
 function createCircle(_i, _r) {
-    var circle = document.createElementNS(svgNS, "circle");
+    const circle = document.createElementNS(svgNS, "circle");
     circle.setAttributeNS(null, "id", 'circle-' + _i);
     circle.setAttributeNS(null, "cx", '50%');
     circle.setAttributeNS(null, "cy", '92%');

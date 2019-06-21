@@ -54,7 +54,7 @@ function createLastLine(_idDiv) {
             idDiv: _idDiv,
             classe: ''
         }
-        createLine(objLine);
+        new createLine(objLine);
     }
     objLine.y1 = 40;
     objLine.y2 = 60;
@@ -62,5 +62,5 @@ function createLastLine(_idDiv) {
     objLine.idName = 'lastLine1';
     objLine.classe = 'lastLine';
     objLine.idDiv = _idDiv;
-    createLine(objLine);
+    new createLine(objLine);
 }

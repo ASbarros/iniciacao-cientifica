@@ -2,14 +2,14 @@
  * classe onde vai ter todas as funcionalidades das notas
  * @author anderson dos santos de barros
  */
-function createCompassFormula(idDiv, name, x, y) {
-    let CF = document.createElementNS(svgNS, "path"),
-        NumDiv = idDiv.substring(5, 6);
-    CF.setAttributeNS(null, "id", name + NumDiv);
+function createCompassFormula(_obj) {
+    const CF = document.createElementNS(svgNS, "path"),
+        NumDiv = _obj.idDiv.substring(5, 6);
+    CF.setAttributeNS(null, "id", _obj.name + NumDiv);
     CF.setAttributeNS(null, "stroke", "#000");
-    CF.setAttributeNS(null, 'transform', 'translate(' + x + ' ' + y + ')');
-    CF.setAttributeNS(null, "d", getImagem(name));
-    document.getElementById(idDiv).appendChild(CF);
+    CF.setAttributeNS(null, 'transform', 'translate(' + _obj.x + ' ' + _obj.y + ')');
+    CF.setAttributeNS(null, "d", getImagem(_obj.name));
+    document.getElementById(_obj.idDiv).appendChild(CF);
     //apendando o elemento no corpo do svg...
 }
 
@@ -33,14 +33,14 @@ function createNote(_name) {
     $(document.body).one('click', (e) => {
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
-            let x = e.clientX;
-            let idDiv = e.target.id;
-            let objNota = new getImagem(_name);
-            //objeto...
-            let y = returnPositionY_px(idDiv);
-            //salvando as coordenadas x, y...
-            let armazenaX = returnPositionX_porcentagem(x - objNota.x);
-            let nota = document.createElementNS(svgNS, "path");
+            let x = e.clientX,
+                idDiv = e.target.id,
+                objNota = new getImagem(_name),
+                //objeto...
+                y = returnPositionY_px(idDiv),
+                //salvando as coordenadas x, y...
+                armazenaX = returnPositionX_porcentagem(x - objNota.x)
+            const nota = document.createElementNS(svgNS, "path");
             nota.setAttributeNS(null, "id", "nota" + id);
             nota.setAttributeNS(null, 'name', _name);
             nota.setAttributeNS(null, "stroke", "#000");
