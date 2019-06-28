@@ -30,7 +30,7 @@ function createNote(_name) {
         //inabilitando os botoes...
         button[i].setAttribute('disabled', 'true');
     }
-    $(document.body).one('click', (e) => {
+    $(document.body).one('click', e => {
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
             let x = e.clientX,
@@ -43,6 +43,8 @@ function createNote(_name) {
             const nota = document.createElementNS(svgNS, "path");
             nota.setAttributeNS(null, "id", "nota" + id);
             nota.setAttributeNS(null, 'name', _name);
+            nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
+            nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
             nota.setAttributeNS(null, "stroke", "#000");
             nota.setAttributeNS(null, "class", "nota");
             nota.setAttributeNS(null, "d", objNota.imagem);

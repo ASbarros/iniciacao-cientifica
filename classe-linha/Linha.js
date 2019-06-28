@@ -7,7 +7,7 @@ const svgNS = "http://www.w3.org/2000/svg";
 //definindo o namespace de svg...
 
 function createSVG(_id, _dad) {
-    var canvasSVG = document.createElementNS(svgNS, "svg");
+    const canvasSVG = document.createElementNS(svgNS, "svg");
     //desenhando a tela a ser pintada...
     canvasSVG.setAttributeNS(null, "id", "idSVG" + _id);
     canvasSVG.setAttributeNS(null, "width", "100%");

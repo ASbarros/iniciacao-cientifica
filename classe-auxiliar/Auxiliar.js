@@ -125,6 +125,36 @@ function remove_id(id) {
 }
 
 function apenasNumeros(string) {
-    var numsStr = string.replace(/[^0-9]/g, '');
+    let numsStr = string.replace(/[^0-9]/g, '');
     return parseInt(numsStr);
+}
+
+
+
+function ativarMovimentacao() {
+    //enquanto estiver segurando o click do mouse em cima da nota...
+    const note = ($(`#${event.target.id}`))[0],
+        lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
+        transform = note.getAttributeNS(null, 'transform');
+    let propriXY = transform.split(' '),
+        x = apenasNumeros(propriXY[0]),
+        y = apenasNumeros(propriXY[1]);
+    note.addEventListener('mousemove', ()=>{
+        note.removeAttributeNS(null, 'transform', this.localName);
+        //removendo o atributo antigo...
+        note.setAttributeNS(null, 'transform',
+         `translate(${returnPositionX_px(returnPositionX_porcentagem(event.clientX)-4)} ${y})`);
+            console.log(note);
+    });
+        
+    //note.setAttributeNS(null, 'transform', `translate(${returnPositionX_px(event.clientX)} ${returnPositionY(lineOrigin)})`);
+    //inserindo um novo atributo com a posicao atual
+    //console.log(returnPositionX_porcentagemSVG(event.pageX) + 'x');
+}
+
+function mousemov(note,x,y){
+    note.removeAttributeNS(null, 'transform', this.localName);
+    //removendo o atributo antigo...
+    note.setAttributeNS(null, 'transform', `translate(${returnPositionX_px(returnPositionX_porcentagem(event.clientX)-3.6)} ${y})`);
+        console.log(note);
 }
