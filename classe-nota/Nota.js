@@ -44,7 +44,8 @@ function createNote(_name) {
             nota.setAttributeNS(null, "id", "nota" + id);
             nota.setAttributeNS(null, 'name', _name);
             nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
-            nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
+            nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
+            nota.setAttributeNS(null, 'onmouseup','retiraMovimentacao()');
             nota.setAttributeNS(null, "stroke", "#000");
             nota.setAttributeNS(null, "class", "nota");
             nota.setAttributeNS(null, "d", objNota.imagem);

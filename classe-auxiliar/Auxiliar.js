@@ -129,9 +129,27 @@ function apenasNumeros(string) {
     return parseInt(numsStr);
 }
 
-
-
 function ativarMovimentacao() {
+    const note = ($(`#${event.target.id}`))[0];
+    note.addEventListener('mousemove', mousemove);
+}
+
+function retiraMovimentacao() {
+    const note = ($(`#${event.target.id}`))[0];
+    note.removeEventListener('mousemove', mousemove);
+}
+
+function mousemove() {
+    const note = ($(`#${event.target.id}`))[0],
+        transform = note.getAttributeNS(null, 'transform');
+    let propriXY = transform.split(' '),
+        y = apenasNumeros(propriXY[1]);
+    note.removeAttributeNS(null, 'transform', this.localName);
+    //removendo o atributo antigo...
+    note.setAttributeNS(null, 'transform',
+        `translate(${event.pageX - 70} ${y})`);
+}
+/* function ativarMovimentacao() {
     //enquanto estiver segurando o click do mouse em cima da nota...
     const note = ($(`#${event.target.id}`))[0],
         lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
@@ -157,4 +175,4 @@ function mousemov(note,x,y){
     //removendo o atributo antigo...
     note.setAttributeNS(null, 'transform', `translate(${returnPositionX_px(returnPositionX_porcentagem(event.clientX)-3.6)} ${y})`);
         console.log(note);
-}
+} */
