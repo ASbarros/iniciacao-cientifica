@@ -45,7 +45,7 @@ function createNote(_name) {
             nota.setAttributeNS(null, 'name', _name);
             nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
             nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
-            nota.setAttributeNS(null, 'onmouseup','retiraMovimentacao()');
+            nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
             nota.setAttributeNS(null, "stroke", "#000");
             nota.setAttributeNS(null, "class", "nota");
             nota.setAttributeNS(null, "d", objNota.imagem);
@@ -203,5 +203,18 @@ function createLineJoin(_obj) {
             classe: 'linejoinsemicolcheia'
         }
         new createLine(objLine);
+    }
+}
+
+function DeleteNote(tentativa = 0) {
+    //funcao para apagar uma nota pelo click...
+    //se o primeiro click der errado, a funcao é chamada outra vez...
+    if (tentativa < 2) {
+        $('.svg').one('click', (e) => {
+            const click = e.target.id;
+            const regex = /\b(nota[0-9]\d*)\b/;
+            if (!!click.match(regex)) remove_id(click);
+            else DeleteNote(tentativa++);
+        });
     }
 }
