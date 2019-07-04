@@ -104,22 +104,23 @@ function apenasNumeros(string) {
 function ativarMovimentacao() {
     //adiciona o evento de movimentacao...
     const note = document.getElementById(event.target.id);
-    note.addEventListener('mousemove', Movimentacao);
+    note.addEventListener('mousemove', movimentacao);
 }
 
 function retiraMovimentacao() {
     //retira o evento de movimentacao...
     const note = document.getElementById(event.target.id);
-    note.removeEventListener('mousemove', Movimentacao);
+    note.removeEventListener('mousemove', movimentacao);
 }
 
-function Movimentacao() {
+function movimentacao() {
     const note = document.getElementById(event.target.id),
-        transform = note.getAttributeNS(null, 'transform');
-    let propriXY = transform.split(' '),
-        y = apenasNumeros(propriXY[1]);
+        lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
+        obj_y = note.getAttributeNS(null, 'obj_y');
+    let y = returnPositionY_px(lineOrigin) - obj_y;
+    
     note.removeAttributeNS(null, 'transform', this.localName);
     //removendo o atributo antigo...
     note.setAttributeNS(null, 'transform',
-        'translate(' + (event.pageX - 50) + ' ' + y + ')');
+        'translate(' + (event.pageX - 55) + ' ' + y + ')');
 }

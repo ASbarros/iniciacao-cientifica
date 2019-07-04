@@ -39,7 +39,7 @@ function createNote(_name) {
                 //objeto...
                 y = returnPositionY_px(idDiv),
                 //salvando as coordenadas x, y...
-                armazenaX = returnPositionX_porcentagem(x - objNota.x)
+                armazenaX = returnPositionX_porcentagem(x - objNota.x);
             const nota = document.createElementNS(svgNS, "path");
             nota.setAttributeNS(null, "id", "nota" + id);
             nota.setAttributeNS(null, 'name', _name);
@@ -54,6 +54,7 @@ function createNote(_name) {
                 ' ' + (y - objNota.y) + ')');
             nota.setAttributeNS(null, 'x', armazenaX);
             nota.setAttributeNS(null, 'y', (y - objNota.y));
+            nota.setAttributeNS(null, 'obj_y', objNota.y);
             document.getElementById(idDiv.substring(idDiv.length - 6, idDiv.length))
                 .appendChild(nota);
             vetObjNote.push('nota' + id);
