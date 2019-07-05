@@ -114,11 +114,30 @@ function retiraMovimentacao() {
 }
 
 function movimentacao() {
-    const note = document.getElementById(event.target.id),
-        lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
-        obj_y = note.getAttributeNS(null, 'obj_y');
+    const note = document.getElementById(event.target.id);
+    let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
+        numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
+    const obj_y = note.getAttributeNS(null, 'obj_y'),
+        pageY = note.getAttributeNS(null, 'pageY'),
+        primeiraParte = lineOrigin.substring(0, 10),
+        segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length);
+
+    if (event.pageY > pageY - 20) {
+        alert('acima');
+        numLine++;
+        lineOrigin = primeiraParte + numLine + segundaParte;
+        note.removeAttributeNS(null, 'lineOrigin', this.localName);
+        note.setAttributeNS(null, 'lineOrigin', lineOrigin);
+    }
+    else if (event.pageY < pageY - 10) {
+        alert('abaixo');
+        numLine--;
+        lineOrigin = primeiraParte + numLine + segundaParte;
+        note.removeAttributeNS(null, 'lineOrigin', this.localName);
+        note.setAttributeNS(null, 'lineOrigin', lineOrigin);
+    }
+
     let y = returnPositionY_px(lineOrigin) - obj_y;
-    
     note.removeAttributeNS(null, 'transform', this.localName);
     //removendo o atributo antigo...
     note.setAttributeNS(null, 'transform',
