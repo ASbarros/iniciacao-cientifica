@@ -54,7 +54,9 @@ function createNote(_name) {
                 ' ' + (y - objNota.y) + ')');
             nota.setAttributeNS(null, 'x', armazenaX);
             nota.setAttributeNS(null, 'y', (y - objNota.y));
+            nota.setAttributeNS(null, 'pageX', e.pageX);
             nota.setAttributeNS(null, 'pageY', e.pageY);
+            nota.setAttributeNS(null, 'obj_x', objNota.x);
             nota.setAttributeNS(null, 'obj_y', objNota.y);
             document.getElementById(idDiv.substring(idDiv.length - 6, idDiv.length))
                 .appendChild(nota);

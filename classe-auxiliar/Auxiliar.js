@@ -105,12 +105,17 @@ function ativarMovimentacao() {
     //adiciona o evento de movimentacao...
     const note = document.getElementById(event.target.id);
     note.addEventListener('mousemove', movimentacao);
+    note.setAttributeNS(null, 'clickY', event.pageY);
+    note.setAttributeNS(null, 'clickX', event.pageX);
+    //adiciona o atributo para saber qual foi a posicao do click inicial...
 }
 
 function retiraMovimentacao() {
     //retira o evento de movimentacao...
     const note = document.getElementById(event.target.id);
     note.removeEventListener('mousemove', movimentacao);
+    note.removeAttributeNS(null, 'clickY', this.localName);
+    note.removeAttributeNS(null, 'clickX', this.localName);
 }
 
 function movimentacao() {
@@ -118,28 +123,28 @@ function movimentacao() {
     let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
         numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
     const obj_y = note.getAttributeNS(null, 'obj_y'),
-        pageY = note.getAttributeNS(null, 'pageY'),
+        obj_x = note.getAttributeNS(null, 'obj_x'),
+        clickY = note.getAttributeNS(null, 'clickY'),
+        clickX = note.getAttributeNS(null, 'clickX'),
         primeiraParte = lineOrigin.substring(0, 10),
         segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length);
-
-    if (event.pageY > pageY - 20) {
-        alert('acima');
-        numLine++;
+    if (event.pageY + 5 > clickY) {
+        if (numLine > 1) numLine--;
         lineOrigin = primeiraParte + numLine + segundaParte;
         note.removeAttributeNS(null, 'lineOrigin', this.localName);
         note.setAttributeNS(null, 'lineOrigin', lineOrigin);
     }
-    else if (event.pageY < pageY - 10) {
-        alert('abaixo');
-        numLine--;
+    if (event.pageY - 5 < clickY) {
+        if (numLine < 29) numLine++;
         lineOrigin = primeiraParte + numLine + segundaParte;
         note.removeAttributeNS(null, 'lineOrigin', this.localName);
         note.setAttributeNS(null, 'lineOrigin', lineOrigin);
     }
 
-    let y = returnPositionY_px(lineOrigin) - obj_y;
+    let y = returnPositionY_px(lineOrigin) - obj_y,
+        x = note.getAttributeNS(null, 'pageX');
     note.removeAttributeNS(null, 'transform', this.localName);
     //removendo o atributo antigo...
     note.setAttributeNS(null, 'transform',
-        'translate(' + (event.pageX - 55) + ' ' + y + ')');
+        'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
 }
