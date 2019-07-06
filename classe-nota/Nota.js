@@ -217,6 +217,7 @@ function DeleteNote(tentativa = 0) {
         $('.svg').one('click', (e) => {
             const click = e.target.id;
             const regex = /\b(nota[0-9]\d*)\b/;
+            //expressao regular para pegar apenas as notas...
             if (!!click.match(regex)) remove_id(click);
             else DeleteNote(tentativa++);
         });

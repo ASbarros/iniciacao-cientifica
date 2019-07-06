@@ -119,22 +119,25 @@ function retiraMovimentacao() {
 }
 
 function movimentacao() {
+    //evento de movimentacao da nota de acordo com o mouse....
     const note = document.getElementById(event.target.id);
     let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
         numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
+    //pegando o numero da linha em que a nota foi criada...
     const obj_y = note.getAttributeNS(null, 'obj_y'),
         obj_x = note.getAttributeNS(null, 'obj_x'),
         clickY = note.getAttributeNS(null, 'clickY'),
-        clickX = note.getAttributeNS(null, 'clickX'),
         primeiraParte = lineOrigin.substring(0, 10),
         segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length);
     if (event.pageY + 5 > clickY) {
+        //se o movimento for para baixo...
         if (numLine > 1) numLine--;
         lineOrigin = primeiraParte + numLine + segundaParte;
         note.removeAttributeNS(null, 'lineOrigin', this.localName);
         note.setAttributeNS(null, 'lineOrigin', lineOrigin);
     }
     if (event.pageY - 5 < clickY) {
+        //se o movimento for para cima...
         if (numLine < 29) numLine++;
         lineOrigin = primeiraParte + numLine + segundaParte;
         note.removeAttributeNS(null, 'lineOrigin', this.localName);
@@ -147,4 +150,5 @@ function movimentacao() {
     //removendo o atributo antigo...
     note.setAttributeNS(null, 'transform',
         'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
+    //colocando a nova posicao...
 }
