@@ -98,6 +98,7 @@ function remove_id(id) {
 
 function apenasNumeros(string) {
     const numsStr = string.replace(/[^0-9]/g, '');
+    //tudo o que nao for numero, sera substituido por vazio...
     return parseInt(numsStr);
 }
 
