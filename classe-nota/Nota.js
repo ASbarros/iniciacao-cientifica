@@ -21,9 +21,7 @@ let vetObjNote = [],
     id = 0;
 //id das notas...
 
-function PositionNote(_name) {
-    //adicionando um evento ao todos os elementos linhas additional...
-    //if para garantir que nao vai ter duas notas esperando click...
+function PositionNote(_name, _amount=1) {
     let button = document.getElementsByTagName('button');
     for (let i = 0; i < button.length; i++) {
         //inabilitando os botoes...
@@ -34,25 +32,29 @@ function PositionNote(_name) {
             //elemento encontrado...
             try {
                 let x = e.clientX,
-                    idDiv = e.target.id;
-                y = returnPositionY_px(idDiv),
-                    //salvando as coordenadas x, y...
+                    idDiv = e.target.id,
+                    y = returnPositionY_px(idDiv),
+                    obj;
+                //salvando as coordenadas x, y...
+                for (let i = 0; i < _amount; i++) {
+                    alert(i);
                     obj = {
-                        x: x,
+                        x: x - (i * 100),
                         y: y,
                         idDiv: idDiv
                     };
-                createNote(_name, obj, e);
+                    createNote(_name, obj, e);
+                }
                 for (let i = 0; i < button.length; i++) {
                     button[i].removeAttribute('disabled', 'true');
                     //retirando a propriedade disabled...
                     //ativando os botoes...
                 }
             } catch {
-                PositionNote(_name);
+                PositionNote(_name, _amount);
                 //se o click nao for em cima da linha, ja chamar a funcao novamente...
             }
-        } else PositionNote(_name);
+        } else PositionNote(_name, _amount);
     });
 }
 
