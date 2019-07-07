@@ -21,7 +21,7 @@ let vetObjNote = [],
     id = 0;
 //id das notas...
 
-function PositionNote(_name, _amount=1) {
+function PositionNote(_name, _amount = 1) {
     let button = document.getElementsByTagName('button');
     for (let i = 0; i < button.length; i++) {
         //inabilitando os botoes...
@@ -33,32 +33,57 @@ function PositionNote(_name, _amount=1) {
             try {
                 let x = e.clientX,
                     idDiv = e.target.id,
-                    y = returnPositionY_px(idDiv),
-                    obj;
-                //salvando as coordenadas x, y...
-                for (let i = 0; i < _amount; i++) {
-                    alert(i);
-                    obj = {
-                        x: x - (i * 100),
-                        y: y,
-                        idDiv: idDiv
-                    };
-                    createNote(_name, obj, e);
+                    y = returnPositionY_px(idDiv);
+                const obj = {};
+                obj.y = y;
+                obj.idDiv = idDiv;
+                obj.e = e;
+
+                if (_amount == 1) { //para criar uma nota...
+                    obj.x = x;
+                    createNote(_name, obj);
+                } else if (_amount == 2) { //para criar duas notas...
+                    obj.x = x - 20;
+                    createNote(_name, obj);
+                    obj.x = x + 20;
+                    createNote(_name, obj);
+                } else if (_amount == 3) {
+                    obj.x = x - 40;
+                    createNote(_name, obj);
+                    obj.x = x;
+                    createNote(_name, obj);
+                    obj.x = x + 40;
+                    createNote(_name, obj);
+                } else if (_amount == 4) {
+                    obj.x = x - 60;
+                    createNote(_name, obj);
+                    obj.x = x - 20;
+                    createNote(_name, obj);
+                    obj.x = x + 20;
+                    createNote(_name, obj);
+                    obj.x = x + 60;
+                    createNote(_name, obj);
                 }
+                /* for (let i = 0; i < _amount; i++) {
+                    obj.x = x - (i * 40);
+
+                    createNote(_name, obj, e);
+                } */
                 for (let i = 0; i < button.length; i++) {
                     button[i].removeAttribute('disabled', 'true');
                     //retirando a propriedade disabled...
                     //ativando os botoes...
                 }
             } catch {
-                PositionNote(_name, _amount);
-                //se o click nao for em cima da linha, ja chamar a funcao novamente...
+                // PositionNote(_name, _amount);
+                //se acontecer algum erro, vai chamar a funcao novamente...
             }
         } else PositionNote(_name, _amount);
+        //se o click nao for em cima da linha, vai chamar a funcao novamente...
     });
 }
 
-function createNote(_name, _obj, e) {
+function createNote(_name, _obj) {
 
     const nota = document.createElementNS(svgNS, "path"),
         objNota = new getImagem(_name);
@@ -70,13 +95,13 @@ function createNote(_name, _obj, e) {
     nota.setAttributeNS(null, "stroke", "#000");
     nota.setAttributeNS(null, "class", "nota");
     nota.setAttributeNS(null, "d", objNota.imagem);
-    nota.setAttributeNS(null, "lineOrigin", e.target.id);
+    nota.setAttributeNS(null, "lineOrigin", _obj.e.target.id);
     nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
         ' ' + (_obj.y - objNota.y) + ')');
     nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
     nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
-    nota.setAttributeNS(null, 'pageX', e.pageX);
-    nota.setAttributeNS(null, 'pageY', e.pageY);
+    nota.setAttributeNS(null, 'pageX', _obj.e.pageX);
+    nota.setAttributeNS(null, 'pageY', _obj.e.pageY);
     nota.setAttributeNS(null, 'obj_x', objNota.x);
     nota.setAttributeNS(null, 'obj_y', objNota.y);
     document.getElementById(_obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length))
