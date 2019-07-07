@@ -13,7 +13,6 @@ function createCompassFormula(_obj) {
     //apendando o elemento no corpo do svg...
 }
 
-
 let vetObjNote = [],
     //vetor para atualizar a posicao das notas,
     //guarda os ids das notas...
@@ -22,7 +21,7 @@ let vetObjNote = [],
     id = 0;
 //id das notas...
 
-function createNote(_name) {
+function PositionNote(_name) {
     //adicionando um evento ao todos os elementos linhas additional...
     //if para garantir que nao vai ter duas notas esperando click...
     let button = document.getElementsByTagName('button');
@@ -33,45 +32,57 @@ function createNote(_name) {
     $(document.body).one('click', e => {
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
-            let x = e.clientX,
-                idDiv = e.target.id,
-                objNota = new getImagem(_name),
-                //objeto...
+            try {
+                let x = e.clientX,
+                    idDiv = e.target.id;
                 y = returnPositionY_px(idDiv),
-                //salvando as coordenadas x, y...
-                armazenaX = returnPositionX_porcentagem(x - objNota.x);
-            const nota = document.createElementNS(svgNS, "path");
-            nota.setAttributeNS(null, "id", "nota" + id);
-            nota.setAttributeNS(null, 'name', _name);
-            nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
-            nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
-            nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
-            nota.setAttributeNS(null, "stroke", "#000");
-            nota.setAttributeNS(null, "class", "nota");
-            nota.setAttributeNS(null, "d", objNota.imagem);
-            nota.setAttributeNS(null, "lineOrigin", e.target.id);
-            nota.setAttributeNS(null, 'transform', 'translate(' + (x - objNota.x) +
-                ' ' + (y - objNota.y) + ')');
-            nota.setAttributeNS(null, 'x', armazenaX);
-            nota.setAttributeNS(null, 'y', (y - objNota.y));
-            nota.setAttributeNS(null, 'pageX', e.pageX);
-            nota.setAttributeNS(null, 'pageY', e.pageY);
-            nota.setAttributeNS(null, 'obj_x', objNota.x);
-            nota.setAttributeNS(null, 'obj_y', objNota.y);
-            document.getElementById(idDiv.substring(idDiv.length - 6, idDiv.length))
-                .appendChild(nota);
-            vetObjNote.push('nota' + id);
-            //armazenado id do obj...
-            id++;
-
-            for (let i = 0; i < button.length; i++) {
-                button[i].removeAttribute('disabled', 'true');
-                //retirando a propriedade disabled...
-                //ativando os botoes...
+                    //salvando as coordenadas x, y...
+                    obj = {
+                        x: x,
+                        y: y,
+                        idDiv: idDiv
+                    };
+                createNote(_name, obj, e);
+                for (let i = 0; i < button.length; i++) {
+                    button[i].removeAttribute('disabled', 'true');
+                    //retirando a propriedade disabled...
+                    //ativando os botoes...
+                }
+            } catch {
+                PositionNote(_name);
+                //se o click nao for em cima da linha, ja chamar a funcao novamente...
             }
-        } else createNote(_name);
-        //se o click nao for em cima da linha, ja chamar a funcao novamente...
+        } else PositionNote(_name);
     });
+}
+
+function createNote(_name, _obj, e) {
+
+    const nota = document.createElementNS(svgNS, "path"),
+        objNota = new getImagem(_name);
+    nota.setAttributeNS(null, "id", "nota" + id);
+    nota.setAttributeNS(null, 'name', _name);
+    nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
+    nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
+    nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
+    nota.setAttributeNS(null, "stroke", "#000");
+    nota.setAttributeNS(null, "class", "nota");
+    nota.setAttributeNS(null, "d", objNota.imagem);
+    nota.setAttributeNS(null, "lineOrigin", e.target.id);
+    nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
+        ' ' + (_obj.y - objNota.y) + ')');
+    nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
+    nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
+    nota.setAttributeNS(null, 'pageX', e.pageX);
+    nota.setAttributeNS(null, 'pageY', e.pageY);
+    nota.setAttributeNS(null, 'obj_x', objNota.x);
+    nota.setAttributeNS(null, 'obj_y', objNota.y);
+    document.getElementById(_obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length))
+        .appendChild(nota);
+    vetObjNote.push('nota' + id);
+    //armazenado id do obj...
+    id++;
+
 }
 
 function join() {
