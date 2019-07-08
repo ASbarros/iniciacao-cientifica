@@ -47,6 +47,7 @@ function PositionNote(_name, _amount = 1) {
                     createNote(_name, obj);
                     obj.x = x + 20;
                     createNote(_name, obj);
+                    createLineJoin();
                 } else if (_amount == 3) {
                     obj.x = x - 40;
                     createNote(_name, obj);
@@ -64,11 +65,6 @@ function PositionNote(_name, _amount = 1) {
                     obj.x = x + 60;
                     createNote(_name, obj);
                 }
-                /* for (let i = 0; i < _amount; i++) {
-                    obj.x = x - (i * 40);
-
-                    createNote(_name, obj, e);
-                } */
                 for (let i = 0; i < button.length; i++) {
                     button[i].removeAttribute('disabled', 'true');
                     //retirando a propriedade disabled...
@@ -211,41 +207,58 @@ function changeNote(_note) {
     }
 }
 
-function createLineJoin(_obj) {
-    let objLine;
-    if (_obj.name == 'colcheia') {
-        objLine = {
-            x1: _obj.x1 + 2.55,
-            x2: _obj.x2 + 2.55,
-            y1: _obj.y1,
-            y2: _obj.y2,
-            idDiv: 'idSVG' + _obj.mom,
-            idName: 'join' + _obj.name,
-            classe: 'linejoincolcheia'
-        }
-        new createLine(objLine);
-    } else if (_obj.name == 'semicolcheia') {
-        objLine = {
-            x1: _obj.x1 + 2.6,
-            x2: _obj.x2 + 2.5,
-            y1: _obj.y1 - 1,
-            y2: _obj.y2 - 1,
-            idDiv: 'idSVG' + _obj.mom,
-            idName: 'join' + _obj.name,
-            classe: 'linejoinsemicolcheia'
-        }
-        new createLine(objLine);
-        objLine = {
-            x1: _obj.x1 + 2.6,
-            x2: _obj.x2 + 2.5,
-            y1: _obj.y1 + 1,
-            y2: _obj.y2 + 1,
-            idDiv: 'idSVG' + _obj.mom,
-            idName: 'join' + _obj.name,
-            classe: 'linejoinsemicolcheia'
-        }
-        new createLine(objLine);
-    }
+function createLineJoin() {
+    const objLine = {},
+        fistNote = document.getElementById('nota' + (id - 2)),
+        secondNote = document.getElementById('nota' + (id - 1)),
+        transformFistNote = fistNote.getAttributeNS(null, 'transform', this.localName),
+        transformSecondNote = secondNote.getAttributeNS(null, 'transform', this.localName),
+        aux1 = transformFistNote.split(' '),
+        aux2 = transformSecondNote.split(' '),
+        lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin', this.localName);
+    objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]));
+    objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0])+40);
+    objLine.y1 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
+    objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
+    objLine.name = fistNote.getAttributeNS(null, 'name', this.localName);
+    objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
+    objLine.classe = 'linejoincolcheia';
+    objLine.idName = 'join' + objLine.name;
+    objLine.idDiv = 'idSVG' + objLine.mom;
+    new createLine(objLine);
+    /*  if (_obj.name == 'colcheia') {
+         objLine = {
+             x1: _obj.x1 + 2.55,
+             x2: _obj.x2 + 2.55,  
+             y1: _obj.y1,
+             y2: _obj.y2,
+             idDiv: 'idSVG' + _obj.mom,
+             idName: 'join' + _obj.name,
+             classe: 'linejoincolcheia'
+         }
+         new createLine(objLine);
+     } else if (_obj.name == 'semicolcheia') {
+         objLine = {
+             x1: _obj.x1 + 2.6,
+             x2: _obj.x2 + 2.5,
+             y1: _obj.y1 - 1,
+             y2: _obj.y2 - 1,
+             idDiv: 'idSVG' + _obj.mom,
+             idName: 'join' + _obj.name,
+             classe: 'linejoinsemicolcheia'
+         }
+         new createLine(objLine);
+         objLine = {
+             x1: _obj.x1 + 2.6,
+             x2: _obj.x2 + 2.5,
+             y1: _obj.y1 + 1,
+             y2: _obj.y2 + 1,
+             idDiv: 'idSVG' + _obj.mom,
+             idName: 'join' + _obj.name,
+             classe: 'linejoinsemicolcheia'
+         }
+         new createLine(objLine);
+     } */
 }
 
 function DeleteNote(tentativa = 0) {
