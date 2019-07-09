@@ -226,39 +226,6 @@ function createLineJoin() {
     objLine.idName = 'join' + objLine.name;
     objLine.idDiv = 'idSVG' + objLine.mom;
     new createLine(objLine);
-    /*  if (_obj.name == 'colcheia') {
-         objLine = {
-             x1: _obj.x1 + 2.55,
-             x2: _obj.x2 + 2.55,  
-             y1: _obj.y1,
-             y2: _obj.y2,
-             idDiv: 'idSVG' + _obj.mom,
-             idName: 'join' + _obj.name,
-             classe: 'linejoincolcheia'
-         }
-         new createLine(objLine);
-     } else if (_obj.name == 'semicolcheia') {
-         objLine = {
-             x1: _obj.x1 + 2.6,
-             x2: _obj.x2 + 2.5,
-             y1: _obj.y1 - 1,
-             y2: _obj.y2 - 1,
-             idDiv: 'idSVG' + _obj.mom,
-             idName: 'join' + _obj.name,
-             classe: 'linejoinsemicolcheia'
-         }
-         new createLine(objLine);
-         objLine = {
-             x1: _obj.x1 + 2.6,
-             x2: _obj.x2 + 2.5,
-             y1: _obj.y1 + 1,
-             y2: _obj.y2 + 1,
-             idDiv: 'idSVG' + _obj.mom,
-             idName: 'join' + _obj.name,
-             classe: 'linejoinsemicolcheia'
-         }
-         new createLine(objLine);
-     } */
 }
 
 function DeleteNote(tentativa = 0) {
