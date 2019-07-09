@@ -153,15 +153,31 @@ function movimentacao() {
     note.setAttributeNS(null, 'transform',
         'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
     //colocando a nova posicao...
-    for (let i = 0; i < allLines.length; i++) {
-        const line = document.getElementById(allLines[i].id);
-        if (line.getAttributeNS(null, 'n1', this.localName) == event.target.id) {
-            line.removeAttributeNS(null, 'y1', this.localName);
-            line.setAttributeNS(null, 'y1', y);
-            line.removeAttributeNS(null, 'x1', this.localName);
-            line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX)+2) + '%');
-            break;
-        }
-
+    try {
+        const idLine = note.getAttributeNS(null, 'x1y1Line', this.localName),
+            line = document.getElementById(idLine);
+        line.removeAttributeNS(null, 'y1', this.localName);
+        line.setAttributeNS(null, 'y1', y);
+        line.removeAttributeNS(null, 'x1', this.localName);
+        line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX) + 2) + '%');
+    } catch {
+        //
     }
+    try {
+        const idLine = note.getAttributeNS(null, 'x2y2Line', this.localName),
+            line = document.getElementById(idLine);
+        line.removeAttributeNS(null, 'y2', this.localName);
+        line.setAttributeNS(null, 'y2', y);
+        line.removeAttributeNS(null, 'x2', this.localName);
+        line.setAttributeNS(null, 'x2', (returnPositionX_porcentagem((event.pageX)) + 1) + '%');
+    } catch {
+        //
+    }
+    // for (let i = 0; i < allLines.length; i++) {
+    //const line = document.getElementById(allLines[i].id);
+    //if (line.getAttributeNS(null, 'n1', this.localName) == event.target.id) {
+    //         break;
+    //   }
+
+    // }
 }

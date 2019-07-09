@@ -230,6 +230,8 @@ function createLineJoin() {
     objLine.idDiv = 'idSVG' + objLine.mom;
     new createLine(objLine);
     idLineJoin++;
+    fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+    secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
 }
 
 function DeleteNote(tentativa = 0) {
