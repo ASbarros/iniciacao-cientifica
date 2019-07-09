@@ -155,14 +155,11 @@ function movimentacao() {
     //colocando a nova posicao...
     for (let i = 0; i < allLines.length; i++) {
         const line = document.getElementById(allLines[i].id);
-        //alert(line.getAttributeNS(null, 'n1', this.localName));
         if (line.getAttributeNS(null, 'n1', this.localName) == event.target.id) {
             line.removeAttributeNS(null, 'y1', this.localName);
             line.setAttributeNS(null, 'y1', y);
             line.removeAttributeNS(null, 'x1', this.localName);
             line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX)+2) + '%');
-
-            //line = document.getElementById(temp.getAttributeNS(null, 'id', this.localName));
             break;
         }
 
