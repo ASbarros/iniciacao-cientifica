@@ -161,7 +161,7 @@ function movimentacao() {
         line.removeAttributeNS(null, 'x1', this.localName);
         line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX) + 2) + '%');
     } catch {
-        //
+        //se nao tiver a linha associada, nao faz nada...
     }
     try {
         const idLine = note.getAttributeNS(null, 'x2y2Line', this.localName),
@@ -171,13 +171,6 @@ function movimentacao() {
         line.removeAttributeNS(null, 'x2', this.localName);
         line.setAttributeNS(null, 'x2', (returnPositionX_porcentagem((event.pageX)) + 1) + '%');
     } catch {
-        //
+        //se nao tiver a linha associada, nao faz nada...
     }
-    // for (let i = 0; i < allLines.length; i++) {
-    //const line = document.getElementById(allLines[i].id);
-    //if (line.getAttributeNS(null, 'n1', this.localName) == event.target.id) {
-    //         break;
-    //   }
-
-    // }
 }
