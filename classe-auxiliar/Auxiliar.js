@@ -117,12 +117,12 @@ function retiraMovimentacao() {
     note.removeEventListener('mousemove', movimentacao);
     note.removeAttributeNS(null, 'clickY', this.localName);
     note.removeAttributeNS(null, 'clickX', this.localName);
+    //retirando os atributos, pois nao sao mais necessarios...
 }
 
 function movimentacao() {
     //evento de movimentacao da nota de acordo com o mouse....
-    const note = document.getElementById(event.target.id),
-        allLines = document.getElementsByClassName('linejoincolcheia');
+    const note = document.getElementById(event.target.id);
     let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
         numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
     //pegando o numero da linha em que a nota foi criada...
@@ -146,16 +146,16 @@ function movimentacao() {
         note.setAttributeNS(null, 'lineOrigin', lineOrigin);
     }
 
-    let y = returnPositionY_px(lineOrigin) - obj_y,
-        x = note.getAttributeNS(null, 'pageX');
+    let y = returnPositionY_px(lineOrigin) - obj_y;
     note.removeAttributeNS(null, 'transform', this.localName);
     //removendo o atributo antigo...
     note.setAttributeNS(null, 'transform',
         'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
     //colocando a nova posicao...
-    try {
+    try { //tentando mover a linha associada...
         const idLine = note.getAttributeNS(null, 'x1y1Line', this.localName),
             line = document.getElementById(idLine);
+        //pegando a linha associada...
         line.removeAttributeNS(null, 'y1', this.localName);
         line.setAttributeNS(null, 'y1', y);
         line.removeAttributeNS(null, 'x1', this.localName);
@@ -163,9 +163,10 @@ function movimentacao() {
     } catch {
         //se nao tiver a linha associada, nao faz nada...
     }
-    try {
+    try { //tentando mover a linha associada a nota...
         const idLine = note.getAttributeNS(null, 'x2y2Line', this.localName),
             line = document.getElementById(idLine);
+        //pegando a linha associada...
         line.removeAttributeNS(null, 'y2', this.localName);
         line.setAttributeNS(null, 'y2', y);
         line.removeAttributeNS(null, 'x2', this.localName);
