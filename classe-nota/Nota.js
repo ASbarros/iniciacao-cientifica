@@ -206,6 +206,7 @@ function changeNote(_note) {
         return false;
     }
 }
+let idLineJoin = 0;
 
 function createLineJoin() {
     const objLine = {},
@@ -216,16 +217,19 @@ function createLineJoin() {
         aux1 = transformFistNote.split(' '),
         aux2 = transformSecondNote.split(' '),
         lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin', this.localName);
-    objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]));
-    objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0])+40);
-    objLine.y1 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
-    objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
+    objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
+    objLine.n1 = 'nota' + (id - 2);
+    objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
+    objLine.n2 = 'nota' + (id - 1);
+    objLine.y1 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.6;
+    objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.6;
     objLine.name = fistNote.getAttributeNS(null, 'name', this.localName);
     objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
     objLine.classe = 'linejoincolcheia';
-    objLine.idName = 'join' + objLine.name;
+    objLine.idName = 'join' + objLine.name + idLineJoin;
     objLine.idDiv = 'idSVG' + objLine.mom;
     new createLine(objLine);
+    idLineJoin++;
 }
 
 function DeleteNote(tentativa = 0) {

@@ -121,7 +121,8 @@ function retiraMovimentacao() {
 
 function movimentacao() {
     //evento de movimentacao da nota de acordo com o mouse....
-    const note = document.getElementById(event.target.id);
+    const note = document.getElementById(event.target.id),
+        allLines = document.getElementsByClassName('linejoincolcheia');
     let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
         numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
     //pegando o numero da linha em que a nota foi criada...
@@ -152,4 +153,18 @@ function movimentacao() {
     note.setAttributeNS(null, 'transform',
         'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
     //colocando a nova posicao...
+    for (let i = 0; i < allLines.length; i++) {
+        const line = document.getElementById(allLines[i].id);
+        //alert(line.getAttributeNS(null, 'n1', this.localName));
+        if (line.getAttributeNS(null, 'n1', this.localName) == event.target.id) {
+            line.removeAttributeNS(null, 'y1', this.localName);
+            line.setAttributeNS(null, 'y1', y);
+            line.removeAttributeNS(null, 'x1', this.localName);
+            line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX)+2) + '%');
+
+            //line = document.getElementById(temp.getAttributeNS(null, 'id', this.localName));
+            break;
+        }
+
+    }
 }
