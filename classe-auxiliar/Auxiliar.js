@@ -159,7 +159,7 @@ function movimentacao() {
         line.removeAttributeNS(null, 'y1', this.localName);
         line.setAttributeNS(null, 'y1', y);
         line.removeAttributeNS(null, 'x1', this.localName);
-        line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX) + 2) + '%');
+        line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX) + 1) + '%');
     } catch {
         //se nao tiver a linha associada, nao faz nada...
     }
@@ -170,7 +170,7 @@ function movimentacao() {
         line.removeAttributeNS(null, 'y2', this.localName);
         line.setAttributeNS(null, 'y2', y);
         line.removeAttributeNS(null, 'x2', this.localName);
-        line.setAttributeNS(null, 'x2', (returnPositionX_porcentagem((event.pageX)) + 1) + '%');
+        line.setAttributeNS(null, 'x2', (returnPositionX_porcentagem((event.pageX)) + 0.5) + '%');
     } catch {
         //se nao tiver a linha associada, nao faz nada...
     }

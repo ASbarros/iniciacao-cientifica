@@ -188,17 +188,17 @@ function join() {
                             numeroDeNotas++;
                         }
                         if (numeroDeNotas == 2) {
-                            const nota1 = document.getElementById(Notas[0]),
+                            let nota1 = document.getElementById(Notas[0]),
                                 //pegando a primeira nota...
                                 trans1 = nota1.getAttributeNS(null, 'transform', this.localName),
-                                a = trans1.split(' ');
-                            let x1 = returnPositionX_porcentagemSVG(apenasNumeros(a[0])),
-                                y1 = returnPositionY(nota1.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
-                            const nota2 = document.getElementById(Notas[1]),
+                                a = trans1.split(' '),
+                                x1 = returnPositionX_porcentagemSVG(apenasNumeros(a[0])) + 2.5,
+                                y1 = returnPositionY(nota1.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5,
+                                nota2 = document.getElementById(Notas[1]),
                                 //pegando a segunda nota...
                                 trans2 = nota2.getAttributeNS(null, 'transform', this.localName),
-                                b = trans2.split(' ');
-                            let x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0])),
+                                b = trans2.split(' '),
+                                x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0])) + 2.5,
                                 y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
                             if (x2 < x1) {
                                 //se a segunda nota for clicada primeiro...
@@ -208,6 +208,9 @@ function join() {
                                 aux = y2;
                                 y2 = y1;
                                 y1 = aux;
+                                aux = nota1;
+                                nota1 = nota2;
+                                nota2 = aux;
                             }
                             const objLine = {};
                             objLine.name = nota1.getAttributeNS(null, 'name', this.localName);
@@ -216,9 +219,17 @@ function join() {
                             objLine.x2 = x2;
                             objLine.y2 = y2;
                             objLine.mom = nota1.getAttributeNS(null, 'lineOrigin', this.localName);
-
-                            obj.mom = apenasNumeros(obj.mom.substring(obj.mom.length - 3, obj.mom.length));
-                            if (changeNote(nota2) && changeNote(nota1)) createLine(obj);
+                            objLine.classe = 'linejoincolcheia';
+                            objLine.mom = apenasNumeros(objLine.mom.substring(objLine.mom.length - 3, objLine.mom.length));
+                            objLine.idName = 'join' + objLine.name + idLineJoin;
+                            objLine.idDiv = 'idSVG' + objLine.mom;
+                            if (changeNote(nota2) && changeNote(nota1)) {
+                                new createLine(objLine);
+                                //criando uma nova linha, que ira ligar as notas...
+                                idLineJoin++;
+                                nota1.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+                                nota2.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+                            }
                             //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
                             else remove_id(nota2.id), remove_id(nota1.id);
                         }
@@ -232,6 +243,7 @@ function join() {
 function changeNote(_note) {
     //funcao para trocar as notas...
     try {
+        if (_note.getAttributeNS(null, 'name', this.localName) === 'seminima') return true;
         const objSeminima = new getImagem('seminima');
         _note.removeAttributeNS(null, 'd', this.localName);
         _note.setAttributeNS(null, 'd', objSeminima.imagem);
