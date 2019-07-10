@@ -162,7 +162,7 @@ function DeleteNote(tentativa = 0) {
 
 function join() {
     //funcao para juntar as notas, colocar uma linha em cima delas...
-    let Notas = [];
+    const Notas = [];
     //vetor para guadar as notas selecionadas...
     let numeroDeNotas = 0;
     //variavel numeroDeNotas para garantir que duas notas sejam selecionadas...
@@ -188,17 +188,18 @@ function join() {
                             numeroDeNotas++;
                         }
                         if (numeroDeNotas == 2) {
-                            let nota1 = document.getElementById(Notas[0]),
-                                trans = nota1.getAttributeNS(null, 'transform', this.localName),
-                                a = trans.split(' '),
-                                x1 = returnPositionX_porcentagemSVG(apenasNumeros(a[0])),
+                            const nota1 = document.getElementById(Notas[0]),
+                                //pegando a primeira nota...
+                                trans1 = nota1.getAttributeNS(null, 'transform', this.localName),
+                                a = trans1.split(' ');
+                            let x1 = returnPositionX_porcentagemSVG(apenasNumeros(a[0])),
                                 y1 = returnPositionY(nota1.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
-
-                            let nota2 = document.getElementById(Notas[1]);
-                            trans = nota2.getAttributeNS(null, 'transform', this.localName);
-                            let b = trans.split(' '),
-                                x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0]));
-                            y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
+                            const nota2 = document.getElementById(Notas[1]),
+                                //pegando a segunda nota...
+                                trans2 = nota2.getAttributeNS(null, 'transform', this.localName),
+                                b = trans2.split(' ');
+                            let x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0])),
+                                y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
                             if (x2 < x1) {
                                 //se a segunda nota for clicada primeiro...
                                 let aux = x2;
@@ -208,16 +209,16 @@ function join() {
                                 y2 = y1;
                                 y1 = aux;
                             }
-                            let obj = {
-                                name: nota1.getAttributeNS(null, 'name', this.localName),
-                                x1: x1,
-                                y1: y1,
-                                x2: x2,
-                                y2: y2,
-                                mom: nota1.getAttributeNS(null, 'lineOrigin', this.localName)
-                            };
+                            const objLine = {};
+                            objLine.name = nota1.getAttributeNS(null, 'name', this.localName);
+                            objLine.x1 = x1;
+                            objLine.y1 = y1;
+                            objLine.x2 = x2;
+                            objLine.y2 = y2;
+                            objLine.mom = nota1.getAttributeNS(null, 'lineOrigin', this.localName);
+
                             obj.mom = apenasNumeros(obj.mom.substring(obj.mom.length - 3, obj.mom.length));
-                            if (changeNote(nota2) && changeNote(nota1)) createLineJoin(obj);
+                            if (changeNote(nota2) && changeNote(nota1)) createLine(obj);
                             //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
                             else remove_id(nota2.id), remove_id(nota1.id);
                         }
@@ -231,7 +232,7 @@ function join() {
 function changeNote(_note) {
     //funcao para trocar as notas...
     try {
-        let objSeminima = new getImagem('seminima');
+        const objSeminima = new getImagem('seminima');
         _note.removeAttributeNS(null, 'd', this.localName);
         _note.setAttributeNS(null, 'd', objSeminima.imagem);
         let trans = _note.getAttributeNS(null, 'transform', this.localName),
