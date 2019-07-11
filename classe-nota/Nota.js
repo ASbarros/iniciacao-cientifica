@@ -20,7 +20,7 @@ let vetObjNote = [],
 //id das notas...
 
 function PositionNote(_name, _amount = 1) {
-    let button = document.getElementsByTagName('button');
+    const button = document.getElementsByTagName('button');
     for (let i = 0; i < button.length; i++) {
         //inabilitando os botoes...
         button[i].setAttribute('disabled', 'true');
