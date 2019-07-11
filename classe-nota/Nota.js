@@ -105,8 +105,12 @@ function createNote(_name, _obj) {
     nota.setAttributeNS(null, 'obj_y', objNota.y);
     document.getElementById(_obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length))
         .appendChild(nota);
-    vetObjNote.push('nota' + id);
-    //armazenado id do obj...
+    vetObjNote.push({
+        id: 'nota' + id,
+        x: (_obj.x - objNota.x)
+    });
+    //armazenado o obj...
+    sortVector(vetObjNote);
     id++;
 
 }

@@ -175,3 +175,12 @@ function movimentacao() {
         //se nao tiver a linha associada, nao faz nada...
     }
 }
+
+function sortfunction(a, b) {
+    return (a.x - b.x) //faz com que o array seja ordenado numericamente e de ordem crescente...
+}
+
+function sortVector(_vector) {
+    //para ordenar um vetor...
+    _vector.sort(sortfunction)
+}
