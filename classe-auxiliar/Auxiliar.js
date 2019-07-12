@@ -152,6 +152,11 @@ function movimentacao() {
     note.setAttributeNS(null, 'transform',
         'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
     //colocando a nova posicao...
+    for (let i in vetObjNote) {
+        if (event.target.id === vetObjNote[i].id) {
+            vetObjNote[i].x = event.pageX - obj_x;
+        }
+    }
     try { //tentando mover a linha associada...
         const idLine = note.getAttributeNS(null, 'x1y1Line', this.localName),
             line = document.getElementById(idLine);
