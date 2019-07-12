@@ -225,15 +225,17 @@ function join() {
                             objLine.mom = apenasNumeros(objLine.mom.substring(objLine.mom.length - 3, objLine.mom.length));
                             objLine.idName = 'join' + objLine.name + idLineJoin;
                             objLine.idDiv = 'idSVG' + objLine.mom;
-                            if (changeNote(nota2) && changeNote(nota1)) {
-                                new createLine(objLine);
-                                //criando uma nova linha, que ira ligar as notas...
-                                idLineJoin++;
-                                nota1.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
-                                nota2.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+                            if (nota1.getAttributeNS(null, 'name', this.localName) == nota2.getAttributeNS(null, 'name', this.localName)) {
+                                //se as duas notas forem iguais...
+                                if (changeNote(nota2) && changeNote(nota1)) {
+                                    new createLine(objLine);
+                                    //criando uma nova linha, que ira ligar as notas...
+                                    idLineJoin++;
+                                    nota1.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+                                    nota2.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+                                    //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
+                                } else remove_id(nota2.id), remove_id(nota1.id);
                             }
-                            //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
-                            else remove_id(nota2.id), remove_id(nota1.id);
                         }
                     }
                 });

@@ -20,29 +20,33 @@
             <button onclick="join()"> Juntar notas </button>
             <button onclick="createDiv()"> Mais pauta </button>
             <button onclick="DeleteNote()"> Excluir nota </button>
-            <button onclick="time()"> <img src="img/play.png" alt=""> </button>
+            <button onclick="time()" title="Iniciar"> <img src="img/play.png" alt=""> </button>
         </div>
         <!-- criaçao das notas -->
         <div class="botoesNotas">
-            <button onclick="PositionNote('colcheia')"><img src="img/colcheia.png" alt=""></button>
+            <button onclick="PositionNote('colcheia')" title="Colcheia"><img src="img/colcheia.png" alt=""></button>
             <button onclick="PositionNote('seminima', 2)"> duas notas</button>
             <button onclick="PositionNote('seminima', 3)"> tres notas</button>
             <button onclick="PositionNote('seminima', 4)"> quatro notas</button>
-            <button onclick="PositionNote('semicolcheia')"><img src="img/semicolcheia.png" alt=""></button>
-            <button onclick="PositionNote('fusa')"><img src="img/fusa.png" alt=""></button>
-            <button onclick="PositionNote('semifusa')"><img src="img/semifusa.png" alt=""></button>
+            <button onclick="PositionNote('semicolcheia')" title="Semicolcheia">
+                <img src="img/semicolcheia.png" alt="">
+            </button>
+            <button onclick="PositionNote('fusa')" title="Fusa"><img src="img/fusa.png" alt=""></button>
+            <button onclick="PositionNote('semifusa')" title="Semifusa"><img src="img/semifusa.png" alt=""></button>
             <button onclick="PositionNote('semibreve')"><img src="img/semibreve.png" alt=""></button>
-            <button onclick="PositionNote('minima')"><img src="img/minima.png" alt=""></button>
-            <button onclick="PositionNote('seminima')"><img src="img/seminima.png" alt=""></button>
-            <button onclick="PositionNote('sustenido')"><img src="img/sustenido.png" alt=""></button>
+            <button onclick="PositionNote('minima')" title="Minima"><img src="img/minima.png" alt=""></button>
+            <button onclick="PositionNote('seminima')" title="Seminima"><img src="img/seminima.png" alt=""></button>
+            <button onclick="PositionNote('sustenido')" title="Sustenido"><img src="img/sustenido.png" alt=""></button>
         </div>
         <!-- criacao das pausas -->
         <div class="botoesPausas">
-            <button onclick="PositionNote('pausa_de_semibreve')">Pausa de Semibreve</button>
-            <button onclick="PositionNote('pausa_de_minima')">Pausa de Mínima</button>
-            <button onclick="PositionNote('pausa_de_seminima')">Pausa de Seminima</button>
+            <button onclick="PositionNote('pausa_de_semibreve')" title="Pausa de Semibreve">Pausa de Semibreve</button>
+            <button onclick="PositionNote('pausa_de_minima')" title="Pausa de Minima">Pausa de Mínima</button>
+            <button onclick="PositionNote('pausa_de_seminima')" title="Pausa de Seminima">Pausa de Seminima</button>
             <button onclick="PositionNote('pausa_de_colcheia')"><img src="img/pausaColcheia.png" alt=""></button>
-            <button onclick="PositionNote('pausa_de_semicolcheia')">Pausa de Semicolcheia</button>
+            <button onclick="PositionNote('pausa_de_semicolcheia')" title="Pausa de Seminima">
+                Pausa de Semicolcheia
+            </button>
         </div>
     </header>
     <!-- bibliotecas -->
