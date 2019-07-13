@@ -153,16 +153,20 @@ function movimentacao() {
         'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
     //colocando a nova posicao...
     for (let i in vetObjNote) {
+        //atualizando a posicao das notas no vetor...
         if (event.target.id === vetObjNote[i].id) {
             vetObjNote[i].x = event.pageX - obj_x;
+            break;
         }
     }
+    sortVector(vetObjNote); //ordenando novamente...
+
     try { //tentando mover a linha associada...
         const idLine = note.getAttributeNS(null, 'x1y1Line', this.localName),
             line = document.getElementById(idLine);
         //pegando a linha associada...
         line.removeAttributeNS(null, 'y1', this.localName);
-        line.setAttributeNS(null, 'y1', y);
+        line.setAttributeNS(null, 'y1', y + 1);
         line.removeAttributeNS(null, 'x1', this.localName);
         line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX) + 1) + '%');
     } catch {
@@ -173,7 +177,7 @@ function movimentacao() {
             line = document.getElementById(idLine);
         //pegando a linha associada...
         line.removeAttributeNS(null, 'y2', this.localName);
-        line.setAttributeNS(null, 'y2', y);
+        line.setAttributeNS(null, 'y2', y + 1);
         line.removeAttributeNS(null, 'x2', this.localName);
         line.setAttributeNS(null, 'x2', (returnPositionX_porcentagem((event.pageX)) + 0.5) + '%');
     } catch {
@@ -181,11 +185,13 @@ function movimentacao() {
     }
 }
 
+
 function sortfunction(a, b) {
     return (a.x - b.x) //faz com que o array seja ordenado numericamente e de ordem crescente...
 }
 
 function sortVector(_vector) {
     //para ordenar um vetor...
-    _vector.sort(sortfunction)
+    for(let i in _vector)
+    _vector[i].notas.sort(sortfunction)
 }

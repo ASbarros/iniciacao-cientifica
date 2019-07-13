@@ -13,10 +13,10 @@ function createCompassFormula(_obj) {
     //apendando o elemento no corpo do svg...
 }
 
-let vetObjNote = [],
-    //vetor para atualizar a posicao das notas,
-    //guarda os ids das notas...
-    id = 0;
+const vetObjNote = [];
+//vetor para atualizar a posicao das notas,
+//guarda os ids das notas...
+let id = 0;
 //id das notas...
 
 function PositionNote(_name, _amount = 1) {
@@ -36,7 +36,6 @@ function PositionNote(_name, _amount = 1) {
                 obj.y = y;
                 obj.idDiv = idDiv;
                 obj.e = e;
-
                 if (_amount == 1) { //para criar uma nota...
                     obj.x = x;
                     createNote(_name, obj);
@@ -85,7 +84,8 @@ function PositionNote(_name, _amount = 1) {
 function createNote(_name, _obj) {
 
     const nota = document.createElementNS(svgNS, "path"),
-        objNota = new getImagem(_name);
+        dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
+    objNota = new getImagem(_name);
     nota.setAttributeNS(null, "id", "nota" + id);
     nota.setAttributeNS(null, 'name', _name);
     nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
@@ -103,13 +103,13 @@ function createNote(_name, _obj) {
     nota.setAttributeNS(null, 'pageY', _obj.e.pageY);
     nota.setAttributeNS(null, 'obj_x', objNota.x);
     nota.setAttributeNS(null, 'obj_y', objNota.y);
-    document.getElementById(_obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length))
-        .appendChild(nota);
-    vetObjNote.push({
+    document.getElementById(dad).appendChild(nota);
+
+    vetObjNote[apenasNumeros(dad)].notas.push({
         id: 'nota' + id,
-        x: (_obj.x - objNota.x)
+        x: (_obj.x - objNota.x),
     });
-    //armazenado o obj...
+    //vetor para armazenar as notas de cada pauta
     sortVector(vetObjNote);
     id++;
 

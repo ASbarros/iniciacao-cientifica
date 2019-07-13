@@ -53,6 +53,10 @@ function createPauta(_idDiv) {
         new createLine(objLine);
         //criando as linhas adicionais ...
     }
+    vetObjNote.push({
+        idSVG: NumDiv,
+        notas: []
+    });
 }
 let i = 0;
 
