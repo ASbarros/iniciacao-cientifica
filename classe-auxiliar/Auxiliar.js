@@ -146,13 +146,13 @@ function movimentacao() {
         note.setAttributeNS(null, 'lineOrigin', lineOrigin);
     }
 
-    let y = returnPositionY_px(lineOrigin) - obj_y;
+    const y = returnPositionY_px(lineOrigin) - obj_y;
     note.removeAttributeNS(null, 'transform', this.localName);
     //removendo o atributo antigo...
     note.setAttributeNS(null, 'transform',
         'translate(' + (event.pageX - obj_x) + ' ' + y + ')');
     //colocando a nova posicao...
-    for (let i in vetObjNote) {
+    for (const i in vetObjNote) {
         //atualizando a posicao das notas no vetor...
         if (event.target.id === vetObjNote[i].id) {
             vetObjNote[i].x = event.pageX - obj_x;
@@ -192,6 +192,32 @@ function sortfunction(a, b) {
 
 function sortVector(_vector) {
     //para ordenar um vetor...
-    for(let i in _vector)
-    _vector[i].notas.sort(sortfunction)
+    for (const i in _vector)
+        _vector[i].notas.sort(sortfunction);
+}
+
+function returnParms1(_numId) {
+    const objLine = {},
+        note = document.getElementById('nota' + _numId),
+        transform = note.getAttributeNS(null, 'transform'),
+        lineOrigin = note.getAttributeNS(null, 'lineOrigin');
+    objLine.idNote = 'nota' + _numId;
+    objLine.name = note.getAttributeNS(null, 'name');
+    objLine.lineOrigin = lineOrigin;
+    objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(transform.split(' ')[0]) + 37);
+    objLine.y1 = returnPositionY(lineOrigin) - 13.5;
+    return objLine;
+
+}
+
+function returnParms2(_numId) {
+    const objLine = {},
+        note = document.getElementById('nota' + _numId),
+        transform = note.getAttributeNS(null, 'transform'),
+        lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
+        idNote = 'nota' + _numId;
+    objLine.idNote = idNote;
+    objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(transform.split(' ')[1]));
+    objLine.y2 = returnPositionY(lineOrigin) - 13.5;
+    return objLine;
 }

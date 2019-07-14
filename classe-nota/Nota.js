@@ -119,11 +119,12 @@ function createNote(_name, _obj) {
 let idLineJoin = 0;
 //id para as linhas de juncao das notas...
 
-function createLineJoin() {
+function createLineJoin(idNote1 = id, idNote2 = id) {
+    console.log(idNote1, '-', idNote2)
     const objLine = {},
         //instanciando o objeto...
-        fistNote = document.getElementById('nota' + (id - 2)),
-        secondNote = document.getElementById('nota' + (id - 1)),
+        fistNote = document.getElementById('nota' + (idNote1 - 2)),
+        secondNote = document.getElementById('nota' + (idNote2 - 1)),
         //pegando as notas, da esqueda para a direita...
         transformFistNote = fistNote.getAttributeNS(null, 'transform', this.localName),
         transformSecondNote = secondNote.getAttributeNS(null, 'transform', this.localName),
@@ -154,8 +155,8 @@ function DeleteNote(tentativa = 0) {
     //se o primeiro click der errado, a funcao é chamada outra vez...
     if (tentativa < 2) {
         $('.svg').one('click', (e) => {
-            const click = e.target.id;
-            const regex = /\b(nota[0-9]\d*)\b/;
+            const click = e.target.id,
+                regex = /\b(nota[0-9]\d*)\b/;
             //expressao regular para pegar apenas as notas...
             if (!!click.match(regex)) remove_id(click);
             else DeleteNote(tentativa++);
@@ -173,7 +174,6 @@ function join() {
         //pegando a primeira nota...
         if (e.target && e.target.classList.contains('nota')) {
             //nota encontrada...
-            console.log(document.getElementById(e.target.id).getAttributeNS(null, 'idDiv'));
             const idNote1 = e.target.id;
             if (Notas.indexOf(idNote1) == -1) {
                 //se a nota ainda nao tiver sido selecionada...
@@ -196,52 +196,64 @@ function join() {
                         if (numeroDeNotas == 2) {
                             let nota1 = document.getElementById(Notas[0]),
                                 //pegando a primeira nota...
+                                fistId, secondId,
                                 nota2 = document.getElementById(Notas[1]);
                             //pegando a segunda nota...
                             if (vetObjNote[apenasNumeros(nota1.getAttributeNS(null, 'svg'))].idSVG ==
                                 vetObjNote[apenasNumeros(nota2.getAttributeNS(null, 'svg'))].idSVG) {
                                 //se as notas estiiverem na mesma pauta...
-                                let trans1 = nota1.getAttributeNS(null, 'transform', this.localName),
-                                    a = trans1.split(' '),
-                                    x1 = returnPositionX_porcentagemSVG(apenasNumeros(a[0])) + 2.5,
-                                    y1 = returnPositionY(nota1.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5,
-                                    trans2 = nota2.getAttributeNS(null, 'transform', this.localName),
-                                    b = trans2.split(' '),
-                                    x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0])) + 2.5,
-                                    y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
-                                if (x2 < x1) {
-                                    //se a segunda nota for clicada primeiro...
-                                    let aux = x2;
-                                    x2 = x1;
-                                    x1 = aux;
-                                    aux = y2;
-                                    y2 = y1;
-                                    y1 = aux;
-                                    aux = nota1;
-                                    nota1 = nota2;
-                                    nota2 = aux;
-                                }
-                                const objLine = {};
-                                objLine.name = nota1.getAttributeNS(null, 'name', this.localName);
-                                objLine.x1 = x1;
-                                objLine.y1 = y1;
-                                objLine.x2 = x2;
-                                objLine.y2 = y2;
-                                objLine.mom = nota1.getAttributeNS(null, 'lineOrigin', this.localName);
-                                objLine.classe = 'linejoincolcheia';
-                                objLine.mom = apenasNumeros(objLine.mom.substring(objLine.mom.length - 3, objLine.mom.length));
-                                objLine.idName = 'join' + objLine.name + idLineJoin;
-                                objLine.idDiv = 'idSVG' + objLine.mom;
                                 if (nota1.getAttributeNS(null, 'name', this.localName) == nota2.getAttributeNS(null, 'name', this.localName)) {
                                     //se as duas notas forem iguais...
-                                    if (changeNote(nota2) && changeNote(nota1)) {
-                                        new createLine(objLine);
-                                        //criando uma nova linha, que ira ligar as notas...
-                                        idLineJoin++;
-                                        nota1.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
-                                        nota2.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
-                                        //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
-                                    } else remove_id(nota2.id), remove_id(nota1.id);
+                                    const indexVector = apenasNumeros(nota1.getAttributeNS(null, 'svg')),
+                                        vectorNote = vetObjNote[indexVector];
+                                    //pegando o vetor de notas da pauta...
+                                    let trans1 = nota1.getAttributeNS(null, 'transform', this.localName),
+                                        a = trans1.split(' '),
+                                        x1 = returnPositionX_porcentagemSVG(apenasNumeros(a[0])) + 2.5,
+                                        y1 = returnPositionY(nota1.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5,
+                                        trans2 = nota2.getAttributeNS(null, 'transform', this.localName),
+                                        b = trans2.split(' '),
+                                        x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0])) + 2.5,
+                                        y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
+                                    if (x2 < x1) {
+                                        //se a segunda nota for clicada primeiro...
+                                        let aux = x2;
+                                        x2 = x1;
+                                        x1 = aux;
+                                        aux = y2;
+                                        y2 = y1;
+                                        y1 = aux;
+                                        aux = nota1;
+                                        nota1 = nota2;
+                                        nota2 = aux;
+                                    }
+                                    for (const i in vectorNote.notas) {
+                                        if (vectorNote.notas[i].id == idNote1) {
+                                            //pegando a posicao da primeira nota no vetor...
+                                            fistId = i;
+                                            continue;
+                                        } else if (vectorNote.notas[i].id == idNote2) {
+                                            //pegando a posicao da segunda nota no vetor...
+                                            secondId = i;
+                                            continue;
+                                        }
+                                    }
+                                    if (!isNaN(fistId) && !isNaN(secondId)) {
+                                        const numLines = secondId - fistId;
+                                        //numLines sera usada na iteracao para criar as linhas entre as notas clicadas...
+                                        /*  for (let i = 0; i <= numLines; i++) {
+                                        const parms = returnParms(apenasNumeros(fistId) + i);
+                                        console.log(parms);
+                                        joinNotes(parms[0], parms[1]);
+                                        passando as propriedades da linha
+                                        //falta passar as notas...
+                                          } */
+                                        if (numLines == 1) {
+                                            //juntando duas notas...
+                                            createLineJoin((parseInt(fistId) + 2), (parseInt(secondId) + 1));
+                                        }
+                                    }
+
                                 }
                             }
                         }
@@ -250,6 +262,48 @@ function join() {
             }
         }
     });
+}
+
+function joinNotes(_l1, _l2) {
+    /* const objLine = {};
+    objLine.name = nota1.getAttributeNS(null, 'name', this.localName);
+    objLine.x1 = _l1.x1;
+    objLine.y1 = _l1.y1;
+    objLine.x2 = _l2.x2;
+    objLine.y2 = _l2.y2;
+    objLine.mom = nota1.getAttributeNS(null, 'lineOrigin', this.localName);
+    objLine.classe = 'linejoincolcheia';
+    objLine.mom = apenasNumeros(objLine.mom.substring(objLine.mom.length - 3, objLine.mom.length));
+    objLine.idName = 'join' + objLine.name + idLineJoin;
+    objLine.idDiv = 'idSVG' + objLine.mom; */
+    const objLine = createLineJoinNotes(_l1, _l2),
+        nota1 = document.getElementById(_l1.idNote),
+        nota2 = document.getElementById(_l2.idNote);
+    if (changeNote(nota2) && changeNote(nota1)) {
+        new createLine(objLine);
+        //criando uma nova linha, que ira ligar as notas...
+        idLineJoin++;
+        nota1.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+        nota2.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+        //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
+    } else remove_id(nota2.id), remove_id(nota1.id);
+}
+
+function createLineJoinNotes(_l1, _l2) {
+    //funcao para retornar o objeto linha que liga as notas clicadas...
+    console.log(_l2)
+    return {
+        name: _l1.name,
+        x1: _l1.x1,
+        y1: _l1.y1,
+        x2: _l2.x2,
+        y2: _l2.y2,
+        mom: _l1.lineOrigin,
+        classe: 'linejoincolcheia',
+        mom: apenasNumeros(_l1.lineOrigin.substring(_l1.lineOrigin.length - 3, _l1.lineOrigin.length)),
+        idName: 'join' + _l1.name + idLineJoin,
+        idDiv: 'idSVG' + apenasNumeros(_l1.lineOrigin.substring(_l1.lineOrigin.length - 3, _l1.lineOrigin.length))
+    }
 }
 
 function changeNote(_note) {
