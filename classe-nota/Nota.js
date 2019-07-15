@@ -120,7 +120,6 @@ let idLineJoin = 0;
 //id para as linhas de juncao das notas...
 
 function createLineJoin(idNote1 = id, idNote2 = id) {
-    console.log(idNote1, '-', idNote2)
     const objLine = {},
         //instanciando o objeto...
         fistNote = document.getElementById('nota' + (idNote1 - 2)),
@@ -250,7 +249,36 @@ function join() {
                                           } */
                                         if (numLines == 1) {
                                             //juntando duas notas...
-                                            createLineJoin((parseInt(fistId) + 2), (parseInt(secondId) + 1));
+                                            const nota1 = document.getElementById('nota' + fistId),
+                                                nota2 = document.getElementById('nota' + secondId);
+                                            if (changeNote(nota2) && changeNote(nota1)) {
+                                                //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
+                                                createLineJoin((parseInt(fistId) + 2), (parseInt(secondId) + 1));
+                                                //criando uma nova linha, que ira ligar as notas...
+                                            } else remove_id(nota2.id), remove_id(nota1.id);
+                                        } else if (numLines == 2) {
+                                            //juntando tres notas...
+                                            const nota1 = document.getElementById('nota' + fistId),
+                                                nota2 = document.getElementById('nota' + (parseInt(fistId) + 1)),
+                                                nota3 = document.getElementById('nota' + secondId);
+                                            if (changeNote(nota1) && changeNote(nota2) && changeNote(nota3)) {
+                                                //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
+                                                createLineJoin((parseInt(fistId) + 2), (parseInt(fistId) + 2));
+                                                createLineJoin((parseInt(fistId) + 3), (parseInt(secondId) + 1));
+                                            }
+                                        } else if (numLines == 3) {
+                                            //juntando quatro linhas...
+                                            const nota1 = document.getElementById('nota' + fistId),
+                                                nota2 = document.getElementById('nota' + (parseInt(fistId) + 1)),
+                                                nota3 = document.getElementById('nota' + (parseInt(fistId) + 2)),
+                                                nota4 = document.getElementById('nota' + parseInt(secondId));
+                                            if (changeNote(nota1) && changeNote(nota2) && changeNote(nota3) && changeNote(nota4)) {
+                                                //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
+                                                createLineJoin((parseInt(fistId) + 2), (parseInt(fistId) + 2));
+                                                createLineJoin((parseInt(fistId) + 3), (parseInt(fistId) + 3));
+                                                createLineJoin((parseInt(fistId) + 3), (parseInt(secondId) + 1));
+                                            }
+                                            else alert('tu é burro')
                                         }
                                     }
 
