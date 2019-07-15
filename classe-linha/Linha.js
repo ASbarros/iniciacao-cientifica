@@ -32,8 +32,6 @@ function createLine(_obj) {
     myLine.setAttributeNS(null, "x2", _obj.x2 + "%");
     myLine.setAttributeNS(null, "y2", _obj.y2 + "%");
     myLine.setAttributeNS(null, "class", _obj.classe);
-    myLine.setAttributeNS(null, "n1", _obj.n1);
-    myLine.setAttributeNS(null, "n2", _obj.n2);
 
     //apendando o elemento no canvas criado...
     document.getElementById(_obj.idDiv).appendChild(myLine);
@@ -48,8 +46,8 @@ function createLastLine(_idDiv) {
         objLine;
     for (let i = 2; i <= 6; i++, y += 5) {
         objLine = {
-            x1: x1,
-            x2: x2,
+            x1,
+            x2,
             y1: y,
             y2: y,
             idName: 'lastLine' + i,
