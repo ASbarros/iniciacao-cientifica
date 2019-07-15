@@ -45,7 +45,7 @@ function PositionNote(_name, _amount = 1) {
                     obj.x = x + 20;
                     createNote(_name, obj);
                     createLineJoin();
-                } else if (_amount == 3) {
+                } else if (_amount == 3) { //para criar tres notas...
                     obj.x = x - 40;
                     createNote(_name, obj);
                     obj.x = x;
@@ -54,7 +54,7 @@ function PositionNote(_name, _amount = 1) {
                     obj.x = x + 40;
                     createNote(_name, obj);
                     createLineJoin();
-                } else if (_amount == 4) {
+                } else if (_amount == 4) { //para criar quatro notas...
                     obj.x = x - 60;
                     createNote(_name, obj);
                     obj.x = x - 20;
@@ -72,10 +72,7 @@ function PositionNote(_name, _amount = 1) {
                     //retirando a propriedade disabled...
                     //ativando os botoes...
                 }
-            } catch {
-                // PositionNote(_name, _amount);
-                //se acontecer algum erro, vai chamar a funcao novamente...
-            }
+            } catch {}
         } else PositionNote(_name, _amount);
         //se o click nao for em cima da linha, vai chamar a funcao novamente...
     });

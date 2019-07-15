@@ -1,3 +1,8 @@
+/**
+ * arquivo juntarNotas.js
+ * para metodos que ligam as notas
+ * @author anderson dos santos de barros
+ */
 function joinNotes(_l1, _l2) {
     const objLine = createLineJoinNotes(_l1, _l2),
         nota1 = document.getElementById(_l1.idNote),
@@ -89,7 +94,6 @@ function join() {
                                     if (!isNaN(fistId) && !isNaN(secondId)) {
                                         const numLines = secondId - fistId;
                                         //numLines sera usada na iteracao para criar as linhas entre as notas clicadas...
-                                        //falta passar as notas...
                                         if (numLines == 1) {
                                             //juntando duas notas...
                                             const nota1 = document.getElementById('nota' + fistId),
@@ -108,6 +112,11 @@ function join() {
                                                 //se a troca das duas notas for bem suscedida, cria a linha de uniao entre elas...
                                                 createLineJoin((parseInt(fistId) + 2), (parseInt(fistId) + 2));
                                                 createLineJoin((parseInt(fistId) + 3), (parseInt(secondId) + 1));
+                                            } else {
+                                                //se acontecer algum erro, exclui as notas...
+                                                remove_id('nota' + fistId);
+                                                remove_id('nota' + (parseInt(fistId) + 1));
+                                                remove_id('nota' + parseInt(secondId));
                                             }
                                         } else if (numLines == 3) {
                                             //juntando quatro linhas...
@@ -137,4 +146,20 @@ function join() {
             }
         }
     });
+}
+
+function createLineJoinNotes(_l1, _l2) {
+    //funcao para retornar o objeto linha que liga as notas clicadas...
+    return {
+        name: _l1.name,
+        x1: _l1.x1,
+        y1: _l1.y1,
+        x2: _l2.x2,
+        y2: _l2.y2,
+        mom: _l1.lineOrigin,
+        classe: 'linejoincolcheia',
+        mom: apenasNumeros(_l1.lineOrigin.substring(_l1.lineOrigin.length - 3, _l1.lineOrigin.length)),
+        idName: 'join' + _l1.name + idLineJoin,
+        idDiv: 'idSVG' + apenasNumeros(_l1.lineOrigin.substring(_l1.lineOrigin.length - 3, _l1.lineOrigin.length))
+    }
 }
