@@ -77,11 +77,3 @@ function createDiv() {
     new lastLine(i);
     i++;
 }
-
-function lastLine(_id) {
-    for (let index = 1; index <= 6; index++) {
-        remove_id('lastLine' + index + '-idSVG' + (_id - 1));
-        //remove a linha anterior...
-    }
-    new createLastLine("idSVG" + _id);
-}
