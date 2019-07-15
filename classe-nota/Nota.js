@@ -240,13 +240,7 @@ function join() {
                                     if (!isNaN(fistId) && !isNaN(secondId)) {
                                         const numLines = secondId - fistId;
                                         //numLines sera usada na iteracao para criar as linhas entre as notas clicadas...
-                                        /*  for (let i = 0; i <= numLines; i++) {
-                                        const parms = returnParms(apenasNumeros(fistId) + i);
-                                        console.log(parms);
-                                        joinNotes(parms[0], parms[1]);
-                                        passando as propriedades da linha
                                         //falta passar as notas...
-                                          } */
                                         if (numLines == 1) {
                                             //juntando duas notas...
                                             const nota1 = document.getElementById('nota' + fistId),
@@ -281,7 +275,6 @@ function join() {
                                             else alert('tu é burro')
                                         }
                                     }
-
                                 }
                             }
                         }
@@ -293,17 +286,6 @@ function join() {
 }
 
 function joinNotes(_l1, _l2) {
-    /* const objLine = {};
-    objLine.name = nota1.getAttributeNS(null, 'name', this.localName);
-    objLine.x1 = _l1.x1;
-    objLine.y1 = _l1.y1;
-    objLine.x2 = _l2.x2;
-    objLine.y2 = _l2.y2;
-    objLine.mom = nota1.getAttributeNS(null, 'lineOrigin', this.localName);
-    objLine.classe = 'linejoincolcheia';
-    objLine.mom = apenasNumeros(objLine.mom.substring(objLine.mom.length - 3, objLine.mom.length));
-    objLine.idName = 'join' + objLine.name + idLineJoin;
-    objLine.idDiv = 'idSVG' + objLine.mom; */
     const objLine = createLineJoinNotes(_l1, _l2),
         nota1 = document.getElementById(_l1.idNote),
         nota2 = document.getElementById(_l2.idNote);
@@ -319,7 +301,6 @@ function joinNotes(_l1, _l2) {
 
 function createLineJoinNotes(_l1, _l2) {
     //funcao para retornar o objeto linha que liga as notas clicadas...
-    console.log(_l2)
     return {
         name: _l1.name,
         x1: _l1.x1,
