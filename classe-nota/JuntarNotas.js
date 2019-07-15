@@ -120,8 +120,13 @@ function join() {
                                                 createLineJoin((parseInt(fistId) + 2), (parseInt(fistId) + 2));
                                                 createLineJoin((parseInt(fistId) + 3), (parseInt(fistId) + 3));
                                                 createLineJoin((parseInt(fistId) + 3), (parseInt(secondId) + 1));
+                                            } else {
+                                                //se acontecer algum erro, exclui as notas...
+                                                remove_id('nota' + fistId);
+                                                remove_id('nota' + (parseInt(fistId) + 1));
+                                                remove_id('nota' + (parseInt(fistId) + 2));
+                                                remove_id('nota' + parseInt(secondId));
                                             }
-                                            else alert('tu é burro')
                                         }
                                     }
                                 }
