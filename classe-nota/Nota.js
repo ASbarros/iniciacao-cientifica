@@ -32,10 +32,11 @@ function PositionNote(_name, _amount = 1) {
                 let x = e.clientX,
                     idDiv = e.target.id,
                     y = returnPositionY_px(idDiv);
-                const obj = {};
-                obj.y = y;
-                obj.idDiv = idDiv;
-                obj.e = e;
+                const obj = {
+                    e,
+                    idDiv,
+                    y
+                };
                 if (_amount == 1) { //para criar uma nota...
                     obj.x = x;
                     createNote(_name, obj);

@@ -63,22 +63,22 @@
      sortVector(vetObjNote); //ordenando novamente...
 
      try { //tentando mover a linha associada...
-         const idLine = note.getAttributeNS(null, 'x1y1Line', this.localName),
+         const idLine = note.getAttributeNS(null, 'x1y1Line'),
              line = document.getElementById(idLine);
          //pegando a linha associada...
          line.removeAttributeNS(null, 'y1', this.localName);
-         line.setAttributeNS(null, 'y1', y + 1);
+         line.setAttributeNS(null, 'y1', y + 0.8);
          line.removeAttributeNS(null, 'x1', this.localName);
          line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX) + 1) + '%');
      } catch {
          //se nao tiver a linha associada, nao faz nada...
      }
      try { //tentando mover a linha associada a nota...
-         const idLine = note.getAttributeNS(null, 'x2y2Line', this.localName),
+         const idLine = note.getAttributeNS(null, 'x2y2Line'),
              line = document.getElementById(idLine);
          //pegando a linha associada...
          line.removeAttributeNS(null, 'y2', this.localName);
-         line.setAttributeNS(null, 'y2', y + 1);
+         line.setAttributeNS(null, 'y2', y + 0.8);
          line.removeAttributeNS(null, 'x2', this.localName);
          line.setAttributeNS(null, 'x2', (returnPositionX_porcentagem((event.pageX)) + 0.5) + '%');
      } catch {
