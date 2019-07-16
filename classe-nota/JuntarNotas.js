@@ -83,11 +83,11 @@ function join() {
                                     for (const i in vectorNote.notas) {
                                         if (vectorNote.notas[i].id == idNote1) {
                                             //pegando a posicao da primeira nota no vetor...
-                                            fistId = i;
+                                            fistId = apenasNumeros(vectorNote.notas[i].id);
                                             continue;
                                         } else if (vectorNote.notas[i].id == idNote2) {
                                             //pegando a posicao da segunda nota no vetor...
-                                            secondId = i;
+                                            secondId = apenasNumeros(vectorNote.notas[i].id);
                                             continue;
                                         }
                                     }
