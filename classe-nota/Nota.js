@@ -122,15 +122,15 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
         fistNote = document.getElementById('nota' + (idNote1 - 2)),
         secondNote = document.getElementById('nota' + (idNote2 - 1)),
         //pegando as notas, da esqueda para a direita...
-        transformFistNote = fistNote.getAttributeNS(null, 'transform', this.localName),
-        transformSecondNote = secondNote.getAttributeNS(null, 'transform', this.localName),
+        transformFistNote = fistNote.getAttributeNS(null, 'transform'),
+        transformSecondNote = secondNote.getAttributeNS(null, 'transform'),
         aux1 = transformFistNote.split(' '),
         aux2 = transformSecondNote.split(' '),
         lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin', this.localName);
     objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
     objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
-    objLine.y1 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.6;
-    objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.6;
+    objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+    objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
     objLine.name = fistNote.getAttributeNS(null, 'name', this.localName);
     objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
     objLine.classe = 'linejoincolcheia';

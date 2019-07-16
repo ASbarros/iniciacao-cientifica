@@ -49,7 +49,6 @@ function join() {
                         if (numeroDeNotas == 2) {
                             let nota1 = document.getElementById(Notas[0]),
                                 //pegando a primeira nota...
-                                fistId, secondId,
                                 nota2 = document.getElementById(Notas[1]);
                             //pegando a segunda nota...
                             if (vetObjNote[apenasNumeros(nota1.getAttributeNS(null, 'svg'))].idSVG ==
@@ -67,7 +66,8 @@ function join() {
                                         trans2 = nota2.getAttributeNS(null, 'transform'),
                                         b = trans2.split(' '),
                                         x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0])) + 2.5,
-                                        y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin')) - 13.5;
+                                        y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin')) - 13.5,
+                                        fistId, secondId;
                                     if (x2 < x1) {
                                         //se a segunda nota for clicada primeiro...
                                         let aux = x2;
