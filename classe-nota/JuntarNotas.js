@@ -55,7 +55,7 @@ function join() {
                             if (vetObjNote[apenasNumeros(nota1.getAttributeNS(null, 'svg'))].idSVG ==
                                 vetObjNote[apenasNumeros(nota2.getAttributeNS(null, 'svg'))].idSVG) {
                                 //se as notas estiiverem na mesma pauta...
-                                if (nota1.getAttributeNS(null, 'name', this.localName) == nota2.getAttributeNS(null, 'name', this.localName)) {
+                                if (nota1.getAttributeNS(null, 'name') == nota2.getAttributeNS(null, 'name')) {
                                     //se as duas notas forem iguais...
                                     const indexVector = apenasNumeros(nota1.getAttributeNS(null, 'svg')),
                                         vectorNote = vetObjNote[indexVector];
@@ -63,11 +63,11 @@ function join() {
                                     let trans1 = nota1.getAttributeNS(null, 'transform', this.localName),
                                         a = trans1.split(' '),
                                         x1 = returnPositionX_porcentagemSVG(apenasNumeros(a[0])) + 2.5,
-                                        y1 = returnPositionY(nota1.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5,
-                                        trans2 = nota2.getAttributeNS(null, 'transform', this.localName),
+                                        y1 = returnPositionY(nota1.getAttributeNS(null, 'lineOrigin')) - 13.5,
+                                        trans2 = nota2.getAttributeNS(null, 'transform'),
                                         b = trans2.split(' '),
                                         x2 = returnPositionX_porcentagemSVG(apenasNumeros(b[0])) + 2.5,
-                                        y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin', this.localName)) - 13.5;
+                                        y2 = returnPositionY(nota2.getAttributeNS(null, 'lineOrigin')) - 13.5;
                                     if (x2 < x1) {
                                         //se a segunda nota for clicada primeiro...
                                         let aux = x2;
