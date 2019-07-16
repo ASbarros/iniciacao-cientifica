@@ -100,7 +100,7 @@ img {
 
 .linejoincolcheia {
     stroke-width: 0.99%;
-    stroke-linecap: butt;
+    stroke-linecap: round;
 }
 
 .linejoinsemicolcheia {
