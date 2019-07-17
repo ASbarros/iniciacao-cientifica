@@ -102,6 +102,7 @@ function createNote(_name, _obj) {
     nota.setAttributeNS(null, 'obj_x', objNota.x);
     nota.setAttributeNS(null, 'obj_y', objNota.y);
     nota.setAttributeNS(null, 'svg', dad);
+    nota.setAttributeNS(null, 'move', objNota.move);
     document.getElementById(dad).appendChild(nota);
 
     vetObjNote[apenasNumeros(dad)].notas.push({
