@@ -24,12 +24,14 @@
  function movimentacao() {
      //evento de movimentacao da nota de acordo com o mouse....
      const note = document.getElementById(event.target.id);
+     //pegando a nota clicada...
      let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
          numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
      //pegando o numero da linha em que a nota foi criada...
      const obj_y = note.getAttributeNS(null, 'obj_y'),
          obj_x = note.getAttributeNS(null, 'obj_x'),
          clickY = note.getAttributeNS(null, 'clickY'),
+         //pegando os atributos da nota...
          primeiraParte = lineOrigin.substring(0, 10),
          segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length),
          y = returnPositionY_px(lineOrigin) - obj_y;
@@ -39,6 +41,7 @@
          lineOrigin = primeiraParte + numLine + segundaParte;
          note.removeAttributeNS(null, 'lineOrigin', this.localName);
          note.setAttributeNS(null, 'lineOrigin', lineOrigin);
+         //atualizando o atributo da nota...
      }
      if (event.pageY - 5 < clickY) {
          //se o movimento for para cima...
@@ -46,6 +49,7 @@
          lineOrigin = primeiraParte + numLine + segundaParte;
          note.removeAttributeNS(null, 'lineOrigin', this.localName);
          note.setAttributeNS(null, 'lineOrigin', lineOrigin);
+         //atualizando o atributo da nota...
      }
 
      note.removeAttributeNS(null, 'transform', this.localName);
@@ -69,10 +73,11 @@
          line.removeAttributeNS(null, 'y1', this.localName);
          line.setAttributeNS(null, 'y1', y + 0.8);
          line.removeAttributeNS(null, 'x1', this.localName);
-         line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX) + 1) + '%');
+         line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX)) + '%');
      } catch {
          //se nao tiver a linha associada, nao faz nada...
      }
+
      try { //tentando mover a linha associada a nota...
          const idLine = note.getAttributeNS(null, 'x2y2Line'),
              line = document.getElementById(idLine);
