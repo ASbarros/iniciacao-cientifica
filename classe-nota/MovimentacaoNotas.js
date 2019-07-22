@@ -90,4 +90,26 @@
      } catch {
          //se nao tiver a linha associada, nao faz nada...
      }
+     try { //tentando mover a linha associada...
+         const idLine = note.getAttributeNS(null, 'x1y1Line2'),
+             line = document.getElementById(idLine);
+         //pegando a linha associada...
+         line.removeAttributeNS(null, 'y1', this.localName);
+         line.setAttributeNS(null, 'y1', y + 9);
+         line.removeAttributeNS(null, 'x1', this.localName);
+         line.setAttributeNS(null, 'x1', returnPositionX_porcentagem((event.pageX)) + '%');
+     } catch {
+         //se nao tiver a linha associada, nao faz nada...
+     }
+     try { //tentando mover a linha associada...
+         const idLine = note.getAttributeNS(null, 'x2y2Line2'),
+             line = document.getElementById(idLine);
+         //pegando a linha associada...
+         line.removeAttributeNS(null, 'y2', this.localName);
+         line.setAttributeNS(null, 'y2', y + 9);
+         line.removeAttributeNS(null, 'x2', this.localName);
+         line.setAttributeNS(null, 'x2', returnPositionX_porcentagem((event.pageX)) + '%');
+     } catch {
+         //se nao tiver a linha associada, nao faz nada...
+     }
  }
