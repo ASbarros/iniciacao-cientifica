@@ -6,7 +6,7 @@
 function changeNote(_note) {
     //funcao para trocar as notas...
     try {
-        if (_note.getAttributeNS(null, 'name', this.localName) === 'seminima') return true;
+        if (_note.getAttributeNS(null, 'name') === 'seminima') return true;
         const objSeminima = new getImagem('seminima');
         _note.removeAttributeNS(null, 'd', this.localName);
         _note.setAttributeNS(null, 'd', objSeminima.imagem);
