@@ -137,7 +137,7 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
         objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
         objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
         objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
-        objLine.name = fistNote.getAttributeNS(null, 'name', this.localName);
+        objLine.name = fistNote.getAttributeNS(null, 'name');
         objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
         objLine.classe = 'linejoincolcheia';
         objLine.idName = 'join' + objLine.name + idLineJoin;
