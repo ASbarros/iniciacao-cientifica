@@ -132,24 +132,55 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
             transformSecondNote = secondNote.getAttributeNS(null, 'transform'),
             aux1 = transformFistNote.split(' '),
             aux2 = transformSecondNote.split(' '),
-            lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin', this.localName);
-        objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
-        objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
-        objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
-        objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
-        objLine.name = fistNote.getAttributeNS(null, 'name');
+            lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin'),
+            name = fistNote.getAttributeNS(null, 'name');
+        objLine.name = name;
         objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
-        objLine.classe = 'linejoincolcheia';
-        objLine.idName = 'join' + objLine.name + idLineJoin;
         objLine.idDiv = 'idSVG' + objLine.mom;
-        //setando os atributos da linha...
-        new createLine(objLine);
-        //criando uma nova linha, que ira ligar as notas...
-        idLineJoin++;
-        fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
-        secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
-        //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
-        //mover juntamente com a linha...
+        if (name === 'colcheia') {
+            objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
+            objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
+            objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+            objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+            objLine.classe = 'linejoincolcheia';
+            objLine.idName = 'join' + objLine.name + idLineJoin;
+            //setando os atributos da linha...
+            new createLine(objLine);
+            //criando uma nova linha, que ira ligar as notas...
+            idLineJoin++;
+            fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+            secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+            //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
+            //mover juntamente com a linha...
+        } else if (name === 'semicolcheia') {
+            objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
+            objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
+            objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+            objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+            objLine.classe = 'linejoinsemicolcheia';
+            objLine.idName = 'join' + objLine.name + idLineJoin;
+            //setando os atributos da linha...
+            new createLine(objLine);
+            //criando uma nova linha, que ira ligar as notas...
+            idLineJoin++;
+            fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+            secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+            //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
+            //mover juntamente com a linha...
+            objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
+            objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
+            objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 12.1;
+            objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 12.1;
+            objLine.idName = 'join' + objLine.name + idLineJoin;
+            //setando os atributos da linha...
+            new createLine(objLine);
+            //criando uma nova linha, que ira ligar as notas...
+            idLineJoin++;
+            fistNote.setAttributeNS(null, 'x1y1Line2', objLine.idName + '-' + objLine.idDiv);
+            secondNote.setAttributeNS(null, 'x2y2Line2', objLine.idName + '-' + objLine.idDiv);
+            //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
+            //mover juntamente com a linha...
+        }
     }
 }
 

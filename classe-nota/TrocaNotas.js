@@ -10,22 +10,24 @@ function changeNote(_note) {
         const objSeminima = new getImagem('seminima');
         _note.removeAttributeNS(null, 'd', this.localName);
         _note.setAttributeNS(null, 'd', objSeminima.imagem);
-        let trans = _note.getAttributeNS(null, 'transform', this.localName),
+        let trans = _note.getAttributeNS(null, 'transform'),
             a = trans.split(' '),
             x = apenasNumeros(a[0]),
             y = apenasNumeros(a[1]);
-        if (_note.getAttributeNS(null, 'name', this.localName) === 'colcheia') {
+        if (_note.getAttributeNS(null, 'name') === 'colcheia') {
             x -= 5;
             _note.removeAttributeNS(null, 'transform', this.localName);
             //removendo o atributo antigo...
             _note.setAttributeNS(null, 'transform', 'translate(' + x + ' ' + y + ')');
             //inserindo um novo atributo com a posicao atual
             return true;
-        } else if (_note.getAttributeNS(null, 'name', this.localName) === 'semicolcheia') {
+        } else if (_note.getAttributeNS(null, 'name') === 'semicolcheia') {
             x = x - 5;
-            _note.removeAttributeNS(null, 'transform', this.localName);
+            _note.removeAttributeNS(null, 'transform');
+            _note.removeAttributeNS(null, 'move');
             //removendo o atributo antigo...
             _note.setAttributeNS(null, 'transform', 'translate(' + x + ' ' + y + ')');
+            _note.setAttributeNS(null, 'move', 10);
             //inserindo um novo atributo com a posicao atual
             return true;
         }
