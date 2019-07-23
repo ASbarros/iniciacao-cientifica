@@ -59,6 +59,9 @@ img {
     width: 100%;
     background-color: #c2bfbf;
 }
+ #inputTime{
+     height: 25px; 
+}
 
 /**    classes   */
 .corpo {
@@ -107,31 +110,28 @@ img {
     stroke-width: 0.48%;
 }
 
-.botoesControle {
-    width: 18vw;
+.nav {
+    width: 20vw;
     height: 100px;
+    background-color: #c2bfbf;
+}
+
+.botoesControle {
     justify-content: left;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
-    background-color: #c2bfbf;
 }
 
 .botoesNotas {
-    width: 15vw;
-    height: 100px;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column-reverse;
-    background-color: #c2bfbf;
 }
 
 .botoesPausas {
-    width: 15vw;
-    height: 100px;
     justify-content: right;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: #c2bfbf;
 }

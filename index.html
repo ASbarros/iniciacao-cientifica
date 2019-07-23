@@ -16,14 +16,15 @@
     </div>
     <header>
         <!-- botoes de controle -->
-        <div class="botoesControle">
+        <div class="botoesControle nav">
             <button onclick="join()"> Juntar notas </button>
             <button onclick="createDiv()"> Mais pauta </button>
             <button onclick="DeleteNote()"> Excluir nota </button>
+            <input type="text" id="inputTime" size="4">
             <button onclick="time()" title="Iniciar"> <img src="img/play.png" alt=""> </button>
         </div>
         <!-- criaçao das notas -->
-        <div class="botoesNotas">
+        <div class="botoesNotas nav">
             <button onclick="PositionNote('colcheia')" title="Colcheia"><img src="img/colcheia.png" alt=""></button>
             <button onclick="PositionNote('seminima', 2)"> duas notas</button>
             <button onclick="PositionNote('seminima', 3)"> tres notas</button>
@@ -40,7 +41,7 @@
             <button onclick="PositionNote('sustenido')" title="Sustenido"><img src="img/sustenido.png" alt=""></button>
         </div>
         <!-- criacao das pausas -->
-        <div class="botoesPausas">
+        <div class="botoesPausas nav">
             <button onclick="PositionNote('pausa_de_semibreve')" title="Pausa de Semibreve">Pausa de Semibreve</button>
             <button onclick="PositionNote('pausa_de_minima')" title="Pausa de Minima">Pausa de Mínima</button>
             <button onclick="PositionNote('pausa_de_seminima')" title="Pausa de Seminima">Pausa de Seminima</button>
