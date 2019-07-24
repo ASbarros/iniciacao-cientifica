@@ -152,6 +152,21 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
             secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
             //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
             //mover juntamente com a linha...
+        } else if (name === 'seminima') {
+            objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
+            objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
+            objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+            objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+            objLine.classe = 'linejoincolcheia';
+            objLine.idName = 'join' + objLine.name + idLineJoin;
+            //setando os atributos da linha...
+            new createLine(objLine);
+            //criando uma nova linha, que ira ligar as notas...
+            idLineJoin++;
+            fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+            secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+            //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
+            //mover juntamente com a linha...
         } else if (name === 'semicolcheia') {
             objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
             objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
