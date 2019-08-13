@@ -23,7 +23,9 @@ function time() {
     }, tempo * 2.5);
 
     setTimeout(() => {
-        //linha passando...
+        //linha passando...        
+        startAudio();
+        //começa a gravar o audio...
         let Tscroll = 350,
             //variavel para incrementar o scroll...
             objLine,
@@ -62,6 +64,9 @@ function time() {
                         new createCircle(idSVG, 0.3);
                     }
                 } catch (e) {
+                    $('audio').remove();
+                    stopAudio();
+                    //parando de gravar o audio...
                     clearInterval(inter);
                     clearInterval(timer);
                     idSVG = 0;
