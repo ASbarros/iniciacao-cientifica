@@ -15,20 +15,21 @@ navigator
 
         let chunks = [];
         mediaRecorder.ondataavailable = data => {
+            chunks = [];
             chunks.push(data.data);
         }
         mediaRecorder.onstop = () => {
             const blob = new Blob(chunks, {
                     type: 'audio/ogg; code=opus'
                 }),
-                reader = new window.FileReader()
+                reader = new window.FileReader();
             reader.readAsDataURL(blob);
             reader.onloadend = () => {
                 const audio = document.createElement('audio');
                 audio.src = reader.result;
                 audio.controls = true;
                 $('#audio').append(audio);
-            } 
+            }
         }
     }, err => { //permissão negada...
         alert(err)
