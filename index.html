@@ -26,9 +26,9 @@
         <!-- criaçao das notas -->
         <div class="botoesNotas nav">
             <button onclick="PositionNote('colcheia')" title="Colcheia"><img src="img/colcheia.png" alt=""></button>
-            <button onclick="PositionNote('seminima', 2)"> duas notas</button>
-            <button onclick="PositionNote('seminima', 3)"> tres notas</button>
-            <button onclick="PositionNote('seminima', 4)"> quatro notas</button>
+            <button onclick="PositionNote('seminima', 2)"> <img src="img/duasNotas.png"></button>
+            <button onclick="PositionNote('seminima', 3)"> <img src="img/tresNotas.png"></button>
+            <button onclick="PositionNote('seminima', 4)"><img src="img/quatroNotas.png"></button>
             <button onclick="PositionNote('bemol')"> Bemol </button>
             <button onclick="PositionNote('semicolcheia')" title="Semicolcheia">
                 <img src="img/semicolcheia.png" alt="">
@@ -42,7 +42,7 @@
         </div>
         <!-- criacao das pausas -->
         <div class="botoesPausas nav">
-            <button onclick="PositionNote('pausa_de_semibreve')" title="Pausa de Semibreve">Pausa de Semibreve</button>
+            <button onclick="PositionNote('pausa_de_semibreve')" title="Pausa de Semibreve"><img src="img/pausaSemibreve.png"></button>
             <button onclick="PositionNote('pausa_de_minima')" title="Pausa de Minima">Pausa de Mínima</button>
             <button onclick="PositionNote('pausa_de_seminima')" title="Pausa de Seminima">Pausa de Seminima</button>
             <button onclick="PositionNote('pausa_de_colcheia')"><img src="img/pausaColcheia.png" alt=""></button>
@@ -52,6 +52,7 @@
         </div>
     </header>
     <div id="audio"></div>
+    <div><canvas id="fft" width="512" height="200"></canvas></div>
     <!-- bibliotecas -->
     <script src="bibliotecas/jquery/jquery-3.3.1.min.js"></script>
     <!-- chamadas dos documentos -->
@@ -68,6 +69,7 @@
     <script src="classe-tempo/Tempo.js"></script>
     <script src="classe-imagem/imagens.js"></script>
     <script src="audio/audio.js"></script>
+    <script src="audio/transformataRapidaFourier.js"></script>
 </body>
 
 </html>

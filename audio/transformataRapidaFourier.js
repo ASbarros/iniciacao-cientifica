@@ -1,6 +1,7 @@
 let canvas = document.getElementById('fft'),
     ctx = canvas.getContext('2d'),
     channels, rate, frameBufferLength, fft;
+    console.log(ctx);
 
 function loadedMetadata() {
     channels = audio.mozChannels;
@@ -69,7 +70,8 @@ FFT.prototype.forward = function (buffer) {
         real = this.real,
         imag = this.imag,
         spectrum = this.spectrum;
-    if (bufferSize !== buffer.length) throw "Supplied buffer is not the same size as defined FFT. FFT Size: " + bufferSize + " Buffer Size: " + buffer.length;
+    if (bufferSize !== buffer.length) throw "O buffer fornecido não é do mesmo tamanho que o FFT definido. Tamanho FFT: " + bufferSize + " Buffer tamanho: " + buffer.length;
+
     for (let i = 0; i < bufferSize; i++) {
         real[i] = buffer[reverseTable[i]];
         imag[i] = 0;
@@ -113,8 +115,8 @@ FFT.prototype.forward = function (buffer) {
 
         halfSize = halfSize << 1;
     }
-    i = bufferSize/2;
-    while(i--) {
-      spectrum[i] = 2 * Math.sqrt(real[i] * real[i] + imag[i] * imag[i]) / bufferSize;
-}
-}
+    i = bufferSize / 2;
+    while (i--) {
+        spectrum[i] = 2 * Math.sqrt(real[i] * real[i] + imag[i] * imag[i]) / bufferSize;
+    }
+};
