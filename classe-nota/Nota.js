@@ -207,12 +207,14 @@ function DeleteNote(tentativa = 0) {
             const click = e.target.id,
                 regex = /\b(nota[0-9]\d*)\b/;
             //expressao regular para pegar apenas as notas...
-            if (!!click.match(regex)) {
+            if (click.match(regex)) {
                 const objLine = document.getElementById(click);
+                // se tiver alguma linha associada com a nota, vai excluir tambem...
                 const x1y1Line = objLine.getAttributeNS(null, 'x1y1Line');
                 const x2y2Line = objLine.getAttributeNS(null, 'x2y2Line');
-                remove_id(x1y1Line)
-                remove_id(x2y2Line);
+
+                x1y1Line ? remove_id(x1y1Line) : '';
+                x2y2Line ? remove_id(x2y2Line) : '';
                 remove_id(click);
             } else DeleteNote(tentativa++);
         });
