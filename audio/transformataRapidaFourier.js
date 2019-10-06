@@ -1,14 +1,13 @@
 let canvas = document.getElementById('fft'),
     ctx = canvas.getContext('2d'),
     channels, rate, frameBufferLength, fft;
-    console.log(ctx);
 
 function loadedMetadata() {
     channels = audio.mozChannels;
     rate = audio.mozSampleRate;
     frameBufferLength = audio.mozFrameBufferLength;
 
-    fft = new fft(frameBufferLength / channels, rate);
+    fft = new FFT(frameBufferLength / channels, rate);
 }
 
 function audioAvailable(event) {
@@ -33,9 +32,11 @@ function audioAvailable(event) {
         ctx.fillRect(i * 4, canvas.heigth, 3, -magnitude);
     }
 }
-let audio = document.getElementById('audio');
-audio.addEventListener('MozAudioAvailable', audioAvailable, false);
-audio.addEventListener('loadedmetadata', loadedMetadata, false);
+function audioPronto() {
+    let audio = document.getElementById('el-audio');
+    audio.addEventListener('MozAudioAvailable', audioAvailable, false);
+    audio.addEventListener('loadedmetadata', loadedMetadata, false);
+}
 
 // FFT de dsp.js, veja abaixo
 let FFT = function (bufferSize, sampleRate) {
@@ -70,6 +71,7 @@ FFT.prototype.forward = function (buffer) {
         real = this.real,
         imag = this.imag,
         spectrum = this.spectrum;
+
     if (bufferSize !== buffer.length) throw "O buffer fornecido não é do mesmo tamanho que o FFT definido. Tamanho FFT: " + bufferSize + " Buffer tamanho: " + buffer.length;
 
     for (let i = 0; i < bufferSize; i++) {

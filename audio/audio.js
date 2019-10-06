@@ -19,16 +19,21 @@ navigator
             chunks.push(data.data);
         }
         mediaRecorder.onstop = () => {
+            //função callback, sera chamada quando terminar o audio...
             const blob = new Blob(chunks, {
-                    type: 'audio/ogg; code=opus'
+                    type: 'audio/wav'
                 }),
                 reader = new window.FileReader();
             reader.readAsDataURL(blob);
             reader.onloadend = () => {
                 const audio = document.createElement('audio');
                 audio.src = reader.result;
+                audio.id = "el-audio";
+                console.log(audio.src);
                 audio.controls = true;
                 $('#audio').append(audio);
+                audioPronto();
+                console.log(blob);
             }
         }
     }, err => { //permissão negada...
