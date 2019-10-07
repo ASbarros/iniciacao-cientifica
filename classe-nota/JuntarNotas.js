@@ -4,6 +4,7 @@
  * @author anderson dos santos de barros
  */
 function joinNotes(_l1, _l2) {
+    alert('u')
     const objLine = createLineJoinNotes(_l1, _l2),
         nota1 = document.getElementById(_l1.idNote),
         nota2 = document.getElementById(_l2.idNote);
@@ -92,6 +93,7 @@ function join() {
                                         }
                                     }
                                     if (!isNaN(fistId) && !isNaN(secondId)) {
+                                        console.log(vetObjNote)
                                         const numLines = secondId - fistId;
                                         //numLines sera usada na iteracao para criar as linhas entre as notas clicadas...
                                         if (numLines == 1) {

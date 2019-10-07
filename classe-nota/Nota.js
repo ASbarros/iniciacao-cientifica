@@ -210,12 +210,25 @@ function DeleteNote(tentativa = 0) {
             if (click.match(regex)) {
                 const objLine = document.getElementById(click);
                 // se tiver alguma linha associada com a nota, vai excluir tambem...
-                const x1y1Line = objLine.getAttributeNS(null, 'x1y1Line');
-                const x2y2Line = objLine.getAttributeNS(null, 'x2y2Line');
+                const x1y1Line = objLine.getAttributeNS(null, 'x1y1Line'),
+                    x2y2Line = objLine.getAttributeNS(null, 'x2y2Line');
 
-                x1y1Line ? remove_id(x1y1Line) : '';
-                x2y2Line ? remove_id(x2y2Line) : '';
-                remove_id(click);
+                try {
+                    const indeceDaPauta = apenasNumeros(objLine.getAttributeNS(null, 'svg')),
+                        vetPauta = vetObjNote[indeceDaPauta];
+                    // remove um elemento a partir da nota excluída do vetor de notas...
+                    vetPauta.notas.splice(apenasNumeros(click), 1);
+                    // reordena o vetor...
+                    sortVector(vetObjNote);
+                    // remove a nota...
+                    remove_id(click);
+                    // remove as linhas associadas a nota removida...
+                    x1y1Line ? remove_id(x1y1Line) : '';
+                    x2y2Line ? remove_id(x2y2Line) : '';
+
+                } catch (error) {
+                    // 
+                }
             } else DeleteNote(tentativa++);
         });
     }
