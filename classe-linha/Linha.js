@@ -6,6 +6,10 @@
 const svgNS = "http://www.w3.org/2000/svg";
 //definindo o namespace de svg...
 
+const vetLinhaExcluidas = [];
+// vetor para guardar as linhas excluídas
+// as linhas associadas as notas...
+
 function createSVG(_id, _dad) {
     const canvasSVG = document.createElementNS(svgNS, "svg");
     //desenhando a tela a ser pintada...
@@ -71,4 +75,10 @@ function lastLine(_id) {
         //remove a linha anterior...
     }
     new createLastLine("idSVG" + _id);
+}
+
+function removeLinha(id) {
+    // função reponsavel por armazenar a linha no vetor de linhas excluídas e apaga-lá da tela...
+    vetLinhaExcluidas.push(id);
+    remove_id(id);
 }

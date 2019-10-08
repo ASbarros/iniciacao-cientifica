@@ -29,3 +29,30 @@ function apenasNumerosInput() {
     input.value = input.value.replace(/[^0-9\.]/g, '');
     //regex para deixar apenas o caracteres numericos...
 }
+
+function numLinhasEntreNotas(primeiraNota, ultimaNota) {
+    // função responsável por retornar a quantidade de
+    // linhas a serem criadas entre as notas selecionadas...
+    const nota = document.getElementById('nota' + primeiraNota),
+        svg = nota.getAttributeNS(null, 'svg'),
+        indece = apenasNumeros(svg);
+    // esse trecho é para saber em qual pauta está sendo criada a linha...
+
+    let posicaoPrimeiraNota = 0,
+        posicaoUltimaNota = 0,
+        achouPrimeiraNota = false,
+        achouUltimaNota = false;
+    // variaveis auxiliares...
+
+    vetObjNote[indece].notas.forEach(el => {
+        if (el.id === 'nota' + primeiraNota) {
+            achouPrimeiraNota = true;
+        }
+        if (!achouPrimeiraNota) posicaoPrimeiraNota++;
+        if (el.id === 'nota' + ultimaNota) {
+            achouUltimaNota = true;
+        }
+        if (!achouUltimaNota) posicaoUltimaNota++;
+    });
+    return posicaoUltimaNota - posicaoPrimeiraNota;
+}
