@@ -3,6 +3,7 @@
   * para metodos que fazem a movimentacao das notas
   * @author anderson dos santos de barros
   */
+
  function ativarMovimentacao() {
      //adiciona o evento de movimentacao...
      const note = document.getElementById(event.target.id);
@@ -22,16 +23,18 @@
  }
 
  function movimentacao() {
-     //evento de movimentacao da nota de acordo com o mouse....
-     const note = document.getElementById(event.target.id),
+     // evento de movimentacao da nota de acordo com o mouse....
+
+     const note = document.getElementById(event.target.id);
          //pegando a nota clicada...
-         moveNote = note.getAttributeNS(null, 'move');
      let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
          numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
      //pegando o numero da linha em que a nota foi criada...
      const obj_y = note.getAttributeNS(null, 'obj_y'),
          obj_x = note.getAttributeNS(null, 'obj_x'),
          clickY = note.getAttributeNS(null, 'clickY'),
+         clickX = note.getAttributeNS(null, 'clickX'),
+         transformX = apenasNumeros(note.getAttributeNS(null, 'transform').split(' ')[0])
          //pegando os atributos da nota...
          primeiraParte = lineOrigin.substring(0, 10),
          segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length),
@@ -53,10 +56,13 @@
          //atualizando o atributo da nota...
      }
 
+     const newTransformX = transformX + (event.pageX - clickX);
+     // atualizando o valor X da propriedade transform
+    
      note.removeAttributeNS(null, 'transform', this.localName);
      //removendo o atributo antigo...
      note.setAttributeNS(null, 'transform',
-         'translate(' + (event.pageX - obj_x - moveNote) + ' ' + y + ')');
+         'translate(' + newTransformX + ' ' + y + ')');
      //colocando a nova posicao...
      for (const i in vetObjNote) {
          //atualizando a posicao das notas no vetor...
