@@ -87,7 +87,7 @@ function createNote(_name, _obj) {
         dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
     // pegando a pauta que foi clicada...
     if (fullCompass(compass, apenasNumeros(dad))) {
-        
+
         objNota = new getImagem(_name);
         nota.setAttributeNS(null, "id", "nota" + id);
         nota.setAttributeNS(null, 'name', _name);
@@ -223,9 +223,8 @@ function DeleteNote(tentativa = 0) {
                     x2y2Line = objLine.getAttributeNS(null, 'x2y2Line');
 
                 try {
-                    const indeceDaPauta = apenasNumeros(objLine.getAttributeNS(null, 'svg')),
-                        vetPauta = vetObjNote[indeceDaPauta];
-                    vetPauta.notas.splice(apenasNumeros(click), 1);
+                    const indeceDaPauta = apenasNumeros(objLine.getAttributeNS(null, 'svg'));
+                    vetObjNote[indeceDaPauta].notas.splice(apenasNumeros(click), 1);
                     // remove um elemento a partir da nota excluída do vetor de notas...
                     sortVector(vetObjNote);
                     // reordena o vetor...
