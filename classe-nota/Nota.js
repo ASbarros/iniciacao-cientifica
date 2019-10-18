@@ -81,38 +81,46 @@ function PositionNote(_name, _amount = 1) {
 
 function createNote(_name, _obj) {
 
-    const nota = document.createElementNS(svgNS, "path"),
+    const compass = returnCompass(_obj.e.pageX),
+        // pegando o compasso que foi clicado...
+        nota = document.createElementNS(svgNS, "path"),
         dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
-    objNota = new getImagem(_name);
-    nota.setAttributeNS(null, "id", "nota" + id);
-    nota.setAttributeNS(null, 'name', _name);
-    nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
-    nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
-    nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
-    nota.setAttributeNS(null, "stroke", "#000");
-    nota.setAttributeNS(null, "class", "nota");
-    nota.setAttributeNS(null, "d", objNota.imagem);
-    nota.setAttributeNS(null, "lineOrigin", _obj.e.target.id);
-    nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
-        ' ' + (_obj.y - objNota.y) + ')');
-    nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
-    nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
-    nota.setAttributeNS(null, 'pageX', _obj.e.pageX);
-    nota.setAttributeNS(null, 'pageY', _obj.e.pageY);
-    nota.setAttributeNS(null, 'obj_x', objNota.x);
-    nota.setAttributeNS(null, 'obj_y', objNota.y);
-    nota.setAttributeNS(null, 'svg', dad);
-    nota.setAttributeNS(null, 'move', objNota.move);
-    document.getElementById(dad).appendChild(nota);
+    // pegando a pauta que foi clicada...
+    if (fullCompass(compass, apenasNumeros(dad))) {
+        
+        objNota = new getImagem(_name);
+        nota.setAttributeNS(null, "id", "nota" + id);
+        nota.setAttributeNS(null, 'name', _name);
+        nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
+        nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
+        nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
+        nota.setAttributeNS(null, "stroke", "#000");
+        nota.setAttributeNS(null, "class", "nota");
+        nota.setAttributeNS(null, "d", objNota.imagem);
+        nota.setAttributeNS(null, "lineOrigin", _obj.e.target.id);
+        nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
+            ' ' + (_obj.y - objNota.y) + ')');
+        nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
+        nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
+        nota.setAttributeNS(null, 'pageX', _obj.e.pageX);
+        nota.setAttributeNS(null, 'pageY', _obj.e.pageY);
+        nota.setAttributeNS(null, 'obj_x', objNota.x);
+        nota.setAttributeNS(null, 'obj_y', objNota.y);
+        nota.setAttributeNS(null, 'svg', dad);
+        nota.setAttributeNS(null, 'move', objNota.move);
+        nota.setAttributeNS(null, 'compass', compass)
+        document.getElementById(dad).appendChild(nota);
 
-    vetObjNote[apenasNumeros(dad)].notas.push({
-        id: 'nota' + id,
-        x: (_obj.x - objNota.x),
-    });
-    //vetor para armazenar as notas de cada pauta
-    sortVector(vetObjNote);
-    id++;
-
+        vetObjNote[apenasNumeros(dad)].notas.push({
+            id: 'nota' + id,
+            x: (_obj.x - objNota.x),
+            compass
+        });
+        // adicionando a nota e suas propriedades no vetor...
+        sortVector(vetObjNote);
+        // ordenando o vetor...
+        id++;
+    }
 }
 
 let idLineJoin = 0;

@@ -26,7 +26,7 @@
      // evento de movimentacao da nota de acordo com o mouse....
 
      const note = document.getElementById(event.target.id);
-         //pegando a nota clicada...
+     //pegando a nota clicada...
      let lineOrigin = note.getAttributeNS(null, 'lineOrigin'),
          numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
      //pegando o numero da linha em que a nota foi criada...
@@ -35,8 +35,8 @@
          clickY = note.getAttributeNS(null, 'clickY'),
          clickX = note.getAttributeNS(null, 'clickX'),
          transformX = apenasNumeros(note.getAttributeNS(null, 'transform').split(' ')[0])
-         //pegando os atributos da nota...
-         primeiraParte = lineOrigin.substring(0, 10),
+     //pegando os atributos da nota...
+     primeiraParte = lineOrigin.substring(0, 10),
          segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length),
          y = returnPositionY_px(lineOrigin) - obj_y;
      if (event.pageY + 5 > clickY) {
@@ -58,7 +58,10 @@
 
      const newTransformX = transformX + (event.pageX - clickX);
      // atualizando o valor X da propriedade transform
-    
+
+     note.setAttributeNS(null, 'compass', returnCompass(clickX));
+     // atualizando o compasso da nota...
+
      note.removeAttributeNS(null, 'transform', this.localName);
      //removendo o atributo antigo...
      note.setAttributeNS(null, 'transform',
@@ -66,9 +69,12 @@
      //colocando a nova posicao...
      for (const i in vetObjNote) {
          //atualizando a posicao das notas no vetor...
-         if (event.target.id === vetObjNote[i].id) {
-             vetObjNote[i].x = event.pageX - obj_x;
-             break;
+         for (const j in vetObjNote[i].notas) {
+             if (event.target.id === vetObjNote[i].notas[j].id) {
+                 vetObjNote[i].notas[j].x = event.pageX - obj_x;
+                 vetObjNote[i].notas[j].compass = returnCompass(clickX);
+                 break;
+             }
          }
      }
      sortVector(vetObjNote); //ordenando novamente...

@@ -33,3 +33,22 @@ function createCompass(_NumCompasso, _idDiv) {
     objLine.idDiv = _idDiv;
     new createLine(objLine);
 }
+
+function returnCompass(clickX) {
+    // retorna em qual compasso foi feito o click...
+    const porcentage = returnPositionX_porcentagem(clickX)
+    if (porcentage < 25) return 1;
+    else if (porcentage >= 25 && porcentage < 50) return 2;
+    else if (porcentage >= 50 && porcentage < 75) return 3;
+    else return 4;
+}
+
+function fullCompass(compass, idSVG) {
+    let numNotes = 0;
+    // funcao booleana para verificar se pode ser inserida mais uma nota no compasso...
+    vetObjNote[idSVG].notas.forEach(el => {
+        if (el.compass == compass) numNotes++;
+    });
+    if (numNotes >= 4) return false;
+    else return true;
+}
