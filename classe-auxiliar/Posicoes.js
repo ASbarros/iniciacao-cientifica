@@ -77,9 +77,32 @@ function returnPositionX_porcentagemSVG(valor) {
     return x;
 }
 
-
 function returnPositionX_px(porcentagem) {
     //recebe como parametro a porcentagem da tela e retorna a posicao em pixes...
     const px = (porcentagem * $(window).width()) / 100;
     return px;
+}
+
+function returnPorcentageYLine(id) {
+    if (id == 29) return 15;
+    else if (id == 28) return 17.5;
+    else if (id == 27) return 20;
+    else if (id == 26) return 22.5;
+    else if (id == 25) return 25;
+    else if (id == 24) return 27.5;
+    else if (id == 23) return 30;
+    else if (id == 22) return 32.5;
+    else if (id == 21) return 35;
+    else if (id == 20) return 37.5;
+    else if (id == 10) return 62.5;
+    else if (id == 9) return 65;
+    else if (id == 8) return 67.5;
+    else if (id == 7) return 70;
+    else if (id == 6) return 72.5;
+    else if (id == 5) return 75;
+    else if (id == 4) return 77.5;
+    else if (id == 3) return 80;
+    else if (id == 2) return 82.5;
+    else if (id == 1) return 85.5;
+    else if (id == 0) return 87.5;
 }

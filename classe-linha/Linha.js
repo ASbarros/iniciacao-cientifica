@@ -24,12 +24,12 @@ function createSVG(_id, _dad) {
     //apendando o elemento no corpo do svg...
 }
 
-//funcao cria linha...
 function createLine(_obj) {
-    //pegando o valor numerico da div...
+    //funcao cria linha...
     NumDiv = _obj.idDiv.substring(5, 6);
-    //desenhando um linha...
+    //pegando o valor numerico da div...
     let myLine = document.createElementNS(svgNS, "line");
+    //desenhando um linha...
     myLine.setAttributeNS(null, "id", _obj.idName + "-" + _obj.idDiv);
     myLine.setAttributeNS(null, "x1", _obj.x1 + "%");
     myLine.setAttributeNS(null, "y1", _obj.y1 + "%");
@@ -67,6 +67,14 @@ function createLastLine(_idDiv) {
     objLine.classe = 'lastLine';
     objLine.idDiv = _idDiv;
     new createLine(objLine);
+}
+
+function createMiniLine(idLineAdditional) {
+    // função booleana retorna verdadeiro se será preciso criar a mini linha que fica a nota quando
+    // ela é criada fora das cinco linhas principais...
+    const numLinha = apenasNumeros(idLineAdditional.substring(10, 15));
+    if (numLinha >= 11 && numLinha <= 19) return false;
+    else return true;
 }
 
 function lastLine(_id) {

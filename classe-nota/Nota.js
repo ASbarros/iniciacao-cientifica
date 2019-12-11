@@ -111,6 +111,20 @@ function createNote(_name, _obj) {
         nota.setAttributeNS(null, 'compass', compass)
         document.getElementById(dad).appendChild(nota);
 
+        // uma funcao para implentar depois 
+        /** if (createMiniLine(_obj.e.target.id)) {
+        *      createLine({
+        *          idDiv: dad,
+        *          classe: 'miniLine',
+        *          idName: 'miniLina-Note' + id,
+        *          x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3,
+        *          x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1,
+        *          y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))),
+        *          y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15)))
+        *      })
+        * }
+        */
+        
         vetObjNote[apenasNumeros(dad)].notas.push({
             id: 'nota' + id,
             x: (_obj.x - objNota.x),
