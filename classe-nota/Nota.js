@@ -91,9 +91,9 @@ function createNote(_name, _obj) {
         objNota = new getImagem(_name);
         nota.setAttributeNS(null, "id", "nota" + id);
         nota.setAttributeNS(null, 'name', _name);
-        nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
-        nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
-        nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
+        // nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
+        // nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
+        // nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
         nota.setAttributeNS(null, "stroke", "#000");
         nota.setAttributeNS(null, "class", "nota");
         nota.setAttributeNS(null, "d", objNota.imagem);
@@ -107,7 +107,7 @@ function createNote(_name, _obj) {
         nota.setAttributeNS(null, 'obj_x', objNota.x);
         nota.setAttributeNS(null, 'obj_y', objNota.y);
         nota.setAttributeNS(null, 'svg', dad);
-        nota.setAttributeNS(null, 'move', objNota.move);
+        // nota.setAttributeNS(null, 'move', objNota.move);
         nota.setAttributeNS(null, 'compass', compass)
         document.getElementById(dad).appendChild(nota);
 
@@ -124,7 +124,7 @@ function createNote(_name, _obj) {
         *      })
         * }
         */
-        
+
         vetObjNote[apenasNumeros(dad)].notas.push({
             id: 'nota' + id,
             x: (_obj.x - objNota.x),
