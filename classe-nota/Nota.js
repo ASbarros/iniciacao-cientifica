@@ -19,12 +19,51 @@ const vetObjNote = [];
 let id = 0;
 //id das notas...
 
+const state = {
+    _name: ''
+}
+
+function shadowNote(e) {
+    let x = e.clientX,
+        idDiv = e.target.id,
+        y = returnPositionY_px(idDiv);
+    const obj = {
+        e,
+        idDiv,
+        y,
+        class: 'nota shadowNote',
+        x
+    };
+    if (obj.idDiv !== 'idSVG0') {
+        console.log(state._name)
+        // createNote(state._name, obj, 2);
+    }
+}
+
+function activeShadow(svgs, _name) {
+    for (const svg of svgs) {
+        svg.addEventListener('mousemove', shadowNote, false);
+    }
+}
+
+function desableShadow(svgs) {
+    for (const svg of svgs) {
+        svg.removeEventListener('mousemove', shadowNote, false);
+    }
+}
+
 function PositionNote(_name, _amount = 1) {
     const button = document.getElementsByTagName('button');
+    const svgs = $('.svg');
+
     for (let i = 0; i < button.length; i++) {
-        //inabilitando os botoes...
+        //desabilitando os botoes...
         button[i].setAttribute('disabled', 'true');
     }
+
+    state._name = _name;
+    activeShadow(svgs, _name);
+
     $(document.body).one('click', e => {
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
@@ -35,11 +74,12 @@ function PositionNote(_name, _amount = 1) {
                 const obj = {
                     e,
                     idDiv,
-                    y
+                    y,
+                    class: 'nota'
                 };
                 if (_amount == 1) { //para criar uma nota...
                     obj.x = x;
-                    createNote(_name, obj);
+                    createNote(_name, obj, 1);
                 } else if (_amount == 2) { //para criar duas notas...
                     obj.x = x - 20;
                     createNote(_name, obj);
@@ -73,14 +113,14 @@ function PositionNote(_name, _amount = 1) {
                     //retirando a propriedade disabled...
                     //ativando os botoes...
                 }
+                desableShadow(svgs);
             } catch {}
         } else PositionNote(_name, _amount);
         //se o click nao for em cima da linha, vai chamar a funcao novamente...
     });
 }
 
-function createNote(_name, _obj) {
-
+function createNote(_name, _obj, a) {
     const compass = returnCompass(_obj.e.pageX),
         // pegando o compasso que foi clicado...
         nota = document.createElementNS(svgNS, "path"),
@@ -95,7 +135,7 @@ function createNote(_name, _obj) {
         // nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
         // nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
         nota.setAttributeNS(null, "stroke", "#000");
-        nota.setAttributeNS(null, "class", "nota");
+        nota.setAttributeNS(null, "class", _obj.class);
         nota.setAttributeNS(null, "d", objNota.imagem);
         nota.setAttributeNS(null, "lineOrigin", _obj.e.target.id);
         nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
@@ -108,22 +148,23 @@ function createNote(_name, _obj) {
         nota.setAttributeNS(null, 'obj_y', objNota.y);
         nota.setAttributeNS(null, 'svg', dad);
         // nota.setAttributeNS(null, 'move', objNota.move);
-        nota.setAttributeNS(null, 'compass', compass)
+        nota.setAttributeNS(null, 'compass', compass);
         document.getElementById(dad).appendChild(nota);
 
         // uma funcao para implentar depois 
         /** if (createMiniLine(_obj.e.target.id)) {
-        *      createLine({
-        *          idDiv: dad,
-        *          classe: 'miniLine',
-        *          idName: 'miniLina-Note' + id,
-        *          x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3,
-        *          x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1,
-        *          y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))),
-        *          y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15)))
-        *      })
-        * }
-        */
+         * // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
+         *      createLine({
+         *          idDiv: dad,
+         *          classe: 'miniLine',
+         *          idName: 'miniLina-Note' + id,
+         *          x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3,
+         *          x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1,
+         *          y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))),
+         *          y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15)))
+         *      })
+         * }
+         */
 
         vetObjNote[apenasNumeros(dad)].notas.push({
             id: 'nota' + id,
