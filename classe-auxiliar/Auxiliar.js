@@ -10,7 +10,7 @@ function returnPositionY(id) {
 }
 
 //funcao que remove...
-function remove_id(id) {
+export function remove_id(id) {
     //usando jquery...
     $('#' + id).remove();
 }

@@ -3,6 +3,12 @@
  * @author anderson dos santos de barros
  */
 
+import {
+    setNumDiv
+} from '../classe-auxiliar/VariaveisGlobais.js';
+import {remove_id}from '../classe-auxiliar/Auxiliar.js'
+
+
 const svgNS = "http://www.w3.org/2000/svg";
 //definindo o namespace de svg...
 
@@ -26,7 +32,7 @@ function createSVG(_id, _dad) {
 
 function createLine(_obj) {
     //funcao cria linha...
-    NumDiv = _obj.idDiv.substring(5, 6);
+    setNumDiv(_obj.idDiv.substring(5, 6));
     //pegando o valor numerico da div...
     let myLine = document.createElementNS(svgNS, "line");
     //desenhando um linha...
@@ -77,7 +83,7 @@ function createMiniLine(idLineAdditional) {
     else return true;
 }
 
-function lastLine(_id) {
+export function lastLine(_id) {
     for (let index = 1; index <= 6; index++) {
         remove_id('lastLine' + index + '-idSVG' + (_id - 1));
         //remove a linha anterior...
@@ -89,4 +95,10 @@ function removeLinha(id) {
     // função reponsavel por armazenar a linha no vetor de linhas excluídas e apaga-lá da tela...
     vetLinhaExcluidas.push(id);
     remove_id(id);
+}
+
+export {
+    createSVG,
+    createLine,
+    svgNS
 }

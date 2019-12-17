@@ -3,6 +3,8 @@
  * @author anderson dos santos de barros
  */
 
+import {createLine} from '../classe-linha/Linha.js'
+
 //funcao para criar o compasso(as linhas verticais)...
 function createCompass(_NumCompasso, _idDiv) {
     //variavel responsavel por comtrolar o espacamento dos compassos...
@@ -51,4 +53,8 @@ function fullCompass(compass, idSVG) {
     });
     if (numNotes >= 4) return false;
     else return true;
+}
+
+export {
+    createCompass
 }

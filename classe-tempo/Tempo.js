@@ -3,12 +3,16 @@
  * @author anderson dos santos de barros
  */
 
+import {
+    getSvgNS
+} from '../classe-auxiliar/VariaveisGlobais.js'
+
 const tempo = 10;
 let x = 5,
     a = 0.3,
     idSVG = 0;
 
-function time() {
+export function time() {
     let idTime = 0;
     //id da linha...
     new createCircle('grande' + idSVG, 1.5);
@@ -77,7 +81,7 @@ function time() {
 }
 
 function createCircle(_i, _r) {
-    const circle = document.createElementNS(svgNS, "circle");
+    const circle = document.createElementNS(getSvgNS, "circle");
     circle.setAttributeNS(null, "id", 'circle-' + _i);
     circle.setAttributeNS(null, "cx", '50%');
     circle.setAttributeNS(null, "cy", '92%');

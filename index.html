@@ -17,19 +17,21 @@
     <header>
         <!-- botoes de controle -->
         <div class="botoesControle nav">
-            <button onclick="join()"> Juntar notas </button>
-            <button onclick="createDiv()"> Mais pauta </button>
+            <button id="btn-joinNotes"> Juntar notas </button>
+            <button id="btn-createDiv"> Mais pauta </button>
             <button onclick="DeleteNote()"> Excluir nota </button>
             <input type="text" id="inputTime" size="4" onkeyup="apenasNumerosInput()">
-            <button onclick="time()" title="Iniciar"> <img src="img/play.png" alt=""> </button>
+            <button id="btn-timer" title="Iniciar"> <img src="img/play.png" alt=""> </button>
         </div>
         <!-- criaçao das notas -->
         <div class="botoesNotas nav">
-            <button onclick="PositionNote('colcheia')" title="Colcheia"><img src="img/colcheia.png" alt=""></button>
-            <button onclick="PositionNote('seminima', 2)"> <img src="img/duasNotas.png"></button>
-            <button onclick="PositionNote('seminima', 3)"> <img src="img/tresNotas.png"></button>
-            <button onclick="PositionNote('seminima', 4)"><img src="img/quatroNotas.png"></button>
-            <button onclick="PositionNote('bemol')"> <img src="img/bemol.png"> </button>
+            <button name="btn-createNote" createNote="PositionNote('colcheia')" title="Colcheia">
+                <img src="img/colcheia.png" alt="">
+            </button>
+            <button name="btn-createNote" onclick="PositionNote('seminima', 2)"> <img src="img/duasNotas.png"></button>
+            <button name="btn-createNote" onclick="PositionNote('seminima', 3)"> <img src="img/tresNotas.png"></button>
+            <button name="btn-createNote" onclick="PositionNote('seminima', 4)"><img src="img/quatroNotas.png"></button>
+            <button name="btn-createNote" onclick="PositionNote('bemol')"> <img src="img/bemol.png"> </button>
             <button onclick="PositionNote('semicolcheia')" title="Semicolcheia">
                 <img src="img/semicolcheia.png" alt="">
             </button>
@@ -58,25 +60,10 @@
             </button>
         </div>
     </header>
-    <!-- <div id="audio"></div> -->
-    <!--  <div><canvas id="fft" width="512" height="200"></canvas></div> -->
-    <!-- bibliotecas -->
+
     <script src="bibliotecas/jquery/jquery-3.3.1.min.js"></script>
     <!-- chamadas dos documentos -->
-    <script src="classe-linha/Linha.js"></script>
-    <script src="classe-pauta/Pauta.js"></script>
-    <script src="classe-compasso/Compasso.js"></script>
-    <script src="classe-auxiliar/Posicoes.js"></script>
-    <script src="classe-auxiliar/Ordenacao.js"></script>
-    <script src="classe-auxiliar/Auxiliar.js"></script>
-    <script src="classe-nota/MovimentacaoNotas.js"></script>
-    <script src="classe-nota/JuntarNotas.js"></script>
-    <script src="classe-nota/TrocaNotas.js"></script>
-    <script src="classe-nota/Nota.js"></script>
-    <script src="classe-tempo/Tempo.js"></script>
-    <script src="classe-imagem/imagens.js"></script>
-    <script src="audio/audio.js"></script>
-    <!--  <script src="audio/transformataRapidaFourier.js"></script> -->
+    <script src="index.js" type="module"></script>
 </body>
 
 </html>

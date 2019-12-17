@@ -3,7 +3,7 @@
  * @author anderson dos santos de barros
  */
 
-function getImagem(_nomeImagem) {
+export function getImagem(_nomeImagem) {
     if (_nomeImagem == 'claveSol') {
         return "M48.688 115.805 c-5.427-0.1409-11.774 12.818-11.563 24.375 0.049 3.52 1.16 10.659" +
             " 2.781 19.625-10.223 10.581-22.094 21.44-22.094 35.688-0.163 13.057 7.817 29.692 26.75" +

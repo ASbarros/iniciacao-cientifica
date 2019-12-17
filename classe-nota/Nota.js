@@ -2,8 +2,17 @@
  * classe onde vai ter todas as funcionalidades das notas
  * @author anderson dos santos de barros
  */
+
+import {
+    getSvgNS
+} from '../classe-auxiliar/VariaveisGlobais.js'
+
+import {
+    getImagem
+} from '../classe-imagem/imagens.js'
+
 function createCompassFormula(_obj) {
-    const CF = document.createElementNS(svgNS, "path"),
+    const CF = document.createElementNS(getSvgNS(), "path"),
         NumDiv = _obj.idDiv.substring(5, 6);
     CF.setAttributeNS(null, "id", _obj.name + NumDiv);
     CF.setAttributeNS(null, "stroke", "#000");
@@ -52,7 +61,7 @@ function desableShadow(svgs) {
     }
 }
 
-function PositionNote(_name, _amount = 1) {
+export function PositionNote(_name, _amount = 1) {
     const button = document.getElementsByTagName('button');
     const svgs = $('.svg');
 
@@ -295,4 +304,8 @@ function DeleteNote(tentativa = 0) {
             } else DeleteNote(tentativa++);
         });
     }
+}
+
+export {
+    createCompassFormula
 }

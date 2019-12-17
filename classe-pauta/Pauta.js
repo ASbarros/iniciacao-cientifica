@@ -3,6 +3,22 @@
  * @author anderson dos santos de barros
  */
 
+import {
+    createSVG,
+    createLine,
+    lastLine
+} from '../classe-linha/Linha.js'
+import {
+    createCompassFormula
+} from '../classe-nota/Nota.js'
+import {
+    createCompass
+} from '../classe-compasso/Compasso.js'
+import {
+    getNumDiv,
+    vetObjNote
+} from '../classe-auxiliar/VariaveisGlobais.js'
+
 function createPauta(_idDiv) {
     //funcao para criar a pauta...
     const espacamento = 5,
@@ -48,13 +64,13 @@ function createPauta(_idDiv) {
         objLine.y1 = y1;
         objLine.y2 = y2;
         objLine.idName = 'additional' + i;
-        objLine.idDiv = 'idSVG' + NumDiv;
+        objLine.idDiv = 'idSVG' + getNumDiv();
         objLine.classe = 'suplementar';
-        new createLine(objLine);
+        createLine(objLine);
         //criando as linhas adicionais ...
     }
     vetObjNote.push({
-        idSVG: NumDiv,
+        idSVG: getNumDiv(),
         notas: []
     });
 }
@@ -76,4 +92,8 @@ function createDiv() {
     new createPauta("idSVG" + i);
     new lastLine(i);
     i++;
+}
+
+export {
+    createDiv
 }

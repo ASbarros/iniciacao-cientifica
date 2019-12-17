@@ -17,7 +17,7 @@ function joinNotes(_l1, _l2) {
     } else remove_id(nota2.id), remove_id(nota1.id);
 }
 
-function join() {
+export function join() {
     //funcao para juntar as notas, colocar uma linha em cima delas...
     const Notas = [];
     //vetor para guadar as notas selecionadas...
