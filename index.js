@@ -2,7 +2,7 @@ import { createDiv } from './classe-pauta/Pauta.js';
 import { PositionNote } from './classe-nota/Nota.js';
 import { join } from './classe-nota/JuntarNotas.js';
 import { time } from './classe-tempo/Tempo.js';
-import { DeleteNote } from './classe-nota/Nota.js'
+import { DeleteNote } from './classe-nota/DeleteNote.js'
 
 function createNote(e) {
     if ($(e.currentTarget)[0].value == 1) PositionNote('seminima');
