@@ -82,7 +82,6 @@ export function time() {
 }
 
 function createCircle(_i, _r) {
-    console.log(2)
     const circle = document.createElementNS(getSvgNS(), "circle");
     circle.setAttributeNS(null, "id", 'circle-' + _i);
     circle.setAttributeNS(null, "cx", '50%');

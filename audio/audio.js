@@ -35,7 +35,6 @@ navigator
                 audio.controls = true;
                 $('#audio').append(audio);
                 audioPronto();
-                console.log(blob);
             }
         }
     }, err => { //permissão negada...
