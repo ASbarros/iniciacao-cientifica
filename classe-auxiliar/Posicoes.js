@@ -83,7 +83,7 @@ function returnPositionX_px(porcentagem) {
     return px;
 }
 
-function returnPorcentageYLine(id) {
+export function returnPorcentageYLine(id) {
     if (id == 29) return 15;
     else if (id == 28) return 17.5;
     else if (id == 27) return 20;

@@ -4,7 +4,7 @@
  */
 
 import { setNumDiv } from '../classe-auxiliar/VariaveisGlobais.js';
-import { remove_id }from '../classe-auxiliar/Auxiliar.js'
+import { remove_id, apenasNumeros} from '../classe-auxiliar/Auxiliar.js';
 
 
 const svgNS = "http://www.w3.org/2000/svg";
@@ -73,7 +73,7 @@ function createLastLine(_idDiv) {
     new createLine(objLine);
 }
 
-function createMiniLine(idLineAdditional) {
+export function createMiniLine(idLineAdditional) {
     // função booleana retorna verdadeiro se será preciso criar a mini linha que fica a nota quando
     // ela é criada fora das cinco linhas principais...
     const numLinha = apenasNumeros(idLineAdditional.substring(10, 15));

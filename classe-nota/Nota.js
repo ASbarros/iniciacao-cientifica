@@ -6,12 +6,12 @@
 import { getSvgNS, vetLinhaExcluidas, vetObjNote } from '../classe-auxiliar/VariaveisGlobais.js';
 import { getImagem } from '../classe-imagem/imagens.js';
 import { 
-    returnPositionY_px, returnPositionX_porcentagem, returnPositionX_porcentagemSVG
+    returnPositionY_px, returnPositionX_porcentagem, returnPositionX_porcentagemSVG, returnPorcentageYLine
 } from '../classe-auxiliar/Posicoes.js';
 import { returnCompass, fullCompass } from '../classe-compasso/Compasso.js';
 import { apenasNumeros, returnPositionY, remove_id } from '../classe-auxiliar/Auxiliar.js';
 import { sortVector } from '../classe-auxiliar/Ordenacao.js';
-import { createLine, removeLinha } from '../classe-linha/Linha.js';
+import { createLine, removeLinha, createMiniLine } from '../classe-linha/Linha.js';
  
 function createCompassFormula(_obj) {
     const CF = document.createElementNS(getSvgNS(), "path"),
@@ -161,19 +161,19 @@ function createNote(_name, _obj) {
         document.getElementById(dad).appendChild(nota);
         
         // uma funcao para implentar depois 
-        /** if (createMiniLine(_obj.e.target.id)) {
-         * // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
-         *      createLine({
-         *          idDiv: dad,
-         *          classe: 'miniLine',
-         *          idName: 'miniLina-Note' + id,
-         *          x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3,
-         *          x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1,
-         *          y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))),
-         *          y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15)))
-         *      })
-         * }
-         */
+        if (createMiniLine(_obj.e.target.id)) {
+        // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
+            createLine({
+                idDiv: dad,
+                classe: 'miniLine',
+                idName: 'miniLina-Note' + id,
+                x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3,
+                x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1,
+                y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))),
+                y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15)))
+            })
+        }
+        
 
         vetObjNote[apenasNumeros(dad)].notas.push({
             id: 'nota' + id,
