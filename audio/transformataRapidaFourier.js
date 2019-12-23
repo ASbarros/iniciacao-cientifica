@@ -1,6 +1,6 @@
-let canvas = document.getElementById('fft'),
+/* let canvas = document.getElementById('fft'),
     ctx = canvas.getContext('2d'),
-    channels, rate, frameBufferLength, fft;
+    channels, rate, frameBufferLength, fft; */
 
 function loadedMetadata() {
     channels = audio.mozChannels;
@@ -32,10 +32,10 @@ function audioAvailable(event) {
         ctx.fillRect(i * 4, canvas.heigth, 3, -magnitude);
     }
 }
-function audioPronto() {
+export function audioPronto() {
     let audio = document.getElementById('el-audio');
-    audio.addEventListener('MozAudioAvailable', audioAvailable, false);
-    audio.addEventListener('loadedmetadata', loadedMetadata, false);
+    //audio.addEventListener('MozAudioAvailable', audioAvailable, false);
+    //audio.addEventListener('loadedmetadata', loadedMetadata, false);
 }
 
 // FFT de dsp.js, veja abaixo

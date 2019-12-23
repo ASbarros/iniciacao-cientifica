@@ -3,6 +3,8 @@
  * @author Anderson dos Santos de Barros
  */
 
+import { audioPronto } from './transformataRapidaFourier.js'
+
 //função para pegar o audio...
 let mediaRecorder;
 navigator
@@ -39,5 +41,5 @@ navigator
     }, err => { //permissão negada...
         alert(err)
     })
-const startAudio = () => mediaRecorder.start();
-const stopAudio = () => mediaRecorder.stop();
+export const startAudio = () => mediaRecorder.start();
+export const stopAudio = () => mediaRecorder.stop();

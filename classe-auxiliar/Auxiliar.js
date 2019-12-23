@@ -4,7 +4,7 @@
  * @author anderson dos santos de barros
  */
 
-function returnPositionY(id) {
+export function returnPositionY(id) {
     const resposta = apenasNumeros(id.substring(id.length - 10, id.length - 5));
     return 85 - (2.5 * (resposta - 1));
 }
@@ -15,7 +15,7 @@ export function remove_id(id) {
     $('#' + id).remove();
 }
 
-function apenasNumeros(string) {
+export function apenasNumeros(string) {
     const numsStr = string.replace(/[^0-9]/g, '');
     //tudo o que nao for numero, sera substituido por vazio...
     return parseInt(numsStr);

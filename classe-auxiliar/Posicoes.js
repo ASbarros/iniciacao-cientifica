@@ -3,7 +3,7 @@
  * para metodos que retornam as posicoes na tela
  * @author anderson dos santos de barros
  */
-function returnPositionY_px(id) {
+export function returnPositionY_px(id) {
     if (id.substring(10, 12) == 29) {
         return -34;
     } else if (id.substring(10, 12) == 28) {
@@ -65,13 +65,13 @@ function returnPositionY_px(id) {
     }
 }
 
-function returnPositionX_porcentagem(valor) {
+export function returnPositionX_porcentagem(valor) {
     //retorna a posicao do click em porcentagem para qualquer tela...
     const x = (valor * 100) / $(window).width();
     return x;
 }
 
-function returnPositionX_porcentagemSVG(valor) {
+export function returnPositionX_porcentagemSVG(valor) {
     //retorna a posicao do click em porcentagem para qualquer tela...
     const x = (valor * 100) / $('.svg').width();
     return x;

@@ -3,10 +3,8 @@
  * @author anderson dos santos de barros
  */
 
-import {
-    setNumDiv
-} from '../classe-auxiliar/VariaveisGlobais.js';
-import {remove_id}from '../classe-auxiliar/Auxiliar.js'
+import { setNumDiv } from '../classe-auxiliar/VariaveisGlobais.js';
+import { remove_id }from '../classe-auxiliar/Auxiliar.js'
 
 
 const svgNS = "http://www.w3.org/2000/svg";
@@ -91,7 +89,7 @@ export function lastLine(_id) {
     new createLastLine("idSVG" + _id);
 }
 
-function removeLinha(id) {
+export function removeLinha(id) {
     // função reponsavel por armazenar a linha no vetor de linhas excluídas e apaga-lá da tela...
     vetLinhaExcluidas.push(id);
     remove_id(id);

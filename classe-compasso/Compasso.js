@@ -3,7 +3,9 @@
  * @author anderson dos santos de barros
  */
 
-import {createLine} from '../classe-linha/Linha.js'
+import { createLine } from '../classe-linha/Linha.js';
+import { returnPositionX_porcentagem } from '../classe-auxiliar/Posicoes.js';
+import { vetObjNote } from '../classe-auxiliar/VariaveisGlobais.js';
 
 //funcao para criar o compasso(as linhas verticais)...
 function createCompass(_NumCompasso, _idDiv) {
@@ -36,7 +38,7 @@ function createCompass(_NumCompasso, _idDiv) {
     new createLine(objLine);
 }
 
-function returnCompass(clickX) {
+export function returnCompass(clickX) {
     // retorna em qual compasso foi feito o click...
     const porcentage = returnPositionX_porcentagem(clickX)
     if (porcentage < 25) return 1;
@@ -45,7 +47,7 @@ function returnCompass(clickX) {
     else return 4;
 }
 
-function fullCompass(compass, idSVG) {
+export function fullCompass(compass, idSVG) {
     let numNotes = 0;
     // funcao booleana para verificar se pode ser inserida mais uma nota no compasso...
     vetObjNote[idSVG].notas.forEach(el => {

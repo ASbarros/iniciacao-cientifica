@@ -3,9 +3,10 @@
  * @author anderson dos santos de barros
  */
 
-import {
-    getSvgNS
-} from '../classe-auxiliar/VariaveisGlobais.js'
+import { getSvgNS } from '../classe-auxiliar/VariaveisGlobais.js';
+import { startAudio, stopAudio } from '../audio/audio.js';
+import { createLine } from '../classe-linha/Linha.js';
+import { remove_id } from '../classe-auxiliar/Auxiliar.js'
 
 const tempo = 10;
 let x = 5,
@@ -81,7 +82,8 @@ export function time() {
 }
 
 function createCircle(_i, _r) {
-    const circle = document.createElementNS(getSvgNS, "circle");
+    console.log(2)
+    const circle = document.createElementNS(getSvgNS(), "circle");
     circle.setAttributeNS(null, "id", 'circle-' + _i);
     circle.setAttributeNS(null, "cx", '50%');
     circle.setAttributeNS(null, "cy", '92%');

@@ -3,14 +3,16 @@
  * @author anderson dos santos de barros
  */
 
-import {
-    getSvgNS
-} from '../classe-auxiliar/VariaveisGlobais.js'
-
-import {
-    getImagem
-} from '../classe-imagem/imagens.js'
-
+import { getSvgNS, vetLinhaExcluidas, vetObjNote } from '../classe-auxiliar/VariaveisGlobais.js';
+import { getImagem } from '../classe-imagem/imagens.js';
+import { 
+    returnPositionY_px, returnPositionX_porcentagem, returnPositionX_porcentagemSVG
+} from '../classe-auxiliar/Posicoes.js';
+import { returnCompass, fullCompass } from '../classe-compasso/Compasso.js';
+import { apenasNumeros, returnPositionY, remove_id } from '../classe-auxiliar/Auxiliar.js';
+import { sortVector } from '../classe-auxiliar/Ordenacao.js';
+import { createLine, removeLinha } from '../classe-linha/Linha.js';
+ 
 function createCompassFormula(_obj) {
     const CF = document.createElementNS(getSvgNS(), "path"),
         NumDiv = _obj.idDiv.substring(5, 6);
@@ -22,9 +24,6 @@ function createCompassFormula(_obj) {
     //apendando o elemento no corpo do svg...
 }
 
-const vetObjNote = [];
-//vetor para atualizar a posicao das notas,
-//guarda os ids das notas...
 let id = 0;
 //id das notas...
 
@@ -64,22 +63,22 @@ function desableShadow(svgs) {
 export function PositionNote(_name, _amount = 1) {
     const button = document.getElementsByTagName('button');
     const svgs = $('.svg');
-
+    
     for (let i = 0; i < button.length; i++) {
         //desabilitando os botoes...
         button[i].setAttribute('disabled', 'true');
     }
-
+    
     state._name = _name;
-    activeShadow(svgs, _name);
-
+    //activeShadow(svgs, _name);
+    
     $(document.body).one('click', e => {
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
             try {
                 let x = e.clientX,
-                    idDiv = e.target.id,
-                    y = returnPositionY_px(idDiv);
+                idDiv = e.target.id,
+                y = returnPositionY_px(idDiv);
                 const obj = {
                     e,
                     idDiv,
@@ -88,12 +87,13 @@ export function PositionNote(_name, _amount = 1) {
                 };
                 if (_amount == 1) { //para criar uma nota...
                     obj.x = x;
-                    createNote(_name, obj, 1);
+                    createNote(_name, obj);
                 } else if (_amount == 2) { //para criar duas notas...
                     obj.x = x - 20;
                     createNote(_name, obj);
                     obj.x = x + 20;
                     createNote(_name, obj);
+                    console.log(1)
                     createLineJoin();
                 } else if (_amount == 3) { //para criar tres notas...
                     obj.x = x - 40;
@@ -122,22 +122,22 @@ export function PositionNote(_name, _amount = 1) {
                     //retirando a propriedade disabled...
                     //ativando os botoes...
                 }
-                desableShadow(svgs);
+                //desableShadow(svgs);
             } catch {}
         } else PositionNote(_name, _amount);
         //se o click nao for em cima da linha, vai chamar a funcao novamente...
     });
 }
 
-function createNote(_name, _obj, a) {
+function createNote(_name, _obj) {
     const compass = returnCompass(_obj.e.pageX),
-        // pegando o compasso que foi clicado...
-        nota = document.createElementNS(svgNS, "path"),
-        dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
+    // pegando o compasso que foi clicado...
+    nota = document.createElementNS(getSvgNS(), "path"),
+    dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
     // pegando a pauta que foi clicada...
+    let objNota;
     if (fullCompass(compass, apenasNumeros(dad))) {
-
-        objNota = new getImagem(_name);
+        objNota = getImagem(_name);
         nota.setAttributeNS(null, "id", "nota" + id);
         nota.setAttributeNS(null, 'name', _name);
         // nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
@@ -148,7 +148,7 @@ function createNote(_name, _obj, a) {
         nota.setAttributeNS(null, "d", objNota.imagem);
         nota.setAttributeNS(null, "lineOrigin", _obj.e.target.id);
         nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
-            ' ' + (_obj.y - objNota.y) + ')');
+        ' ' + (_obj.y - objNota.y) + ')');
         nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
         nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
         nota.setAttributeNS(null, 'pageX', _obj.e.pageX);
@@ -159,7 +159,7 @@ function createNote(_name, _obj, a) {
         // nota.setAttributeNS(null, 'move', objNota.move);
         nota.setAttributeNS(null, 'compass', compass);
         document.getElementById(dad).appendChild(nota);
-
+        
         // uma funcao para implentar depois 
         /** if (createMiniLine(_obj.e.target.id)) {
          * // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
@@ -196,10 +196,10 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
         //pegando as notas, da esqueda para a direita...
         line1 = fistNote.getAttributeNS(null, 'x1y1Line'),
         line2 = secondNote.getAttributeNS(null, 'x2y2Line');
-
-    if (!line1 || !line2 || vetLinhaExcluidas.indexOf(line1) > -1 || vetLinhaExcluidas.indexOf(line2) > -1) {
-        //se existir uma linha que liga as notas, nao sera criada uma nova...
-        const objLine = {},
+        
+        if (!line1 || !line2 || vetLinhaExcluidas.indexOf(line1) > -1 || vetLinhaExcluidas.indexOf(line2) > -1) {
+            //se existir uma linha que liga as notas, nao sera criada uma nova...
+            const objLine = {},
             //instanciando o objeto...
             transformFistNote = fistNote.getAttributeNS(null, 'transform'),
             transformSecondNote = secondNote.getAttributeNS(null, 'transform'),
@@ -207,33 +207,34 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
             aux2 = transformSecondNote.split(' '),
             lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin'),
             name = fistNote.getAttributeNS(null, 'name');
-        objLine.name = name;
-        objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
-        objLine.idDiv = 'idSVG' + objLine.mom;
-        if (name === 'colcheia') {
-            objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
-            objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
-            objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
-            objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
-            objLine.classe = 'linejoincolcheia';
-            objLine.idName = 'join' + objLine.name + idLineJoin;
-            //setando os atributos da linha...
-            new createLine(objLine);
-            //criando uma nova linha, que ira ligar as notas...
-            idLineJoin++;
-            fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
-            secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
-            //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
-            //mover juntamente com a linha...
-        } else if (name === 'seminima') {
-            objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
-            objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
-            objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
-            objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
-            objLine.classe = 'linejoincolcheia';
-            objLine.idName = 'join' + objLine.name + idLineJoin;
-            //setando os atributos da linha...
-            new createLine(objLine);
+            objLine.name = name;
+            objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
+            objLine.idDiv = 'idSVG' + objLine.mom;
+            if (name === 'colcheia') {
+                objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
+                objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
+                objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+                objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+                objLine.classe = 'linejoincolcheia';
+                objLine.idName = 'join' + objLine.name + idLineJoin;
+                //setando os atributos da linha...
+                new createLine(objLine);
+                //criando uma nova linha, que ira ligar as notas...
+                idLineJoin++;
+                fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
+                secondNote.setAttributeNS(null, 'x2y2Line', objLine.idName + '-' + objLine.idDiv);
+                //colocando o id da linha nas notas, para saber qual a parte da linha que ira se
+                //mover juntamente com a linha...
+            } else if (name === 'seminima') {
+                objLine.x1 = returnPositionX_porcentagemSVG(apenasNumeros(aux1[0]) + 37);
+                objLine.x2 = returnPositionX_porcentagemSVG(apenasNumeros(aux2[0]) + 40);
+                objLine.y1 = returnPositionY(fistNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+                objLine.y2 = returnPositionY(secondNote.getAttributeNS(null, 'lineOrigin')) - 13.6;
+                objLine.classe = 'linejoincolcheia';
+                objLine.idName = 'join' + objLine.name + idLineJoin;
+                //setando os atributos da linha...
+                new createLine(objLine);
+                console.log(2)
             //criando uma nova linha, que ira ligar as notas...
             idLineJoin++;
             fistNote.setAttributeNS(null, 'x1y1Line', objLine.idName + '-' + objLine.idDiv);
@@ -272,13 +273,14 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
     }
 }
 
-function DeleteNote(tentativa = 0) {
+export function DeleteNote(tentativa = 0) {
     //funcao para apagar uma nota pelo click...
+    if (typeof tentativa == 'object') tentativa = 0;
     //se o primeiro click der errado, a funcao é chamada outra vez...
     if (tentativa < 2) {
         $('.svg').one('click', (e) => {
             const click = e.target.id,
-                regex = /\b(nota[0-9]\d*)\b/;
+            regex = /\b(nota[0-9]\d*)\b/;
             //expressao regular para pegar apenas as notas...
             if (click.match(regex)) {
                 const objLine = document.getElementById(click);

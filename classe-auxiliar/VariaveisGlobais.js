@@ -7,6 +7,7 @@
 let NumDiv = 0;
 const svgNS = 'http://www.w3.org/2000/svg';
 export let vetObjNote = [];
+export let vetLinhaExcluidas = [];
 
 export function setNumDiv(val) {
     NumDiv = val;
