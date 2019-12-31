@@ -3,7 +3,8 @@
  * @author anderson dos santos de barros
  */
 
-import { getSvgNS, vetLinhaExcluidas, vetObjNote, getIdLineJoin, setIdLineJoin 
+import { 
+    getSvgNS, vetLinhaExcluidas, vetObjNote, getIdLineJoin, setIdLineJoin, getCreateNoteShadow, setCreateNoteShadow
 } from '../classe-auxiliar/VariaveisGlobais.js';
 import { getImagem } from '../classe-imagem/imagens.js';
 import { 
@@ -43,9 +44,56 @@ function shadowNote(e) {
         class: 'nota shadowNote',
         x
     };
-    if (obj.idDiv !== 'idSVG0') {
-        console.log(state._name)
-        // createNote(state._name, obj, 2);
+    if (obj.idDiv !== 'idSVG0' && !getCreateNoteShadow()) {
+        createNote(state._name, obj, 2);
+        setCreateNoteShadow(true);
+    } else {
+        const noteShadow = document.getElementsByClassName('shadowNote')[0];
+        if(noteShadow) {
+            noteShadow.setAttributeNS(null, 'clickY', e.pageY);
+            noteShadow.setAttributeNS(null, 'clickX', e.pageX);
+            let lineOrigin = noteShadow.getAttributeNS(null, 'lineOrigin'),
+            numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
+            
+            const obj_y = noteShadow.getAttributeNS(null, 'obj_y'),
+            obj_x = noteShadow.getAttributeNS(null, 'obj_x'),
+            clickY = noteShadow.getAttributeNS(null, 'clickY'),
+            clickX = noteShadow.getAttributeNS(null, 'clickX'),
+            transformX = apenasNumeros(noteShadow.getAttributeNS(null, 'transform').split(' ')[0]),
+            //pegando os atributos da nota...
+            primeiraParte = lineOrigin.substring(0, 10),
+            segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length),
+            y = returnPositionY_px(lineOrigin) - obj_y;
+            // console.log(clickY)
+            if (e.pageY + 10 > clickY ) {
+                //se o movimento for para baixo...
+                if (numLine > 1) numLine--;
+                 lineOrigin = primeiraParte + numLine + segundaParte;
+                noteShadow.removeAttributeNS(null, 'lineOrigin', this.localName);
+                noteShadow.setAttributeNS(null, 'lineOrigin', lineOrigin); 
+                //atualizando o atributo da nota...
+            }
+            else if (e.pageY - 10 < clickY) {
+               //se o movimento for para cima...
+               if (numLine < 29) numLine++;
+               lineOrigin = primeiraParte + numLine + segundaParte;
+               noteShadow.removeAttributeNS(null, 'lineOrigin', this.localName);
+               noteShadow.setAttributeNS(null, 'lineOrigin', lineOrigin);
+               //atualizando o atributo da nota...
+            }
+               const newTransformX = (e.pageX);
+               console.log(returnPositionY_px(lineOrigin)- obj_y)
+            // atualizando o valor X da propriedade transform
+
+            noteShadow.setAttributeNS(null, 'compass', returnCompass(clickX));
+            // atualizando o compasso da nota...
+
+            noteShadow.removeAttributeNS(null, 'transform', this.localName);
+            //removendo o atributo antigo...
+            noteShadow.setAttributeNS(null, 'transform',
+                'translate(' + newTransformX + ' ' + y + ')');
+            //colocando a nova posicao...
+        }
     }
 }
 
@@ -71,7 +119,7 @@ export function PositionNote(_name, _amount = 1) {
     }
     
     state._name = _name;
-    //activeShadow(svgs, _name);
+    activeShadow(svgs, _name);
     
     $(document.body).one('click', e => {
         if (e.target && e.target.classList.contains('suplementar')) {
@@ -94,7 +142,6 @@ export function PositionNote(_name, _amount = 1) {
                     createNote(_name, obj);
                     obj.x = x + 20;
                     createNote(_name, obj);
-                    console.log('aki')
                     createLineJoin();
                 } else if (_amount == 3) { //para criar tres notas...
                     obj.x = x - 40;
@@ -123,7 +170,7 @@ export function PositionNote(_name, _amount = 1) {
                     //retirando a propriedade disabled...
                     //ativando os botoes...
                 }
-                //desableShadow(svgs);
+                desableShadow(svgs);
             } catch {}
         } else PositionNote(_name, _amount);
         //se o click nao for em cima da linha, vai chamar a funcao novamente...

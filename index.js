@@ -19,8 +19,9 @@ function createNote(e) {
     else if ($(e.currentTarget)[0].id == 'btn-createNoteMinima') PositionNote('minima');
     else if ($(e.currentTarget)[0].id == 'btn-createPausaDeSemibreve') PositionNote('pausa_de_semibreve');
     else if ($(e.currentTarget)[0].id == 'btn-createPausaDeMinima') PositionNote('pausa_de_minima');
-    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeSemicocheia') PositionNote('pausa_de_semicocheia');
-    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeCocheia') PositionNote('pausa_de_cocheia');
+    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeSemicolcheia') PositionNote('pausa_de_semicolcheia');
+    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeColcheia') PositionNote('pausa_de_colcheia');
+    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeSeminima') PositionNote('pausa_de_seminima');
 }
 
 document.body.onload = function () {
