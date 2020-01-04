@@ -12,6 +12,16 @@ let idLineJoin = 0;
 //id para as linhas de juncao das notas...
 let createNoteShadow = false;
 let numLineAtualy = null;
+let id = 0;
+//id das notas...
+
+export function getIdNote() {
+    return id;
+}
+
+export function addIdNote() {
+    id++;
+}
 
 export function getNumLineAtualy() {
     return numLineAtualy;

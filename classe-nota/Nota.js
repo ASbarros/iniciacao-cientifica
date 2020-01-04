@@ -4,18 +4,18 @@
  */
 
 import {
-    getSvgNS, vetLinhaExcluidas, vetObjNote,
+    getSvgNS, vetLinhaExcluidas,
     getIdLineJoin, setIdLineJoin, getCreateNoteShadow,
     setCreateNoteShadow, getNumLineAtualy, setNumLineAtuaty
 } from '../classe-auxiliar/VariaveisGlobais.js';
 import { getImagem } from '../classe-imagem/imagens.js';
 import {
-    returnPositionY_px, returnPositionX_porcentagem, returnPositionX_porcentagemSVG, returnPorcentageYLine
+    returnPositionY_px, returnPositionX_porcentagemSVG
 } from '../classe-auxiliar/Posicoes.js';
-import { returnCompass, fullCompass } from '../classe-compasso/Compasso.js';
+import { returnCompass } from '../classe-compasso/Compasso.js';
 import { apenasNumeros, returnPositionY, remove_id } from '../classe-auxiliar/Auxiliar.js';
-import { sortVector } from '../classe-auxiliar/Ordenacao.js';
-import { createLine, createMiniLine } from '../classe-linha/Linha.js';
+import { createLine } from '../classe-linha/Linha.js';
+import { createNote } from './CreateNote.js';
 
 function createCompassFormula(_obj) {
     const CF = document.createElementNS(getSvgNS(), "path"),
@@ -27,9 +27,6 @@ function createCompassFormula(_obj) {
     document.getElementById(_obj.idDiv).appendChild(CF);
     //apendando o elemento no corpo do svg...
 }
-
-let id = 0;
-//id das notas...
 
 const state = {
     _name: ''
@@ -63,10 +60,7 @@ function shadowNote(e) {
                         numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
 
                     const obj_y = noteShadow.getAttributeNS(null, 'obj_y'),
-                        obj_x = noteShadow.getAttributeNS(null, 'obj_x'),
-                        clickY = noteShadow.getAttributeNS(null, 'clickY'),
                         clickX = noteShadow.getAttributeNS(null, 'clickX'),
-                        transformX = apenasNumeros(noteShadow.getAttributeNS(null, 'transform').split(' ')[0]),
                         //pegando os atributos da nota...
                         primeiraParte = lineOrigin.substring(0, 10),
                         segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length),
@@ -194,63 +188,7 @@ export function PositionNote(_name, _amount = 1) {
     });
 }
 
-function createNote(_name, _obj) {
-    const compass = returnCompass(_obj.e.pageX),
-        // pegando o compasso que foi clicado...
-        nota = document.createElementNS(getSvgNS(), "path"),
-        dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
-    // pegando a pauta que foi clicada...
-    let objNota;
-    if (fullCompass(compass, apenasNumeros(dad))) {
-        objNota = getImagem(_name);
-        nota.setAttributeNS(null, "id", "nota" + id);
-        nota.setAttributeNS(null, 'name', _name);
-        // nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
-        // nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
-        // nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
-        nota.setAttributeNS(null, "stroke", "#000");
-        nota.setAttributeNS(null, "class", _obj.class);
-        nota.setAttributeNS(null, "d", objNota.imagem);
-        nota.setAttributeNS(null, "lineOrigin", _obj.e.target.id);
-        nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
-            ' ' + (_obj.y - objNota.y) + ')');
-        nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
-        nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
-        nota.setAttributeNS(null, 'pageX', _obj.e.pageX);
-        nota.setAttributeNS(null, 'pageY', _obj.e.pageY);
-        nota.setAttributeNS(null, 'obj_x', objNota.x);
-        nota.setAttributeNS(null, 'obj_y', objNota.y);
-        nota.setAttributeNS(null, 'svg', dad);
-        // nota.setAttributeNS(null, 'move', objNota.move);
-        nota.setAttributeNS(null, 'compass', compass);
-        document.getElementById(dad).appendChild(nota);
 
-        // uma funcao para implentar depois 
-        if (createMiniLine(_obj.e.target.id)) {
-            // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
-            createLine({
-                idDiv: dad,
-                classe: 'miniLine',
-                idName: 'miniLina-Note' + id,
-                x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3 + '%',
-                x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1 + '%',
-                y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))) + '%',
-                y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))) + '%'
-            })
-        }
-
-
-        vetObjNote[apenasNumeros(dad)].notas.push({
-            id: 'nota' + id,
-            x: (_obj.x - objNota.x),
-            compass
-        });
-        // adicionando a nota e suas propriedades no vetor...
-        sortVector(vetObjNote);
-        // ordenando o vetor...
-        id++;
-    }
-}
 
 function createLineJoin(idNote1 = id, idNote2 = id) {
     const fistNote = document.getElementById('nota' + (idNote1 - 2)),
