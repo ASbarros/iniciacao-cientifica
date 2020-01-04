@@ -1,3 +1,8 @@
+/**
+ * classe para a junção de duas notas
+ * @author anderson dos santos de barros
+ */
+
 import {
     vetLinhaExcluidas, getIdLineJoin,
     setIdLineJoin, getIdNote

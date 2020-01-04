@@ -90,7 +90,7 @@ function shadowNote(e) {
                     noteShadow.removeAttributeNS(null, 'transform', this.localName);
                     //removendo o atributo antigo...
                     noteShadow.setAttributeNS(null, 'transform',
-                        'translate(' + newTransformX + ' ' + y + ')');
+                        'translate(' + (newTransformX - 60) + ' ' + y + ')');
                     //colocando a nova posicao...
                 }
             } else {
