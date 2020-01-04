@@ -3,18 +3,20 @@
  * @author anderson dos santos de barros
  */
 
-import { 
-    getSvgNS, vetLinhaExcluidas, vetObjNote, getIdLineJoin, setIdLineJoin, getCreateNoteShadow, setCreateNoteShadow
+import {
+    getSvgNS, vetLinhaExcluidas, vetObjNote,
+    getIdLineJoin, setIdLineJoin, getCreateNoteShadow,
+    setCreateNoteShadow, getNumLineAtualy, setNumLineAtuaty
 } from '../classe-auxiliar/VariaveisGlobais.js';
 import { getImagem } from '../classe-imagem/imagens.js';
-import { 
+import {
     returnPositionY_px, returnPositionX_porcentagem, returnPositionX_porcentagemSVG, returnPorcentageYLine
 } from '../classe-auxiliar/Posicoes.js';
 import { returnCompass, fullCompass } from '../classe-compasso/Compasso.js';
 import { apenasNumeros, returnPositionY, remove_id } from '../classe-auxiliar/Auxiliar.js';
 import { sortVector } from '../classe-auxiliar/Ordenacao.js';
 import { createLine, createMiniLine } from '../classe-linha/Linha.js';
- 
+
 function createCompassFormula(_obj) {
     const CF = document.createElementNS(getSvgNS(), "path"),
         NumDiv = _obj.idDiv.substring(5, 6);
@@ -45,54 +47,68 @@ function shadowNote(e) {
         x
     };
     if (obj.idDiv !== 'idSVG0' && !getCreateNoteShadow()) {
-        createNote(state._name, obj, 2);
+        createNote(state._name, obj);
         setCreateNoteShadow(true);
     } else {
         const noteShadow = document.getElementsByClassName('shadowNote')[0];
-        if(noteShadow) {
-            noteShadow.setAttributeNS(null, 'clickY', e.pageY);
-            noteShadow.setAttributeNS(null, 'clickX', e.pageX);
-            let lineOrigin = noteShadow.getAttributeNS(null, 'lineOrigin'),
-            numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
-            
-            const obj_y = noteShadow.getAttributeNS(null, 'obj_y'),
-            obj_x = noteShadow.getAttributeNS(null, 'obj_x'),
-            clickY = noteShadow.getAttributeNS(null, 'clickY'),
-            clickX = noteShadow.getAttributeNS(null, 'clickX'),
-            transformX = apenasNumeros(noteShadow.getAttributeNS(null, 'transform').split(' ')[0]),
-            //pegando os atributos da nota...
-            primeiraParte = lineOrigin.substring(0, 10),
-            segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length),
-            y = returnPositionY_px(lineOrigin) - obj_y;
-            // console.log(clickY)
-            if (e.pageY + 10 > clickY ) {
-                //se o movimento for para baixo...
-                if (numLine > 1) numLine--;
-                 lineOrigin = primeiraParte + numLine + segundaParte;
-                noteShadow.removeAttributeNS(null, 'lineOrigin', this.localName);
-                noteShadow.setAttributeNS(null, 'lineOrigin', lineOrigin); 
-                //atualizando o atributo da nota...
-            }
-            else if (e.pageY - 10 < clickY) {
-               //se o movimento for para cima...
-               if (numLine < 29) numLine++;
-               lineOrigin = primeiraParte + numLine + segundaParte;
-               noteShadow.removeAttributeNS(null, 'lineOrigin', this.localName);
-               noteShadow.setAttributeNS(null, 'lineOrigin', lineOrigin);
-               //atualizando o atributo da nota...
-            }
-               const newTransformX = (e.pageX);
-               console.log(returnPositionY_px(lineOrigin)- obj_y)
-            // atualizando o valor X da propriedade transform
+        if (noteShadow) {
+            // se a nota sombra existir...
+            if (getNumLineAtualy()) {
+                // se a linha atual da nota de sombra estiver setada...
+                if ($(e.target)[0].getAttributeNS(null, 'type') == 'line') {
+                    // se o movimento esta em uma linha...
+                    noteShadow.setAttributeNS(null, 'clickY', e.pageY);
+                    noteShadow.setAttributeNS(null, 'clickX', e.pageX);
+                    let lineOrigin = noteShadow.getAttributeNS(null, 'lineOrigin'),
+                        numLine = apenasNumeros(lineOrigin.substring(10, lineOrigin.length - 7));
 
-            noteShadow.setAttributeNS(null, 'compass', returnCompass(clickX));
-            // atualizando o compasso da nota...
+                    const obj_y = noteShadow.getAttributeNS(null, 'obj_y'),
+                        obj_x = noteShadow.getAttributeNS(null, 'obj_x'),
+                        clickY = noteShadow.getAttributeNS(null, 'clickY'),
+                        clickX = noteShadow.getAttributeNS(null, 'clickX'),
+                        transformX = apenasNumeros(noteShadow.getAttributeNS(null, 'transform').split(' ')[0]),
+                        //pegando os atributos da nota...
+                        primeiraParte = lineOrigin.substring(0, 10),
+                        segundaParte = lineOrigin.substring(lineOrigin.length - 7, lineOrigin.length),
+                        y = returnPositionY_px(lineOrigin) - obj_y;
+                    // console.log(clickY)
+                    if (apenasNumeros($(e.target)[0].getAttributeNS(null, 'id').substring(10, $(e.target)[0].getAttributeNS(null, 'id').length - 7)) < getNumLineAtualy()) {
+                        //se o movimento for para baixo...
+                        if (numLine > 1) numLine--;
+                        lineOrigin = primeiraParte + numLine + segundaParte;
+                        noteShadow.removeAttributeNS(null, 'lineOrigin', this.localName);
+                        noteShadow.setAttributeNS(null, 'lineOrigin', lineOrigin);
+                        //atualizando o atributo da nota...
+                        setNumLineAtuaty(numLine);
+                    }
+                    else if (apenasNumeros($(e.target)[0].getAttributeNS(null, 'id').substring(10, $(e.target)[0].getAttributeNS(null, 'id').length - 7)) > getNumLineAtualy()) {
+                        //se o movimento for para cima...
+                        if (numLine < 29) numLine++;
+                        lineOrigin = primeiraParte + numLine + segundaParte;
+                        noteShadow.removeAttributeNS(null, 'lineOrigin', this.localName);
+                        noteShadow.setAttributeNS(null, 'lineOrigin', lineOrigin);
+                        //atualizando o atributo da nota...
+                        setNumLineAtuaty(numLine);
+                    }
+                    const newTransformX = (e.pageX);
+                    // atualizando o valor X da propriedade transform
 
-            noteShadow.removeAttributeNS(null, 'transform', this.localName);
-            //removendo o atributo antigo...
-            noteShadow.setAttributeNS(null, 'transform',
-                'translate(' + newTransformX + ' ' + y + ')');
-            //colocando a nova posicao...
+                    noteShadow.setAttributeNS(null, 'compass', returnCompass(clickX));
+                    // atualizando o compasso da nota...
+
+                    noteShadow.removeAttributeNS(null, 'transform', this.localName);
+                    //removendo o atributo antigo...
+                    noteShadow.setAttributeNS(null, 'transform',
+                        'translate(' + newTransformX + ' ' + y + ')');
+                    //colocando a nova posicao...
+                }
+            } else {
+                $(e.target)[0].getAttributeNS(null, 'type') == 'line' ?
+                    setNumLineAtuaty(
+                        apenasNumeros(
+                            $(e.target)[0].getAttributeNS(null, 'id').substring(10, $(e.target)[0].getAttributeNS(null, 'id').length - 7)))
+                    : '';
+            }
         }
     }
 }
@@ -107,27 +123,28 @@ function desableShadow(svgs) {
     for (const svg of svgs) {
         svg.removeEventListener('mousemove', shadowNote, false);
     }
+    $('.shadowNote').remove()
 }
 
 export function PositionNote(_name, _amount = 1) {
     const button = document.getElementsByTagName('button');
     const svgs = $('.svg');
-    
+
     for (let i = 0; i < button.length; i++) {
         //desabilitando os botoes...
         button[i].setAttribute('disabled', 'true');
     }
-    
+
     state._name = _name;
     activeShadow(svgs, _name);
-    
+
     $(document.body).one('click', e => {
         if (e.target && e.target.classList.contains('suplementar')) {
             //elemento encontrado...
             try {
                 let x = e.clientX,
-                idDiv = e.target.id,
-                y = returnPositionY_px(idDiv);
+                    idDiv = e.target.id,
+                    y = returnPositionY_px(idDiv);
                 const obj = {
                     e,
                     idDiv,
@@ -171,7 +188,7 @@ export function PositionNote(_name, _amount = 1) {
                     //ativando os botoes...
                 }
                 desableShadow(svgs);
-            } catch {}
+            } catch { }
         } else PositionNote(_name, _amount);
         //se o click nao for em cima da linha, vai chamar a funcao novamente...
     });
@@ -179,9 +196,9 @@ export function PositionNote(_name, _amount = 1) {
 
 function createNote(_name, _obj) {
     const compass = returnCompass(_obj.e.pageX),
-    // pegando o compasso que foi clicado...
-    nota = document.createElementNS(getSvgNS(), "path"),
-    dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
+        // pegando o compasso que foi clicado...
+        nota = document.createElementNS(getSvgNS(), "path"),
+        dad = _obj.idDiv.substring(_obj.idDiv.length - 6, _obj.idDiv.length);
     // pegando a pauta que foi clicada...
     let objNota;
     if (fullCompass(compass, apenasNumeros(dad))) {
@@ -196,7 +213,7 @@ function createNote(_name, _obj) {
         nota.setAttributeNS(null, "d", objNota.imagem);
         nota.setAttributeNS(null, "lineOrigin", _obj.e.target.id);
         nota.setAttributeNS(null, 'transform', 'translate(' + (_obj.x - objNota.x) +
-        ' ' + (_obj.y - objNota.y) + ')');
+            ' ' + (_obj.y - objNota.y) + ')');
         nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
         nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
         nota.setAttributeNS(null, 'pageX', _obj.e.pageX);
@@ -207,10 +224,10 @@ function createNote(_name, _obj) {
         // nota.setAttributeNS(null, 'move', objNota.move);
         nota.setAttributeNS(null, 'compass', compass);
         document.getElementById(dad).appendChild(nota);
-        
+
         // uma funcao para implentar depois 
         if (createMiniLine(_obj.e.target.id)) {
-        // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
+            // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
             createLine({
                 idDiv: dad,
                 classe: 'miniLine',
@@ -221,7 +238,7 @@ function createNote(_name, _obj) {
                 y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))) + '%'
             })
         }
-        
+
 
         vetObjNote[apenasNumeros(dad)].notas.push({
             id: 'nota' + id,
@@ -241,17 +258,17 @@ function createLineJoin(idNote1 = id, idNote2 = id) {
         //pegando as notas, da esqueda para a direita...
         line1 = fistNote.getAttributeNS(null, 'x1y1Line'),
         line2 = secondNote.getAttributeNS(null, 'x2y2Line');
-        
+
     if (!line1 || !line2 || vetLinhaExcluidas.indexOf(line1) > -1 || vetLinhaExcluidas.indexOf(line2) > -1) {
         //se existir uma linha que liga as notas, nao sera criada uma nova...
         const objLine = {},
-        //instanciando o objeto...
-        transformFistNote = fistNote.getAttributeNS(null, 'transform'),
-        transformSecondNote = secondNote.getAttributeNS(null, 'transform'),
-        aux1 = transformFistNote.split(' '),
-        aux2 = transformSecondNote.split(' '),
-        lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin'),
-        name = fistNote.getAttributeNS(null, 'name');
+            //instanciando o objeto...
+            transformFistNote = fistNote.getAttributeNS(null, 'transform'),
+            transformSecondNote = secondNote.getAttributeNS(null, 'transform'),
+            aux1 = transformFistNote.split(' '),
+            aux2 = transformSecondNote.split(' '),
+            lineOrigin = fistNote.getAttributeNS(null, 'lineOrigin'),
+            name = fistNote.getAttributeNS(null, 'name');
         objLine.name = name;
         objLine.mom = apenasNumeros(lineOrigin.substring(lineOrigin.length - 3, lineOrigin.length));
         objLine.idDiv = 'idSVG' + objLine.mom;

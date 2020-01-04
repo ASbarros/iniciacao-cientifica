@@ -11,6 +11,15 @@ export let vetLinhaExcluidas = [];
 let idLineJoin = 0;
 //id para as linhas de juncao das notas...
 let createNoteShadow = false;
+let numLineAtualy = null;
+
+export function getNumLineAtualy() {
+    return numLineAtualy;
+}
+
+export function setNumLineAtuaty(val) {
+    numLineAtualy = val;
+}
 
 export function getCreateNoteShadow() {
     return createNoteShadow;

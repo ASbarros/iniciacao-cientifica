@@ -5,23 +5,68 @@ import { time } from './classe-tempo/Tempo.js';
 import { DeleteNote } from './classe-nota/DeleteNote.js'
 
 function createNote(e) {
-    if ($(e.currentTarget)[0].value == 1) PositionNote('seminima');
-    else if ($(e.currentTarget)[0].value == 2) PositionNote('seminima', 2);
-    else if ($(e.currentTarget)[0].value == 3) PositionNote('seminima', 3);
-    else if ($(e.currentTarget)[0].value == 4) PositionNote('seminima', 4);
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteBemol') PositionNote('bemol');
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteColcheia') PositionNote('colcheia');
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteSemicolcheia') PositionNote('semicolcheia');
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteFusa') PositionNote('fusa');
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteSemifusa') PositionNote('semifusa');
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteSemibreve') PositionNote('semibreve');
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteSustenido') PositionNote('sustenido');
-    else if ($(e.currentTarget)[0].id == 'btn-createNoteMinima') PositionNote('minima');
-    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeSemibreve') PositionNote('pausa_de_semibreve');
-    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeMinima') PositionNote('pausa_de_minima');
-    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeSemicolcheia') PositionNote('pausa_de_semicolcheia');
-    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeColcheia') PositionNote('pausa_de_colcheia');
-    else if ($(e.currentTarget)[0].id == 'btn-createPausaDeSeminima') PositionNote('pausa_de_seminima');
+    switch ($(e.currentTarget)[0].value) {
+        case '1':
+            PositionNote('seminima');
+            break;
+        case '2':
+            PositionNote('seminima', 2);
+            break;
+        case '3':
+            PositionNote('seminima', 3);
+            break;
+        case '4':
+            PositionNote('seminima', 4);
+            break;
+        default:
+            break;
+    }
+    switch ($(e.currentTarget)[0].id) {
+        case 'btn-createNoteBemol':
+            PositionNote('bemol')
+            break;
+        case 'btn-createNoteColcheia':
+            PositionNote('colcheia')
+            break;
+        case 'btn-createNoteSemicolcheia':
+            PositionNote('semicolcheia')
+            break;
+        case 'btn-createNoteFusa':
+            PositionNote('fusa')
+            break;
+        case 'btn-createNoteSemifusa':
+            PositionNote('bemsemifusaol')
+            break;
+        case 'btn-createNoteFusa':
+            PositionNote('fusa')
+            break;
+        case 'btn-createNoteSemifusa':
+            PositionNote('bemsemifusaol')
+            break;
+        case 'btn-createNoteSemibreve':
+            PositionNote('semibreve')
+            break;
+        case 'btn-createNoteSustenido':
+            PositionNote('sustenido')
+            break;
+        case 'btn-createNoteMinima':
+            PositionNote('pausa_de_semibreve')
+            break;
+        case 'btn-createPausaDeMinima':
+            PositionNote('pausa_de_minima')
+            break;
+        case 'btn-createPausaDeSemicolcheia':
+            PositionNote('pausa_de_semicolcheia')
+            break;
+        case 'btn-createPausaDeColcheia':
+            PositionNote('pausa_de_colcheia')
+            break;
+        case 'btn-createPausaDeSeminima':
+            PositionNote('pausa_de_seminima')
+            break;
+        default:
+            break;
+    }
 }
 
 document.body.onload = function () {

@@ -68,6 +68,7 @@ function createPauta(_idDiv) {
         objLine.idDiv = 'idSVG' + getNumDiv();
         objLine.id = 'additional' + i + '-idSVG' + getNumDiv();
         objLine.class = 'suplementar';
+        objLine.type = 'line';
         createLine(objLine);
         //criando as linhas adicionais ...
     }
