@@ -6,7 +6,7 @@
 import { getSvgNS } from '../classe-auxiliar/VariaveisGlobais.js';
 import { startAudio, stopAudio } from '../audio/audio.js';
 import { createLine } from '../classe-linha/Linha.js';
-import { remove_id } from '../classe-auxiliar/Auxiliar.js'
+import { remove_id } from '../classe-auxiliar/Auxiliar.js';
 
 const tempo = 10;
 let x = 5,
@@ -38,16 +38,16 @@ export function time() {
                 try {
                     idTime++;
                     objLine = {
-                        x1: x,
-                        x2: x,
-                        y1: 40,
-                        y2: 60,
+                        x1: x + '%',
+                        x2: x + '%',
+                        y1: 40 + '%',
+                        y2: 60 + '%',
                         idName: 'time' + idTime,
+                        id: 'time' + idTime + '-' + "idSVG" + idSVG,
                         idDiv: "idSVG" + idSVG,
-                        classe: 'time'
+                        class: 'time'
                     }
                     new createLine(objLine);
-                    //createLine(x, 40, x, 60, "time" + idTime, "idSVG" + idSVG, "time");
                     x = x + 0.18;
                     let id = 'time' + (idTime - 1) + '-idSVG' + idSVG;
                     //id da linha ...

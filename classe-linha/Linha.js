@@ -34,12 +34,17 @@ function createLine(_obj) {
     //pegando o valor numerico da div...
     let myLine = document.createElementNS(svgNS, "line");
     //desenhando um linha...
-    myLine.setAttributeNS(null, "id", _obj.idName + "-" + _obj.idDiv);
+    for (const key in _obj) {
+        if (_obj.hasOwnProperty(key)) {
+            myLine.setAttributeNS(null, key, _obj[key]);
+        }
+    }
+   /*  myLine.setAttributeNS(null, "id", _obj.idName + "-" + _obj.idDiv);
     myLine.setAttributeNS(null, "x1", _obj.x1 + "%");
     myLine.setAttributeNS(null, "y1", _obj.y1 + "%");
     myLine.setAttributeNS(null, "x2", _obj.x2 + "%");
     myLine.setAttributeNS(null, "y2", _obj.y2 + "%");
-    myLine.setAttributeNS(null, "class", _obj.classe);
+    myLine.setAttributeNS(null, "class", _obj.class); */
 
     //apendando o elemento no canvas criado...
     document.getElementById(_obj.idDiv).appendChild(myLine);
@@ -54,19 +59,19 @@ function createLastLine(_idDiv) {
         objLine;
     for (let i = 2; i <= 6; i++, y += 5) {
         objLine = {
-            x1,
-            x2,
-            y1: y,
-            y2: y,
+            x1:x1 + '%',
+            x2:x2 + '%',
+            y1: y + '%',
+            y2: y + '%',
             idName: 'lastLine' + i,
             idDiv: _idDiv,
             classe: ''
         }
         new createLine(objLine);
     }
-    objLine.y1 = 40;
-    objLine.y2 = 60;
-    objLine.x1 = x2;
+    objLine.y1 = 40 + '%';
+    objLine.y2 = 60 + '%';
+    objLine.x1 = x2 + '%';
     objLine.idName = 'lastLine1';
     objLine.classe = 'lastLine';
     objLine.idDiv = _idDiv;

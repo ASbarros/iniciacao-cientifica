@@ -215,10 +215,10 @@ function createNote(_name, _obj) {
                 idDiv: dad,
                 classe: 'miniLine',
                 idName: 'miniLina-Note' + id,
-                x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3,
-                x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1,
-                y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))),
-                y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15)))
+                x1: returnPositionX_porcentagemSVG(_obj.e.pageX) - 3 + '%',
+                x2: returnPositionX_porcentagemSVG(_obj.e.pageX) - 1 + '%',
+                y1: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))) + '%',
+                y2: returnPorcentageYLine(apenasNumeros(_obj.e.target.id.substring(10, 15))) + '%'
             })
         }
         

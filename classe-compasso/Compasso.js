@@ -21,18 +21,18 @@ function createCompass(_NumCompasso, _idDiv) {
     id++;
     for (let i = 1; i < _NumCompasso; i++, EspaCompasso += TamCompasso, id++) {
         objLine = {
-            x1: EspaCompasso,
-            x2: EspaCompasso,
-            y1: y1,
-            y2: y2,
+            x1: EspaCompasso + '%',
+            x2: EspaCompasso + '%',
+            y1: y1 + '%',
+            y2: y2 + '%',
             idName: 'compasso' + id,
             idDiv: _idDiv,
-            classe: 'compasso'
+            class: 'compasso'
         }
         new createLine(objLine);
     }
-    objLine.x1 = 98.2;
-    objLine.x2 = 98.2;
+    objLine.x1 = 98.2 + '%';
+    objLine.x2 = 98.2 + '%';
     objLine.idDiv = 'compasso' + id;
     objLine.idDiv = _idDiv;
     new createLine(objLine);
