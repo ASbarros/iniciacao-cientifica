@@ -16,7 +16,7 @@ import { apenasNumeros } from '../classe-auxiliar/Auxiliar.js';
 import { sortVector } from '../classe-auxiliar/Ordenacao.js';
 import { createLine, createMiniLine } from '../classe-linha/Linha.js';
 
-export function createNote(_name, _obj) {
+export function createNote(_name, _obj, miniLine = true) {
     const compass = returnCompass(_obj.e.pageX),
         // pegando o compasso que foi clicado...
         nota = document.createElementNS(getSvgNS(), "path"),
@@ -31,7 +31,7 @@ export function createNote(_name, _obj) {
             ' ' + (_obj.y - objNota.y) + ')');
         nota.setAttributeNS(null, 'x', returnPositionX_porcentagem(_obj.x - objNota.x));
         nota.setAttributeNS(null, 'y', (_obj.y - objNota.y));
-        
+
         for (const key in _obj) {
             if (_obj.hasOwnProperty(key)) {
                 nota.setAttributeNS(null, key, _obj[key]);
@@ -47,7 +47,7 @@ export function createNote(_name, _obj) {
         if (_obj.class != 'nota shadowNote') {
 
             // uma funcao para implentar depois 
-            if (createMiniLine(_obj.e.target.id)) {
+            if (miniLine && createMiniLine(_obj.e.target.id)) {
                 // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
                 createLine({
                     idDiv: dad,

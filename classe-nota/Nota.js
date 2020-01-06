@@ -1,7 +1,7 @@
 /**
- * classe onde vai ter todas as funcionalidades das notas
- * @author anderson dos santos de barros
- */
+* classe onde vai ter todas as funcionalidades das notas
+* @author anderson dos santos de barros
+*/
 
 import {
     getSvgNS, getCreateNoteShadow,
@@ -158,48 +158,50 @@ export function PositionNote(_name, _amount = 1) {
                 } else if (_amount == 2) { //para criar duas notas...
                     obj.x = x - 20;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     obj.x = x + 20;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     createLineJoin();
                 } else if (_amount == 3) { //para criar tres notas...
                     obj.x = x - 40;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     obj.x = x;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     createLineJoin();
                     obj.x = x + 40;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     createLineJoin();
                 } else if (_amount == 4) { //para criar quatro notas...
                     obj.x = x - 60;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     obj.x = x - 20;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     createLineJoin();
                     obj.x = x + 20;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     createLineJoin();
                     obj.x = x + 60;
                     obj.id = addIdNote();
-                    createNote(_name, obj);
+                    createNote(_name, obj, false);
                     createLineJoin();
-                }
-                for (let i = 0; i < button.length; i++) {
-                    button[i].removeAttribute('disabled', 'true');
-                    //retirando a propriedade disabled...
-                    //ativando os botoes...
                 }
                 desableShadow(svgs);
                 setCreateNoteShadow(false);
             } catch { }
+            finally {
+                for (let i = 0; i < button.length; i++) {
+                    button[i].removeAttribute('disabled', 'true');
+                    // retirando a propriedade disabled...
+                    // ativando os botoes...
+                }
+            }
         } else PositionNote(_name, _amount);
         //se o click nao for em cima da linha, vai chamar a funcao novamente...
     });
