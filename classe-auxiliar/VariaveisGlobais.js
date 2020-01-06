@@ -21,6 +21,7 @@ export function getIdNote() {
 
 export function addIdNote() {
     id++;
+    return 'nota' + (id - 1);
 }
 
 export function getNumLineAtualy() {

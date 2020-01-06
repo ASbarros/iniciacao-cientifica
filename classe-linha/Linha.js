@@ -3,19 +3,15 @@
  * @author anderson dos santos de barros
  */
 
-import { setNumDiv } from '../classe-auxiliar/VariaveisGlobais.js';
+import { setNumDiv, getSvgNS } from '../classe-auxiliar/VariaveisGlobais.js';
 import { remove_id, apenasNumeros} from '../classe-auxiliar/Auxiliar.js';
-
-
-const svgNS = "http://www.w3.org/2000/svg";
-//definindo o namespace de svg...
 
 const vetLinhaExcluidas = [];
 // vetor para guardar as linhas excluídas
 // as linhas associadas as notas...
 
 function createSVG(_id, _dad) {
-    const canvasSVG = document.createElementNS(svgNS, "svg");
+    const canvasSVG = document.createElementNS(getSvgNS(), "svg");
     //desenhando a tela a ser pintada...
     canvasSVG.setAttributeNS(null, "id", "idSVG" + _id);
     canvasSVG.setAttributeNS(null, "width", "100%");
@@ -32,20 +28,13 @@ function createLine(_obj) {
     //funcao cria linha...
     setNumDiv(_obj.idDiv.substring(5, 6));
     //pegando o valor numerico da div...
-    let myLine = document.createElementNS(svgNS, "line");
+    let myLine = document.createElementNS(getSvgNS(), "line");
     //desenhando um linha...
     for (const key in _obj) {
         if (_obj.hasOwnProperty(key)) {
             myLine.setAttributeNS(null, key, _obj[key]);
         }
     }
-   /*  myLine.setAttributeNS(null, "id", _obj.idName + "-" + _obj.idDiv);
-    myLine.setAttributeNS(null, "x1", _obj.x1 + "%");
-    myLine.setAttributeNS(null, "y1", _obj.y1 + "%");
-    myLine.setAttributeNS(null, "x2", _obj.x2 + "%");
-    myLine.setAttributeNS(null, "y2", _obj.y2 + "%");
-    myLine.setAttributeNS(null, "class", _obj.class); */
-
     //apendando o elemento no canvas criado...
     document.getElementById(_obj.idDiv).appendChild(myLine);
 
@@ -102,6 +91,5 @@ export function removeLinha(id) {
 
 export {
     createSVG,
-    createLine,
-    svgNS
+    createLine
 }

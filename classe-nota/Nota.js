@@ -5,7 +5,8 @@
 
 import {
     getSvgNS, getCreateNoteShadow,
-    setCreateNoteShadow, getNumLineAtualy, setNumLineAtuaty
+    setCreateNoteShadow, getNumLineAtualy,
+    setNumLineAtuaty, getIdNote, addIdNote
 } from '../classe-auxiliar/VariaveisGlobais.js';
 import { getImagem } from '../classe-imagem/imagens.js';
 import { returnPositionY_px } from '../classe-auxiliar/Posicoes.js';
@@ -38,7 +39,13 @@ function shadowNote(e) {
         idDiv,
         y,
         class: 'nota shadowNote',
-        x
+        x,
+        id: 'nota-shadow',
+        name: state._name,
+        stroke: '#000',
+        lineOrigin: idDiv,
+        pageX: e.pageX,
+        pageY: e.pageY
     };
     if (obj.idDiv !== 'idSVG0' && !getCreateNoteShadow()) {
         createNote(state._name, obj);
@@ -140,36 +147,48 @@ export function PositionNote(_name, _amount = 1) {
                     e,
                     idDiv,
                     y,
-                    class: 'nota'
+                    class: 'nota',
+                    pageX: e.pageX,
+                    pageY: e.pageY
                 };
                 if (_amount == 1) { //para criar uma nota...
                     obj.x = x;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                 } else if (_amount == 2) { //para criar duas notas...
                     obj.x = x - 20;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     obj.x = x + 20;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     createLineJoin();
                 } else if (_amount == 3) { //para criar tres notas...
                     obj.x = x - 40;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     obj.x = x;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     createLineJoin();
                     obj.x = x + 40;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     createLineJoin();
                 } else if (_amount == 4) { //para criar quatro notas...
                     obj.x = x - 60;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     obj.x = x - 20;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     createLineJoin();
                     obj.x = x + 20;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     createLineJoin();
                     obj.x = x + 60;
+                    obj.id = addIdNote();
                     createNote(_name, obj);
                     createLineJoin();
                 }
@@ -179,6 +198,7 @@ export function PositionNote(_name, _amount = 1) {
                     //ativando os botoes...
                 }
                 desableShadow(svgs);
+                setCreateNoteShadow(false);
             } catch { }
         } else PositionNote(_name, _amount);
         //se o click nao for em cima da linha, vai chamar a funcao novamente...
