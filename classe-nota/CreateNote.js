@@ -24,9 +24,6 @@ export function createNote(_name, _obj) {
         objNota = getImagem(_name);
         nota.setAttributeNS(null, "id", "nota" + getIdNote());
         nota.setAttributeNS(null, 'name', _name);
-        // nota.setAttributeNS(null, 'onmousedown', 'ativarMovimentacao()');
-        // nota.setAttributeNS(null, 'onmouseleave', 'retiraMovimentacao()');
-        // nota.setAttributeNS(null, 'onmouseup', 'retiraMovimentacao()');
         nota.setAttributeNS(null, "stroke", "#000");
         nota.setAttributeNS(null, "class", _obj.class);
         nota.setAttributeNS(null, "d", objNota.imagem);
@@ -45,7 +42,7 @@ export function createNote(_name, _obj) {
         document.getElementById(dad).appendChild(nota);
 
         // uma funcao para implentar depois 
-        if (createMiniLine(_obj.e.target.id)) {
+        if (_obj.class != 'nota shadowNote' && createMiniLine(_obj.e.target.id)) {
             // se for preciso criar uma linha pequena na linha em que a nota foi inserida ...
             createLine({
                 idDiv: dad,
